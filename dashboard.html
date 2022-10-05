@@ -35,25 +35,22 @@
     <title>Dashboard</title>
 
     <!-- fonts 的CSS -->
-    <link href="{% static 'dashboard/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{% static 'dashboard/vendor/fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
 
     <!-- Css-->
     <link href="{% static 'dashboard/css/Dashboard.min.css' %}" rel="stylesheet">
 
     <!-- dataTables 和 searchPanes 的CSS  -->
-    <link  rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" >
-    <link  rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.0.2/css/searchPanes.dataTables.min.css" >
-    <link  rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" >
+    <link  rel="stylesheet" href="{% static 'dashboard/vendor/datatables/jquery.dataTables.min.css' %}" >
+    <link  rel="stylesheet" href="{% static 'dashboard/vendor/searchpanes/searchPanes.dataTables.min.css' %}" >
+    <link  rel="stylesheet" href="{% static 'dashboard/vendor/searchpanes/select.dataTables.min.css' %}" >
 
     <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper" >
 
-        <!-- Sidebar左側留白 刪掉就沒有左側 -->
-<!--        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>-->
-        <!-- Sidebar左側留白-->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -64,21 +61,16 @@
                 <!-- Page Content -->
                 <div class="container-fluid" >
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-3 mt-3 ">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
-                    <!-- Page Heading -->
 
                     <!-- 4card -->
-                    <div class="row">
+                    <div class="row mt-2">
                         <!-- product -->
                         <div class="col-xl-3 col-md-6 mb-3">
                             <div class="card border-left-primary shadow h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2 justify-content-center">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">
                                                 <a href="{{request.path}}product/products/" title="Click to view product list.">product</a>
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-center">{{ product_qty }}</div>
@@ -103,11 +95,11 @@
 
                         <!-- NPI Issue -->
                         <div class="col-xl-3 col-md-6 mb-3">
-                            <div class="card border-left-success shadow h-100 ">
+                            <div class="card border-left-primary shadow h-100 ">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">
                                                 <a href="{{request.path}}npi/issue/" title="Click to view the detail of product.">NPI Issue</a>
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-center">{{ npi_issue_qty }}</div>
@@ -131,11 +123,11 @@
 
                         <!-- DEM -->
                         <div class="col-xl-3 col-md-6 mb-3">
-                            <div class="card border-left-info shadow h-100">
+                            <div class="card border-left-primary shadow h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">DFM</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">DFM</div>
                                             <div class="h5 mb-0 font-weight-bold text-center text-muted">Under Construction</div>
                                              <hr>
                                               <div class="row">
@@ -155,11 +147,11 @@
 
                         <!-- Sustaining -->
                         <div class="col-xl-3 col-md-6 mb-3">
-                            <div class="card border-left-warning shadow h-100">
+                            <div class="card border-left-primary shadow h-100">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Sustaining</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Sustaining</div>
                                             <div class="h5 mb-0 font-weight-bold text-center text-muted">Under Construction</div>
                                              <hr>
 
@@ -185,18 +177,18 @@
                         <div class="col-lg-12">
                             <div class="card mb-3" style="border:none;">
                                 <div class="card-body">
-                                    <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" id="Product-tab" data-toggle="tab" href="#Product-tab-page" role="tab" aria-controls="Product-tab-page" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Product</span></a>                                            </li>
-                                        <li class="nav-item"> <a class="nav-link" id="DFM-tab" data-toggle="tab" href="#DFM-tab-page" role="tab" aria-controls="DFM-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">DFM</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="NPI-tab" data-toggle="tab" href="#NPI-tab-page" role="tab" aria-controls="NPI-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">NPI Issue</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="SystemCosmetic-tab" data-toggle="tab" href="#SystemCosmetic-tab-page" role="tab" aria-controls="SystemCosmetic-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">System Cosmetic</span></a></li>
-                                        <li class="nav-item"> <a class="nav-link" id="Sustaining-tab" data-toggle="tab" href="#Sustaining-tab-page" role="tab" aria-controls="Sustaining-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Sustaining</span></a></li>
+                                    <ul class="nav nav2 nav-tabs justify-content-end" role="tablist">
+                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#Product-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Product</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#DFM-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">DFM</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#NPI-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">NPI Issue</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#SystemCosmetic-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">System Cosmetic</span></a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Sustaining-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Sustaining</span></a> </li>
                                     </ul>
                                     <!-- tab 內頁 -->
-                                    <div class="tab-content tabcontent-border p-10" id="myTabContent">
+                                    <div class="tab-content tabcontent-border">
 
                                         <!-- product-tab-page -->
-                                        <div role="tabpanel" class="tab-pane fade show active" id="Product-tab-page" aria-labelledby="Product-tab">
+                                        <div class="tab-pane active" role="tabpanel" id="Product-tab-page">
 
                                             <div class="row">
                                                 <div class="col-xl-4 col-lg-4 mt-4">
@@ -268,13 +260,13 @@
                                         <!-- product-tab-page -->
 
                                         <!-- DFM-tab-page -->
-                                        <div class="tab-pane fade" id="DFM-tab-page" role="tabpanel" aria-labelledby="DFM-tab">
+                                        <div class="tab-pane" role="tabpanel" id="DFM-tab-page">
                                             <div class="row ">
                                                 <div class="col-xl-12 col-lg-12 mt-4">
                                                     <div class="card shadow mb-2 h-100">
                                                         <!-- Card Header-->
                                                         <a href="#DFM-collapse1" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="DFM-collapse1">
-                                                        <h6 class="m-0 font-weight-bold text-primary ">How many DFM item</h6>
+                                                        <h5 class="m-0 font-weight-bold">DFM</h5>
                                                         </a>
                                                         <!--Collapse Card Content -->
                                                         <div class="collapse" id="DFM-collapse1">
@@ -290,7 +282,7 @@
                                         <!-- DFM-tab-page -->
 
                                         <!-- NPI-tab-page -->
-                                         <div class="tab-pane fade" id="NPI-tab-page" role="tabpanel" aria-labelledby="NPI-tab">
+                                         <div class="tab-pane" role="tabpanel" id="NPI-tab-page">
 
                                              <!-- issue1 -->
                                              <div class="row ">
@@ -298,7 +290,7 @@
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
                                                          <a href="#NPI-collapse1" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse1">
-                                                             <h6 class="m-0 font-weight-bold text-primary">How many Design issue being fixed by Design Change vs fixed by Factory vs fixed by Supplier</h6>
+                                                             <h5 class="m-0 font-weight-bold">Design issue</h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse show" id="NPI-collapse1">
@@ -323,18 +315,18 @@
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>Root Cause</th>
+                                                                                                <th>Short-term Category</th>
                                                                                                 <th>Long-term Category</th>
                                                                                                 <th>Issue Qty</th>
-                                                                                                <th>Short-term Category</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
                                                                                             {% for item in statistic_by_rc %}
                                                                                                 <tr>
                                                                                                     <td>{{ item.root_cause_category}}</td>
+                                                                                                    <td>{{item.short_term_category }}</td>
                                                                                                     <td>{{item.long_term_category}}</td>
                                                                                                     <td>{{ item.root_cause_category__count }}</td>
-                                                                                                    <td>{{item.short_term_category }}</td>
                                                                                                 </tr>
                                                                                             {% endfor %}
                                                                                         </tbody>
@@ -364,7 +356,7 @@
                                                                 <div class="row ml-1">
                                                                     <button id="NPI-filter-button1" class="btn btn-secondary btn-icon-split btn-sm">
                                                                         <span class="icon text-white-50">
-                                                                            <i class="fas fa-arrow-right"></i>
+                                                                            <i class="icon fa fa-arrow-right"></i>
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
@@ -378,7 +370,7 @@
                                                                             <div class="card-body">
 
                                                                                 <form action="" method="post">
-                                                                                    <span>date range：</span>
+                                                                                    <span>Date range control ： </span>
                                                                                     <input type="date" name="NPI_datemin1" value="2011-09-21">
                                                                                     <span>~</span>
                                                                                     <input type="date" name="NPI_datemax1" value="2011-09-29">
@@ -393,7 +385,7 @@
                                                                                 <div id="NPI-filter-panel1"></div>
                                                                                 <button id="NPI-redraw1" class="btn btn-primary btn-icon-split btn-sm">
                                                                                     <span class="icon text-white-50">
-                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                        <i class="icon fa fa-arrow-right"></i>
                                                                                     </span>
                                                                                     <span class="text">Redraw Charts</span>
                                                                                 </button>
@@ -415,8 +407,8 @@
                                                  <div class="col-xl-12 col-lg-12 mt-4">
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
-                                                         <a href="#NPI-collapse2" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse2">
-                                                             <h6 class="m-0 font-weight-bold text-primary">How many issue being fixed from SI to PV</h6>
+                                                         <a href="#NPI-collapse2" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse2">
+                                                             <h5 class="m-0 font-weight-bold">P1 gating PV phase exit</h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse2">
@@ -506,7 +498,7 @@
                                                                 <div class="row ml-1">
                                                                     <button id="NPI-filter-button2" class="btn btn-secondary btn-icon-split btn-sm">
                                                                         <span class="icon text-white-50">
-                                                                            <i class="fas fa-arrow-right"></i>
+                                                                            <i class="icon fa fa-arrow-right"></i>
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
@@ -520,7 +512,7 @@
                                                                             <div class="card-body">
 
                                                                                 <form action="" method="post">
-                                                                                    <span>date range：</span>
+                                                                                    <span>Date range control ： </span>
                                                                                     <input type="date" name="NPI_datemin2" value="2011-09-21">
                                                                                     <span>~</span>
                                                                                     <input type="date" name="NPI_datemax2" value="2011-09-29">
@@ -536,7 +528,7 @@
                                                                                 <div id="NPI-filter-panel2"></div>
                                                                                 <button id="NPI-redraw2" class="btn btn-primary btn-icon-split btn-sm">
                                                                                     <span class="icon text-white-50">
-                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                        <i class="icon fa fa-arrow-right"></i>
                                                                                     </span>
                                                                                     <span class="text">Redraw Charts</span>
                                                                                 </button>
@@ -561,8 +553,8 @@
                                                  <div class="col-xl-12 col-lg-12 mt-4">
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
-                                                         <a href="#NPI-collapse3" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse3">
-                                                             <h6 class="m-0 font-weight-bold text-primary">How many single failure item</h6>
+                                                         <a href="#NPI-collapse3" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse3">
+                                                             <h5 class="m-0 font-weight-bold">Single failure</h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse3">
@@ -624,7 +616,7 @@
                                                                 <div class="row ml-1">
                                                                     <button id="NPI-filter-button3" class="btn btn-secondary btn-icon-split btn-sm">
                                                                         <span class="icon text-white-50">
-                                                                            <i class="fas fa-arrow-right"></i>
+                                                                            <i class="icon fa fa-arrow-right"></i>
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
@@ -638,7 +630,7 @@
                                                                             <div class="card-body">
 
                                                                                 <form action="" method="post">
-                                                                                    <span>date range：</span>
+                                                                                    <span>Date range control ： </span>
                                                                                     <input type="date" name="NPI_datemin3" value="2011-09-21">
                                                                                     <span>~</span>
                                                                                     <input type="date" name="NPI_datemax3" value="2011-09-29">
@@ -654,7 +646,7 @@
                                                                                 <div id="NPI-filter-panel3"></div>
                                                                                 <button id="NPI-redraw3" class="btn btn-primary btn-icon-split btn-sm">
                                                                                     <span class="icon text-white-50">
-                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                        <i class="icon fa fa-arrow-right"></i>
                                                                                     </span>
                                                                                     <span class="text">Redraw Charts</span>
                                                                                 </button>
@@ -676,8 +668,8 @@
                                                  <div class="col-xl-12 col-lg-12 mt-4">
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
-                                                         <a href="#NPI-collapse4" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse4">
-                                                             <h6 class="m-0 font-weight-bold text-primary">How many platform vs issue per ODM</h6>
+                                                         <a href="#NPI-collapse4" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse4">
+                                                             <h5 class="m-0 font-weight-bold">Product vs Issue per ODM </h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse4">
@@ -703,7 +695,7 @@
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>ODM</th>
-                                                                                                <th>Product Name</th>
+                                                                                                <th>Product</th>
                                                                                                 <th>Series</th>
                                                                                                 <th>Issue Qty</th>
                                                                                                 <th>Create Date</th>
@@ -746,7 +738,7 @@
                                                                 <div class="row ml-1">
                                                                     <button id="NPI-filter-button4" class="btn btn-secondary btn-icon-split btn-sm">
                                                                         <span class="icon text-white-50">
-                                                                            <i class="fas fa-arrow-right"></i>
+                                                                            <i class="icon fa fa-arrow-right"></i>
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
@@ -760,7 +752,7 @@
                                                                             <div class="card-body">
 
                                                                                 <form action="" method="post">
-                                                                                    <span>date range：</span>
+                                                                                    <span>Date range control ： </span>
                                                                                     <input type="date" name="NPI_datemin4" value="2011-09-21">
                                                                                     <span>~</span>
                                                                                     <input type="date" name="NPI_datemax4" value="2011-09-29">
@@ -775,7 +767,7 @@
                                                                                 <div id="NPI-filter-panel4"></div>
                                                                                 <button id="NPI-redraw4" class="btn btn-primary btn-icon-split btn-sm">
                                                                                     <span class="icon text-white-50">
-                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                        <i class="icon fa fa-arrow-right"></i>
                                                                                     </span>
                                                                                     <span class="text">Redraw Charts</span>
                                                                                 </button>
@@ -797,8 +789,8 @@
                                                  <div class="col-xl-12 col-lg-12 mt-4">
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
-                                                         <a href="#NPI-collapse5" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse5">
-                                                             <h6 class="m-0 font-weight-bold text-primary">How many platform vs repeating issue per ODM</h6>
+                                                         <a href="#NPI-collapse5" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse5">
+                                                             <h5 class="m-0 font-weight-bold">Product vs Repeating Issue per ODM </h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse5">
@@ -825,10 +817,10 @@
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>ODM</th>
-                                                                                                <th>Product name</th>
+                                                                                                <th>Product</th>
                                                                                                 <th>Series</th>
-                                                                                                <th>Issue QtY</th>
-                                                                                                <th>Rep Issue Qty</th>
+                                                                                                <th>Issue Qty</th>
+                                                                                                <th>Rpt. Issue Qty</th>
                                                                                                 <th>Create Date</th>
                                                                                                 </tr>
                                                                                         </thead>
@@ -871,7 +863,7 @@
                                                                <div class="row ml-1">
                                                                     <button id="NPI-filter-button5" class="btn btn-secondary btn-icon-split btn-sm">
                                                                         <span class="icon text-white-50">
-                                                                            <i class="fas fa-arrow-right"></i>
+                                                                            <i class="icon fa fa-arrow-right"></i>
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
@@ -885,7 +877,7 @@
                                                                             <div class="card-body">
 
                                                                                 <form action="" method="post">
-                                                                                    <span>date range：</span>
+                                                                                    <span>Date range control ： </span>
                                                                                     <input type="date" name="NPI_datemin5" value="2011-09-21">
                                                                                     <span>~</span>
                                                                                     <input type="date" name="NPI_datemax5" value="2011-09-29">
@@ -899,7 +891,7 @@
                                                                                 <div id="NPI-filter-panel5"></div>
                                                                                 <button id="NPI-redraw5" class="btn btn-primary btn-icon-split btn-sm">
                                                                                     <span class="icon text-white-50">
-                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                        <i class="icon fa fa-arrow-right"></i>
                                                                                     </span>
                                                                                     <span class="text">Redraw Charts</span>
                                                                                 </button>
@@ -919,14 +911,16 @@
                                         <!-- NPI-tab-page -->
 
                                         <!-- SystemCosmetic-tab-page -->
-                                         <div class="tab-pane fade " id="SystemCosmetic-tab-page" role="tabpanel" aria-labelledby="SystemCosmetic-tab">
+                                         <div class="tab-pane" role="tabpanel" id="SystemCosmetic-tab-page" >
 <!--                                            <img src="construction.jpg" style="width:50%;">-->
+
                                          </div>
                                         <!-- SystemCosmetic-tab-page -->
 
                                          <!-- Sustaining-tab-page -->
-                                         <div class="tab-pane fade" id="Sustaining-tab-page" role="tabpanel" aria-labelledby="Sustaining-tab">
+                                         <div class="tab-pane" role="tabpanel" id="Sustaining-tab-page">
 <!--                                             <img src="construction.jpg" style="width:50%;">-->
+
                                         </div>
                                         <!-- Sustaining-tab-page -->
                                     </div>
@@ -943,16 +937,6 @@
             </div>
             <!-- Main Content -->
 
-            <!-- Footer -->
-<!--            <footer class="sticky-footer">-->
-<!--                <div class="container my-auto">-->
-<!--                    <div class="copyright text-center my-auto">-->
-<!--                        <span>© Product Engineering 2022</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </footer>-->
-            <!-- Footer -->
-
         </div>
         <!-- Content Wrapper -->
 
@@ -961,7 +945,7 @@
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
+        <i class="icon fa fa-angle-up"></i>
     </a>
     <!-- Scroll to Top Button-->
 
@@ -971,21 +955,21 @@
 <script src="{% static 'dashboard/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 <script src="{% static 'dashboard/js/Dashboard.min.js'%}"></script>
 <!-- datatable 和 searchpanes 共同的-->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'dashboard/vendor/datatables/jquery-3.5.1.js'%}"></script>
+<script src="{% static 'dashboard/vendor/datatables/jquery.dataTables.min.js'%}"></script>
 <!-- datatable -->
 <script src="{% static 'dashboard/js/datatables-demo.js'%}"></script>
 <!-- searchpanes -->
-<script src="https://cdn.datatables.net/searchpanes/2.0.2/js/dataTables.searchPanes.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script>
+<script src="{% static 'dashboard/vendor/searchpanes/dataTables.searchPanes.min.js'%}"></script>
+<script src="{% static 'dashboard/vendor/searchpanes/dataTables.select.min.js'%}"></script>
 <!-- chartjs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="{% static 'dashboard/vendor/chartjs/Chart.min.js'%}"></script>
 <!--<script src="https://cdnjs.com/libraries/Chart.js"></script>-->
 
 <!-- chartjs 顏色套件 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+<script src="{% static 'dashboard/vendor/chartjs/chartjs-plugin-colorschemes.min.js'%}"></script>
 <!-- chartjs 顯示表分比套件 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>-->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+<script src="{% static 'dashboard/vendor/chartjs/chartjs-plugin-labels.js'%}"></script>
 
 <!-- chartjs -->
 <script src="{% static 'dashboard/js/chart-pie-demo.js'%}"></script>
