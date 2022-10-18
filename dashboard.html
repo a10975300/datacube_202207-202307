@@ -1,4 +1,4 @@
-{% extends 'xadmin/mybase_dashboard.html' %}
+{% extends base_template %}
 {% load i18n xadmin_tags %}
 {% load static %}
 
@@ -18,11 +18,11 @@
 {% endblock %}
 
 {% block nav_btns %}
-    {#  <meta name="viewport" content="width=device-width, initial-scale=1">#}
-    {#{% if has_add_widget_permission %}#}
-    {#  <a title="{% trans 'Add Widget' %}" href="{{ add_widget_url }}" class="btn btn-primary">#}
-    {#      <i class="fa fa-plus"></i> <span>{% trans "Add Widget" %}</span></a>#}
-    {#{% endif %}#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if has_add_widget_permission %}
+    <a title="{% trans 'Add Widget' %}" href="{{ add_widget_url }}" class="btn btn-primary">
+    <i class="fa fa-plus"></i> <span>{% trans "Add Widget" %}</span></a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -50,17 +50,12 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper" >
-
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content" class="bg-white">
-
                 <!-- Page Content -->
                 <div class="container-fluid" >
-
 
                     <!-- 4card -->
                     <div class="row mt-2">
@@ -71,9 +66,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2 justify-content-center">
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                                <a href="{{request.path}}product/products/" title="Click to view product list.">product</a>
+                                                <a href="{{request.path}}product/products/" title="Click to view product list.">PRODUCT</a>
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-center">{{ product_qty }}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center" title="total product quantity">{{ product_qty }}</div>
                                             <hr>
                                               <div class="row">
                                                     <div class="col-sm-4 text-center">
@@ -100,7 +95,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">
-                                                <a href="{{request.path}}npi/issue/" title="Click to view the detail of product.">NPI Issue</a>
+                                                <a href="{{request.path}}npi/issue/" title="Click to view the detail of product.">NPI ISSUE</a>
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-center">{{ npi_issue_qty }}</div>
                                              <hr>
@@ -128,7 +123,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">DFM</div>
-                                            <div class="h5 mb-0 font-weight-bold text-center text-muted">Under Construction</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center text-muted">under construction</div>
                                              <hr>
                                               <div class="row">
                                                     <div class="col-sm-6 text-center">
@@ -151,8 +146,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1">Sustaining</div>
-                                            <div class="h5 mb-0 font-weight-bold text-center text-muted">Under Construction</div>
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1">SUSTAINING</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center text-muted">under construction</div>
                                              <hr>
 
                                               <div class="row">
@@ -208,21 +203,21 @@
                                                                 <table id="product-table1" class="display compact" style="width:100%;white-space:nowrap;">
                                                                     <thead >
                                                                         <tr>
-                                                                            <th>Risk Ass.</th>
+                                                                            <th>Risk Ass</th>
                                                                             <th>Stage</th>
                                                                             <th>Product</th>
                                                                             <th>RTP Date</th>
                                                                             <th>Factory</th>
-                                                                            <th>PE Owner</th>
+                                                                            <th>PE</th>
                                                                             <th>DFM</th>
-                                                                            <th>NPI Issues</th>
+                                                                            <th>NPI Issue</th>
                                                                             <th>Sustaining</th>
-                                                                            <th>Create Date</th>
+<!--                                                                            <th>Date</th>-->
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         {% for item in product_table_data %}
-                                                                            <tr style="text-align:center">
+                                                                            <tr>
                                                                                 <td>...</td>
                                                                                 <!-- 通过日期判断当前stage是 -->
                                                                                 {% if date_today > item.RTP|add:date_delta %}
@@ -246,7 +241,7 @@
                                                                                 <td><a href="#">...</a></td>
                                                                                 <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
                                                                                 <td><a href="#">...</a></td>
-                                                                                <td>{{ item.create_date|date:'Y-m-d' }}</td>
+<!--                                                                                <td>{{ item.create_date|date:'Y-m-d' }}</td>-->
                                                                             </tr>
                                                                         {% endfor %}
                                                                     </tbody>
@@ -595,9 +590,9 @@
                                                                                                     <td>{{ item.platformName__ProductName }}</td>
                                                                                                     <td>{{ item.platformName__Product_Segment }}</td>
                                                                                                     {% if item.duplicate == 'N' %}
-                                                                                                        <td>unduplicated</td>
+                                                                                                        <td>unduplicate</td>
                                                                                                     {% else %}
-                                                                                                        <td>duplicated</td>
+                                                                                                        <td>duplicate</td>
                                                                                                     {% endif %}
                                                                                                     <td>{{ item.platformName__ProductName__count }}</td>
                                                                                                     <td>{{ item.cratedate|date:'Y-m-d' }}</td>
@@ -822,7 +817,7 @@
                                                                                                 <th>Issue Qty</th>
                                                                                                 <th>Rpt. Issue Qty</th>
                                                                                                 <th>Create Date</th>
-                                                                                                </tr>
+                                                                                            </tr>
                                                                                         </thead>
                                                                                         <tbody>
                                                                                             {% for item in issue_vs_repeated %}
