@@ -34,17 +34,15 @@
     <meta name="author" content="">
     <title>Dashboard</title>
 
-    <!-- fonts 的CSS -->
+    <!-- fonts -->
     <link href="{% static 'dashboard/vendor/fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
-
-
     <!-- Css-->
     <link href="{% static 'dashboard/css/Dashboard.min.css' %}" rel="stylesheet">
-
-    <!-- dataTables 和 searchPanes 的CSS  -->
+    <!-- dataTables 和 searchPanes 和導出按鈕 的CSS  -->
     <link  rel="stylesheet" href="{% static 'dashboard/vendor/datatables/jquery.dataTables.min.css' %}" >
     <link  rel="stylesheet" href="{% static 'dashboard/vendor/searchpanes/searchPanes.dataTables.min.css' %}" >
     <link  rel="stylesheet" href="{% static 'dashboard/vendor/searchpanes/select.dataTables.min.css' %}" >
+    <link  rel="stylesheet" href="{% static 'dashboard/vendor/datatables/buttons.dataTables.min.css' %}" >
 
     <body id="page-top">
 
@@ -189,7 +187,7 @@
                                                 <div class="col-xl-4 col-lg-4 mt-4">
                                                     <div class="card shadow mb-3 h-100">
                                                         <div class="card-body">
-                                                            <div class="chart-pie pt-2">
+                                                            <div class="chart-pie pt-3">
                                                                 <canvas id="product-pie1"></canvas>
                                                             </div>
                                                         </div>
@@ -200,7 +198,7 @@
                                                     <div class="card shadow mb-3 h-100">
                                                         <div class="card-body">
                                                             <div class="table-responsive">
-                                                                <table id="product-table1" class="display compact" style="width:100%;white-space:nowrap;">
+                                                                <table id="product-table1" class="display compact nowrap">
                                                                     <thead >
                                                                         <tr>
                                                                             <th>Risk Ass</th>
@@ -267,7 +265,6 @@
                                                         <div class="collapse" id="DFM-collapse1">
                                                             <div class="card-body">
 
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -295,7 +292,7 @@
                                                                     <div class="col-xl-5 col-lg-5 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie pt-3">
                                                                                     <canvas id="NPI-pie1"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -306,7 +303,7 @@
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table id="NPI-table1" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                    <table id="NPI-table1" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>Root Cause</th>
@@ -366,9 +363,9 @@
 
                                                                                 <form action="" method="post">
                                                                                     <span>Date range control ： </span>
-                                                                                    <input type="date" name="NPI_datemin1" value="2011-09-21">
+                                                                                    <input type="date" name="NPI_datemin1" value="2022-01-01">
                                                                                     <span>~</span>
-                                                                                    <input type="date" name="NPI_datemax1" value="2011-09-29">
+                                                                                    <input type="date" name="NPI_datemax1" value="2022-12-31">
                                                                                     <!-- date_sumbit_button -->
                                                                                     <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
                                                                                         <span class="text">Sumbit</span>
@@ -397,152 +394,6 @@
                                              </div>
                                              <!-- issue1 -->
 
-                                             <!-- issue2 -->
-                                             <div class="row">
-                                                 <div class="col-xl-12 col-lg-12 mt-4">
-                                                     <div class="card shadow mb-2 h-100">
-                                                         <!-- Card Header-->
-                                                         <a href="#NPI-collapse2" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse2">
-                                                             <h5 class="m-0 font-weight-bold">P1 gating PV phase exit</h5>
-                                                         </a>
-                                                            <!--Collapse Card Content -->
-                                                         <div class="collapse" id="NPI-collapse2">
-                                                             <div class="card-body">
-                                                                 <!-- row1 -->
-                                                                <div class="row ">
-                                                                    <div class="col-xl-5 col-lg-5 mb-3">
-                                                                        <div class="card shadow mb-3 h-100">
-                                                                            <div class="card-body">
-                                                                                <div class="chart-bar">
-                                                                                    <canvas id="NPI-Bar1"></canvas>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-xl-7 col-lg-7 mb-3">
-                                                                        <div class="card shadow mb-3 h-100">
-                                                                            <div class="card-body">
-                                                                                <div class="table-responsive">
-                                                                                    <table id="NPI-table2" class="display compact" style="width:100%; white-space:nowrap;">
-                                                                                        <thead>
-                                                                                            <tr>
-                                                                                                <th>Build Stage</th>
-                                                                                                <th>Issue Stage</th>
-                                                                                                <th>Issue Qty</th>
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            {% for item in issue_fixed_status %}
-                                                                                                <tr>
-                                                                                                    <td>{{ item.buildstage }}</td>
-                                                                                                    <td>{{ item.status }}</td>
-                                                                                                    <td>{{ item.status__count }}</td>
-                                                                                                </tr>
-                                                                                            {% endfor %}
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                 <!-- row1 -->
-
-                                                                 <!-- row2 -->
-                                                                <div class="row">
-                                                                   <div class="col-xl-5 col-lg-5 mb-3">
-                                                                        <div class="card shadow mb-3 h-100">
-                                                                            <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
-                                                                                    <canvas id="NPI-pie2"></canvas>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                   <div class="col-xl-7 col-lg-7 mb-3">
-                                                                       <div class="card shadow mb-3 h-100">
-                                                                           <div class="card-body">
-                                                                                <div class="table-responsive">
-                                                                                    <table id="no" class="display compact" style="width:100%; white-space:nowrap;">
-                                                                                        <thead>
-                                                                                            <tr>
-                                                                                                <th>Build Stage</th>
-                                                                                                <th>Issue Qty</th>
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            {% for item in issue_by_stage %}
-                                                                                                <tr>
-                                                                                                    <td>{{ item.buildstage }}</td>
-                                                                                                    <td>{{ item.buildstage__count }}</td>
-                                                                                                </tr>
-                                                                                            {% endfor %}
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                   </div>
-                                                                </div>
-                                                                 <!-- row2-->
-
-                                                               <!-- filter_button -->
-                                                                <div class="row ml-1">
-                                                                    <button id="NPI-filter-button2" class="btn btn-secondary btn-icon-split btn-sm">
-                                                                        <span class="icon text-white-50">
-                                                                            <i class="icon fa fa-arrow-right"></i>
-                                                                        </span>
-                                                                        <span class="text">Filters</span>
-                                                                    </button>
-                                                                </div>
-                                                                 <!-- filter button -->
-
-                                                                <!-- filter -->
-                                                                <div class="row mt-2" style="display:none" id="NPI-filter2">
-                                                                    <div class="col-xl-12 col-lg-12">
-                                                                        <div class="card shadow">
-                                                                            <div class="card-body">
-
-                                                                                <form action="" method="post">
-                                                                                    <span>Date range control ： </span>
-                                                                                    <input type="date" name="NPI_datemin2" value="2011-09-21">
-                                                                                    <span>~</span>
-                                                                                    <input type="date" name="NPI_datemax2" value="2011-09-29">
-                                                                                    <!-- date_sumbit_button -->
-                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
-                                                                                        <span class="text">Sumbit</span>
-                                                                                    </button>
-                                                                                    <!-- date_sumbit_button -->
-                                                                                </form>
-
-
-
-                                                                                <div id="NPI-filter-panel2"></div>
-                                                                                <button id="NPI-redraw2" class="btn btn-primary btn-icon-split btn-sm">
-                                                                                    <span class="icon text-white-50">
-                                                                                        <i class="icon fa fa-arrow-right"></i>
-                                                                                    </span>
-                                                                                    <span class="text">Redraw Charts</span>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- filter -->
-
-                                                             </div>
-                                                         </div>
-
-                                                     </div>
-                                                 </div>
-
-
-                                             </div>
-                                             <!-- issue2 -->
-
                                              <!-- issue3 -->
                                              <div class="row ">
                                                  <div class="col-xl-12 col-lg-12 mt-4">
@@ -559,7 +410,7 @@
                                                                     <div class="col-xl-5 col-lg-5 mb-3">
                                                                         <div class="card shadow mb-3  h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie pt-3">
                                                                                     <canvas id="NPI-pie3"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -570,7 +421,7 @@
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table id="NPI-table3" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                    <table id="NPI-table3" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>ODM</th>
@@ -579,7 +430,6 @@
                                                                                                 <th>Series</th>
                                                                                                 <th>Failure Category</th>
                                                                                                 <th>Issue Qty</th>
-                                                                                                <th>Create Date</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -595,7 +445,6 @@
                                                                                                         <td>duplicate</td>
                                                                                                     {% endif %}
                                                                                                     <td>{{ item.platformName__ProductName__count }}</td>
-                                                                                                    <td>{{ item.cratedate|date:'Y-m-d' }}</td>
                                                                                                 </tr>
                                                                                             {% endfor %}
                                                                                         </tbody>
@@ -626,9 +475,9 @@
 
                                                                                 <form action="" method="post">
                                                                                     <span>Date range control ： </span>
-                                                                                    <input type="date" name="NPI_datemin3" value="2011-09-21">
+                                                                                    <input type="date" name="NPI_datemin3" value="2022-01-01">
                                                                                     <span>~</span>
-                                                                                    <input type="date" name="NPI_datemax3" value="2011-09-29">
+                                                                                    <input type="date" name="NPI_datemax3" value="2022-12-31">
                                                                                     <!-- date_sumbit_button -->
                                                                                     <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
                                                                                         <span class="text">Sumbit</span>
@@ -675,7 +524,7 @@
                                                                     <div class="col-xl-5 col-lg-5 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie pt-3">
                                                                                     <canvas id="NPI-pie4"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -686,14 +535,13 @@
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table id="NPI-table4" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                    <table id="NPI-table4" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>ODM</th>
                                                                                                 <th>Product</th>
                                                                                                 <th>Series</th>
                                                                                                 <th>Issue Qty</th>
-                                                                                                <th>Create Date</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -703,7 +551,6 @@
                                                                                                     <td>{{ item.platformName__ProductName }}</td>
                                                                                                     <td>{{ item.platformName__Product_Segment }}</td>
                                                                                                     <td>{{ item.platformName__ProductName__count }}</td>
-                                                                                                    <td>...</td>
                                                                                                 </tr>
                                                                                             {% endfor %}
                                                                                         </tbody>
@@ -720,7 +567,7 @@
                                                                    <div class="col-xl-12 col-lg-12 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie pt-3">
                                                                                     <canvas id="NPI-stacklinebar1"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -748,9 +595,9 @@
 
                                                                                 <form action="" method="post">
                                                                                     <span>Date range control ： </span>
-                                                                                    <input type="date" name="NPI_datemin4" value="2011-09-21">
+                                                                                    <input type="date" name="NPI_datemin4" value="2022-01-01">
                                                                                     <span>~</span>
-                                                                                    <input type="date" name="NPI_datemax4" value="2011-09-29">
+                                                                                    <input type="date" name="NPI_datemax4" value="2022-12-31">
                                                                                     <!-- date_sumbit_button -->
                                                                                     <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
                                                                                         <span class="text">Sumbit</span>
@@ -796,7 +643,7 @@
                                                                     <div class="col-xl-5 col-lg-5 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie pt-3">
                                                                                     <canvas id="NPI-pie5"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -808,7 +655,7 @@
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table id="NPI-table5" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                    <table id="NPI-table5" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th>ODM</th>
@@ -816,7 +663,6 @@
                                                                                                 <th>Series</th>
                                                                                                 <th>Issue Qty</th>
                                                                                                 <th>Rpt. Issue Qty</th>
-                                                                                                <th>Create Date</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
@@ -827,7 +673,6 @@
                                                                                                 <td>{{ item.platformName__Product_Segment }}</td>
                                                                                                 <td>{{ item.all_issue_qty }}</td>
                                                                                                 <td>{{ item.repeated_issue_qty }}</td>
-                                                                                                <td>...</td>
                                                                                             </tr>
                                                                                             {% endfor %}
                                                                                         </tbody>
@@ -845,7 +690,7 @@
                                                                    <div class="col-xl-12 col-lg-12 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie pt-3">
                                                                                     <canvas id="NPI-stacklinebar2"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -873,9 +718,9 @@
 
                                                                                 <form action="" method="post">
                                                                                     <span>Date range control ： </span>
-                                                                                    <input type="date" name="NPI_datemin5" value="2011-09-21">
+                                                                                    <input type="date" name="NPI_datemin5" value="2022-01-01">
                                                                                     <span>~</span>
-                                                                                    <input type="date" name="NPI_datemax5" value="2011-09-29">
+                                                                                    <input type="date" name="NPI_datemax5" value="2022-12-31">
                                                                                     <!-- date_sumbit_button -->
                                                                                     <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
                                                                                         <span class="text">Sumbit</span>
@@ -907,14 +752,12 @@
 
                                         <!-- SystemCosmetic-tab-page -->
                                          <div class="tab-pane" role="tabpanel" id="SystemCosmetic-tab-page" >
-<!--                                            <img src="construction.jpg" style="width:50%;">-->
 
                                          </div>
                                         <!-- SystemCosmetic-tab-page -->
 
                                          <!-- Sustaining-tab-page -->
                                          <div class="tab-pane" role="tabpanel" id="Sustaining-tab-page">
-<!--                                             <img src="construction.jpg" style="width:50%;">-->
 
                                         </div>
                                         <!-- Sustaining-tab-page -->
@@ -949,25 +792,24 @@
 <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 <script src="{% static 'dashboard/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 <script src="{% static 'dashboard/js/Dashboard.min.js'%}"></script>
-<!-- datatable 和 searchpanes 共同的-->
+<!-- datatable 和 searchpanes 和導出按鈕 共同的-->
 <script src="{% static 'dashboard/vendor/datatables/jquery-3.5.1.js'%}"></script>
 <script src="{% static 'dashboard/vendor/datatables/jquery.dataTables.min.js'%}"></script>
-<!-- datatable -->
-<script src="{% static 'dashboard/js/datatables-demo.js'%}"></script>
+<!-- 導出按鈕-->
+<script src="{% static 'dashboard/vendor/datatables/dataTables.buttons.min.js'%}"></script>
+<script src="{% static 'dashboard/vendor/datatables/jszip.min.js'%}"></script>
+<script src="{% static 'dashboard/vendor/datatables/buttons.html5.min.js'%}"></script>
 <!-- searchpanes -->
 <script src="{% static 'dashboard/vendor/searchpanes/dataTables.searchPanes.min.js'%}"></script>
 <script src="{% static 'dashboard/vendor/searchpanes/dataTables.select.min.js'%}"></script>
 <!-- chartjs -->
 <script src="{% static 'dashboard/vendor/chartjs/Chart.min.js'%}"></script>
-<!--<script src="https://cdnjs.com/libraries/Chart.js"></script>-->
-
 <!-- chartjs 顏色套件 -->
 <script src="{% static 'dashboard/vendor/chartjs/chartjs-plugin-colorschemes.min.js'%}"></script>
-<!-- chartjs 顯示表分比套件 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>-->
+<!-- chartjs 顯示表分比套件 -->
 <script src="{% static 'dashboard/vendor/chartjs/chartjs-plugin-labels.js'%}"></script>
-
-<!-- chartjs -->
-<script src="{% static 'dashboard/js/chart-pie-demo.js'%}"></script>
+<!-- datatable -->
+<script src="{% static 'dashboard/js/datatables-demo.js'%}"></script>
 
 </body>
 {% endblock content %}
