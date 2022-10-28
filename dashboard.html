@@ -214,34 +214,122 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        {% for item in product_table_data %}
-                                                                            <tr>
-                                                                                <td>...</td>
-                                                                                <!-- 通过日期判断当前stage是 -->
-                                                                                {% if date_today > item.RTP|add:date_delta %}
-                                                                                    <td>MP</td>
-                                                                                {% elif date_today > item.RTP and date_today < item.RTP|add:date_delta %}
-                                                                                    <td>Ramp</td>
-                                                                                {% elif date_today > item.BuildDate_MV %}
-                                                                                    <td>MV</td>
-                                                                                {% elif date_today > item.BuildDate_PV %}
-                                                                                    <td>PV</td>
-                                                                                {% elif date_today > item.BuildDate_SI %}
-                                                                                    <td>SI</td>
-                                                                                {% else %}
-                                                                                    <td>TBD</td>
-                                                                                {% endif %}
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP333</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>0</td>
+                                                                            <td>test</td>
 
-                                                                                <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
-                                                                                <td>{{ item.RTP|date:'Y-m-d' }}</td>
-                                                                                <td>{{ item.PartnerName }}</td>
-                                                                                <td>{{ item.PE }}</td>
-                                                                                <td><a href="#">...</a></td>
-                                                                                <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
-                                                                                <td><a href="#">...</a></td>
-<!--                                                                                <td>{{ item.create_date|date:'Y-m-d' }}</td>-->
-                                                                            </tr>
-                                                                        {% endfor %}
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+
+                                                                        </tr>
+                                                                <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+
+                                                                        </tr>
+                                                                       <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>5</td>
+                                                                            <td>test</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MV</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>6</td>
+                                                                            <td>test</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>SI</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>7</td>
+                                                                            <td>test</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>TBD</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>8</td>
+                                                                            <td>test</td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>SI</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>9</td>
+                                                                            <td>test</td>
+
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -292,7 +380,7 @@
                                                                     <div class="col-xl-5 col-lg-5 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie">
+                                                                                <div class="chart-pie-lg">
                                                                                     <canvas id="NPI-pie1"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -335,7 +423,7 @@
                                                                    <div class="col-xl-12 col-lg-12 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-bar">
+                                                                                <div class="chart-bar pt-2">
                                                                                     <canvas id="NPI-stackbar1"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -352,7 +440,7 @@
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
-                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Left click” or press “Ctrl” to do so)</span>
+                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Mouse” or press “Ctrl” to do so)</span>
                                                                 </div>
                                                                  <!-- filter button -->
 
@@ -465,7 +553,7 @@
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
-                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Left click” or press “Ctrl” to do so)</span>
+                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Mouse” or press “Ctrl” to do so)</span>
                                                                 </div>
                                                                  <!-- filter button -->
 
@@ -547,14 +635,69 @@
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
-                                                                                            {% for item in issue_platform_odm%}
-                                                                                                <tr>
-                                                                                                    <td>{{ item.platformName__PartnerName }}</td>
-                                                                                                    <td>{{ item.platformName__ProductName }}</td>
-                                                                                                    <td>{{ item.platformName__Product_Segment }}</td>
-                                                                                                    <td>{{ item.platformName__ProductName__count }}</td>
-                                                                                                </tr>
-                                                                                            {% endfor %}
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>X360 G9</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>11</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>Powderkeg</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>31</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Rota</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>12</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wddf</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>32</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wsff</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>22</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Maldives</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>53</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>eddd</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>5</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>edcvv</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>23</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>efvvv</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>13</td>
+
+                                                                                            </tr>
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -569,7 +712,7 @@
                                                                    <div class="col-xl-12 col-lg-12 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-3">
+                                                                                <div class="chart-bar pt-2">
                                                                                     <canvas id="NPI-stacklinebar1"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -586,7 +729,7 @@
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
-                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Left click” or press “Ctrl” to do so)</span>
+                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Mouse” or press “Ctrl” to do so)</span>
                                                                 </div>
                                                                  <!-- filter button -->
 
@@ -668,16 +811,70 @@
                                                                                                 <th>Rpt. Issue Qty</th>
                                                                                             </tr>
                                                                                         </thead>
-                                                                                        <tbody>
-                                                                                            {% for item in issue_vs_repeated %}
+                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td>{{ item.platformName__PartnerName }}</td>
-                                                                                                <td>{{ item.platformName__ProductName }}</td>
-                                                                                                <td>{{ item.platformName__Product_Segment }}</td>
-                                                                                                <td>{{ item.all_issue_qty }}</td>
-                                                                                                <td>{{ item.repeated_issue_qty }}</td>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>X360 G9</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>11</td>
+                                                                                                <td>1</td>
                                                                                             </tr>
-                                                                                            {% endfor %}
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>Powderkeg</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>31</td>
+                                                                                                <td>11</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Rota</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>12</td>
+                                                                                                <td>13</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wddf</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>32</td>
+                                                                                                <td>14</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wsff</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>22</td>
+                                                                                                <td>2</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Maldives</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>53</td>
+                                                                                                <td>11</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>eddd</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>5</td>
+                                                                                                <td>6</td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>edcvv</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>23</td>
+                                                                                                <td>7</td>
+
+                                                                                            </tr>
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -693,7 +890,7 @@
                                                                    <div class="col-xl-12 col-lg-12 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-3">
+                                                                                <div class="chart-bar pt-2">
                                                                                     <canvas id="NPI-stacklinebar2"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -710,7 +907,7 @@
                                                                         </span>
                                                                         <span class="text">Filters</span>
                                                                     </button>
-                                                                   <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Left click” or press “Ctrl” to do so)</span>
+                                                                   <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Mouse” or press “Ctrl” to do so)</span>
                                                                 </div>
                                                                  <!-- filter button -->
 
