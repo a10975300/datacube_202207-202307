@@ -170,12 +170,12 @@
                         <div class="col-lg-12">
                             <div class="card mb-3" style="border:none;">
                                 <div class="card-body">
-                                    <ul class="nav nav2 nav-tabs justify-content-end" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#Product-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Product</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#DFM-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">DFM</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#NPI-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">NPI Issue</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#SystemCosmetic-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">System Cosmetic</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Sustaining-tab-page" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Sustaining</span></a> </li>
+                                    <ul class="nav nav2 nav-tabs justify-content-end" id="myTab">
+                                        <li class="nav-item active"> <a class="nav-link" data-toggle="tab" href="#Product-tab-page">Product</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#DFM-tab-page">DFM</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#NPI-tab-page">NPI Issue</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#SystemCosmetic-tab-page">System Cosmetic</a> </li>
+                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Sustaining-tab-page">Sustaining</a> </li>
                                     </ul>
                                     <!-- tab 內頁 -->
                                     <div class="tab-content tabcontent-border">
@@ -210,7 +210,7 @@
                                                                             <th>DFM</th>
                                                                             <th>NPI Issue</th>
                                                                             <th>Sustaining</th>
-<!--                                                                            <th>Date</th>-->
+                                                                            <th>Yield Rate</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -239,7 +239,7 @@
                                                                                 <td><a href="#">...</a></td>
                                                                                 <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
                                                                                 <td><a href="#">...</a></td>
-<!--                                                                                <td>{{ item.create_date|date:'Y-m-d' }}</td>-->
+                                                                                <td>...</td>
                                                                             </tr>
                                                                         {% endfor %}
                                                                     </tbody>
@@ -299,7 +299,17 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-xl-7 col-lg-7 mb-3">
+                                                                      <div class="col-xl-7 col-lg-7 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-bar-md pt-2">
+                                                                                    <canvas id="NPI-bar1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-7 col-lg-7 mb-3" style="display:none;">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
@@ -330,19 +340,10 @@
                                                                  </div>
                                                                 <!-- row1 -->
 
-                                                               <!-- row2 -->
+                                                               <!-- row2
                                                                  <div class="row">
-                                                                   <div class="col-xl-12 col-lg-12 mb-3">
-                                                                        <div class="card shadow mb-3 h-100">
-                                                                            <div class="card-body">
-                                                                                <div class="chart-bar pt-2">
-                                                                                    <canvas id="NPI-bar1"></canvas>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                               </div>
-                                                                <!-- row2 -->
+
+                                                               </div>-->
 
                                                                  <!-- filter_button -->
                                                                 <div class="row ml-1">
@@ -515,7 +516,7 @@
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
                                                          <a href="#NPI-collapse3" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse3">
-                                                             <h5 class="m-0 font-weight-bold">Product vs Issue per ODM </h5>
+                                                             <h5 class="m-0 font-weight-bold">Overall issue impact factory / factory+field (EE/ME or other)</h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse3">
@@ -540,21 +541,83 @@
                                                                                     <table id="NPI-table3" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>ODM</th>
-                                                                                                <th>Product</th>
-                                                                                                <th>Series</th>
+                                                                                                <th>Impact Scope</th>
+                                                                                                <th>Root Cause</th>
                                                                                                 <th>Issue Qty</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
-                                                                                            {% for item in issue_platform_odm%}
                                                                                                 <tr>
-                                                                                                    <td>{{ item.platformName__PartnerName }}</td>
-                                                                                                    <td>{{ item.platformName__ProductName }}</td>
-                                                                                                    <td>{{ item.platformName__Product_Segment }}</td>
-                                                                                                    <td>{{ item.platformName__ProductName__count }}</td>
+                                                                                                    <td>Factory</td>
+                                                                                                    <td>Design - EE</td>
+                                                                                                    <td>3</td>
                                                                                                 </tr>
-                                                                                            {% endfor %}
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Field+Factory</td>
+                                                                                                    <td>Design - EE</td>
+                                                                                                    <td>4</td>
+                                                                                                </tr>
+                                                                                                                                                                                                <tr>
+                                                                                                    <td>Factory</td>
+                                                                                                    <td>Design - EE</td>
+                                                                                                    <td>3</td>
+                                                                                                </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Field</td>
+                                                                                                    <td>Design - EE</td>
+                                                                                                    <td>4</td>
+                                                                                                </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Field+Factory</td>
+                                                                                                    <td>Design - EE DFM</td>
+                                                                                                    <td>3</td>
+                                                                                                </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                <tr>
+                                                                                                    <td>Field+Factory</td>
+                                                                                                    <td>Design - EE DFM</td>
+                                                                                                    <td>2</td>
+                                                                                                </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Factory</td>
+                                                                                                    <td>Design - ME DFM</td>
+                                                                                                    <td>2</td>
+                                                                                                </tr>
+
+                                                                                                </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Factory</td>
+                                                                                                    <td>Design - ME DFM</td>
+                                                                                                    <td>23</td>
+                                                                                                </tr>
+                                                                                                                 </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Factory</td>
+                                                                                                    <td>Design - ME</td>
+                                                                                                    <td>23</td>
+                                                                                                </tr>
+                                                                                                                                                                                                  </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Field+Factory</td>
+                                                                                                    <td>Design-SW</td>
+                                                                                                    <td>23</td>
+                                                                                                </tr>
+                                                                                                    </tr>
+                                                                                                                                                                                                  </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Field</td>
+                                                                                                    <td>comm</td>
+                                                                                                    <td>23</td>
+                                                                                                </tr>
+
+
+                                                                                                                                    </tr>
+                                                                                                                                                                                                  </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                    <td>Factory</td>
+                                                                                                    <td>comm - DFM</td>
+                                                                                                    <td>23</td>
+                                                                                                </tr>
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -635,7 +698,7 @@
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
                                                          <a href="#NPI-collapse4" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse4">
-                                                             <h5 class="m-0 font-weight-bold">Product vs Repeating Issue per ODM </h5>
+                                                             <h5 class="m-0 font-weight-bold">Factory issue</h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse4">
@@ -646,7 +709,7 @@
                                                                     <div class="col-xl-5 col-lg-5 mb-3">
                                                                         <div class="card shadow mb-3 h-100">
                                                                             <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
+                                                                                <div class="chart-pie-lg">
                                                                                     <canvas id="NPI-pie4"></canvas>
                                                                                 </div>
                                                                             </div>
@@ -661,23 +724,149 @@
                                                                                     <table id="NPI-table4" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th>ODM</th>
-                                                                                                <th>Product</th>
-                                                                                                <th>Series</th>
+                                                                                                <th>Root Cause</th>
+                                                                                                <th>Build stage</th>
+                                                                                                <th>Short-term Category</th>
+                                                                                                <th>Long-term Category</th>
                                                                                                 <th>Issue Qty</th>
-                                                                                                <th>Rpt. Issue Qty</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
-                                                                                            {% for item in issue_vs_repeated %}
                                                                                             <tr>
-                                                                                                <td>{{ item.platformName__PartnerName }}</td>
-                                                                                                <td>{{ item.platformName__ProductName }}</td>
-                                                                                                <td>{{ item.platformName__Product_Segment }}</td>
-                                                                                                <td>{{ item.all_issue_qty }}</td>
-                                                                                                <td>{{ item.repeated_issue_qty }}</td>
+                                                                                                <td>Design-BIOS</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Supplier</td>
+                                                                                                <td>4</td>
                                                                                             </tr>
-                                                                                            {% endfor %}
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Factory-Process</td>
+                                                                                                <td>23</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>SI-2</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Factory-Fixture</td>
+                                                                                                <td>34</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-BIOS</td>
+                                                                                                <td>PV-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Factory-Fixture</td>
+                                                                                                <td>34</td>
+                                                                                            </tr>
+                                                                                              <tr>
+                                                                                                <td>Design-ME</td>
+                                                                                                  <td>PV-2</td>
+                                                                                                  <td>test</td>
+                                                                                                <td>Factory-Fixture</td>
+                                                                                                <td>24</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Factory Operation</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Factory-Process</td>
+                                                                                                <td>12</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-BIOS</td>
+                                                                                                <td>MV-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>24</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Factory Operation</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>35</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>comm-ME</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                <td>TBD</td>
+                                                                                                                                                                                            <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                <td>TBD</td>
+                                                                                                                                                                                            <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                <td>MM</td>
+                                                                                                                                                                                            <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                                                                                  <tr>
+                                                                                                <td>CC</td>
+                                                                                                                                                                                            <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                <td>MM</td>
+                                                                                                                                                                                            <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                <td>Factory Operation</td>
+                                                                                                                                                                                            <td>SI-2</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                <td>Factory Operation</td>
+                                                                                                                                                                                            <td>PV-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>3</td>
+                                                                                            </tr>
+                                                                                                                                                                                        </tr>
+                                                                       </tr>
+
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>35</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>comm-ME</td>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>test</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                            </tr>
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
