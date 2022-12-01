@@ -207,9 +207,9 @@
                                                                             <th>RTP Date</th>
                                                                             <th>Factory</th>
                                                                             <th>PE</th>
-                                                                            <th>DFM</th>
+<!--                                                                            <th>DFM</th>-->
                                                                             <th>NPI Issue</th>
-                                                                            <th>Sustaining</th>
+<!--                                                                            <th>Sustaining</th>-->
                                                                             <th>Yield Rate</th>
                                                                         </tr>
                                                                     </thead>
@@ -220,26 +220,67 @@
                                                                                 <!-- 通过日期判断当前stage是 -->
                                                                                 {% if date_today > item.RTP|add:date_delta %}
                                                                                     <td>MP</td>
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
+                                                                                    <td>{{ item.RTP|date:'Y-m-d' }}</td>
+                                                                                    <td>{{ item.PartnerName }}</td>
+                                                                                    <td>{{ item.PE }}</td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td>{{ item.yeildrate_ramp }}</td>
                                                                                 {% elif date_today > item.RTP and date_today < item.RTP|add:date_delta %}
                                                                                     <td>Ramp</td>
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
+                                                                                    <td>{{ item.RTP|date:'Y-m-d' }}</td>
+                                                                                    <td>{{ item.PartnerName }}</td>
+                                                                                    <td>{{ item.PE }}</td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td>{{ item.yeildrate_ramp }}</td>
                                                                                 {% elif date_today > item.BuildDate_MV %}
                                                                                     <td>MV</td>
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
+                                                                                    <td>{{ item.RTP|date:'Y-m-d' }}</td>
+                                                                                    <td>{{ item.PartnerName }}</td>
+                                                                                    <td>{{ item.PE }}</td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td>{{ item.yeildrate_mv_mini1 }}</td>
                                                                                 {% elif date_today > item.BuildDate_PV %}
                                                                                     <td>PV</td>
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
+                                                                                    <td>{{ item.RTP|date:'Y-m-d' }}</td>
+                                                                                    <td>{{ item.PartnerName }}</td>
+                                                                                    <td>{{ item.PE }}</td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td>{{ item.yeildrate_pv }}</td>
                                                                                 {% elif date_today > item.BuildDate_SI %}
                                                                                     <td>SI</td>
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
+                                                                                    <td>{{ item.RTP|date:'Y-m-d' }}</td>
+                                                                                    <td>{{ item.PartnerName }}</td>
+                                                                                    <td>{{ item.PE }}</td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td>{{ item.yeildrate_si }}</td>
                                                                                 {% else %}
+                                                                                    <td>TBD</td>
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
+                                                                                    <td>{{ item.RTP|date:'Y-m-d' }}</td>
+                                                                                    <td>{{ item.PartnerName }}</td>
+                                                                                    <td>{{ item.PE }}</td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
+                                                                                    <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
+<!--                                                                                    <td><a href="#">...</a></td>-->
                                                                                     <td>TBD</td>
                                                                                 {% endif %}
 
-                                                                                <td class="table_fontsize"><a href="{{request.path}}product/products/?_p_ProductName__in={{ item.ProductName }}" title="{{ item.ProductName }}">{{ item.ProductName }}</a></td>
-                                                                                <td>{{ item.RTP|date:'Y-m-d' }}</td>
-                                                                                <td>{{ item.PartnerName }}</td>
-                                                                                <td>{{ item.PE }}</td>
-                                                                                <td><a href="#">...</a></td>
-                                                                                <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
-                                                                                <td><a href="#">...</a></td>
-                                                                                <td>...</td>
+
                                                                             </tr>
                                                                         {% endfor %}
                                                                     </tbody>
@@ -396,119 +437,6 @@
                                              </div>
                                              <!-- issue1 -->
 
-                                             <!-- issue2 -->
-                                             <div class="row ">
-                                                 <div class="col-xl-12 col-lg-12 mt-4">
-                                                     <div class="card shadow mb-2 h-100">
-                                                         <!-- Card Header-->
-                                                         <a href="#NPI-collapse2" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse2">
-                                                             <h5 class="m-0 font-weight-bold">Single failure</h5>
-                                                         </a>
-                                                            <!--Collapse Card Content -->
-                                                         <div class="collapse" id="NPI-collapse2">
-                                                             <div class="card-body">
-                                                                  <!-- row1 -->
-                                                                 <div class="row">
-                                                                    <div class="col-xl-5 col-lg-5 mb-3">
-                                                                        <div class="card shadow mb-3  h-100">
-                                                                            <div class="card-body">
-                                                                                <div class="chart-pie pt-2">
-                                                                                    <canvas id="NPI-pie2"></canvas>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-xl-7 col-lg-7 mb-3">
-                                                                        <div class="card shadow mb-3 h-100">
-                                                                            <div class="card-body">
-                                                                                <div class="table-responsive">
-                                                                                    <table id="NPI-table2" class="display compact nowrap">
-                                                                                        <thead>
-                                                                                            <tr>
-                                                                                                <th>ODM</th>
-                                                                                                <th>Build Stage</th>
-                                                                                                <th>Product Name</th>
-                                                                                                <th>Series</th>
-                                                                                                <th>Failure Category</th>
-                                                                                                <th>Issue Qty</th>
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            {% for item in signle_failure %}
-                                                                                                <tr>
-                                                                                                    <td>{{ item.platformName__PartnerName }}</td>
-                                                                                                    <td>{{ item.buildstage }}</td>
-                                                                                                    <td>{{ item.platformName__ProductName }}</td>
-                                                                                                    <td>{{ item.platformName__Product_Segment }}</td>
-                                                                                                    {% if item.duplicate == 'N' %}
-                                                                                                        <td>unduplicate</td>
-                                                                                                    {% else %}
-                                                                                                        <td>duplicate</td>
-                                                                                                    {% endif %}
-                                                                                                    <td>{{ item.platformName__ProductName__count }}</td>
-                                                                                                </tr>
-                                                                                            {% endfor %}
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                               </div>
-                                                                <!-- row1 -->
-
-                                                              <!-- filter_button -->
-                                                                <div class="row ml-1">
-                                                                    <button id="NPI-filter-button2" class="btn btn-secondary btn-icon-split btn-sm">
-                                                                        <span class="icon text-white-50">
-                                                                            <i class="icon fa fa-arrow-right"></i>
-                                                                        </span>
-                                                                        <span class="text">Filters</span>
-                                                                    </button>
-                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Left click” or press “Ctrl” to do so)</span>
-                                                                </div>
-                                                                 <!-- filter button -->
-
-                                                                <!-- filter -->
-                                                                <div class="row mt-2" style="display:none" id="NPI-filter2">
-                                                                    <div class="col-xl-12 col-lg-12">
-                                                                        <div class="card shadow">
-                                                                            <div class="card-body">
-
-                                                                             <!--    <form action="" method="post">
-                                                                                    <span>Date range control ： </span>
-                                                                                    <input type="date" name="NPI_datemin3" value="2022-01-01">
-                                                                                    <span>~</span>
-                                                                                    <input type="date" name="NPI_datemax3" value="2022-12-31">
-
-                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
-                                                                                        <span class="text">Sumbit</span>
-                                                                                    </button>
-
-                                                                                </form>-->
-
-
-
-                                                                                <div id="NPI-filter-panel2"></div>
-                                                                                <button id="NPI-redraw2" class="btn btn-primary btn-icon-split btn-sm">
-                                                                                    <span class="icon text-white-50">
-                                                                                        <i class="icon fa fa-arrow-right"></i>
-                                                                                    </span>
-                                                                                    <span class="text">Redraw Charts</span>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- filter -->
-
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <!-- issue2 -->
 
                                              <!-- issue3 -->
                                              <div class="row ">
@@ -516,7 +444,7 @@
                                                      <div class="card shadow mb-2 h-100">
                                                          <!-- Card Header-->
                                                          <a href="#NPI-collapse3" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="NPI-collapse3">
-                                                             <h5 class="m-0 font-weight-bold">Overall issue impact factory / factory+field (EE/ME or other)</h5>
+                                                             <h5 class="m-0 font-weight-bold">Oveall issue impact Factory</h5>
                                                          </a>
                                                             <!--Collapse Card Content -->
                                                          <div class="collapse" id="NPI-collapse3">
@@ -559,96 +487,15 @@
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
+                                                                                                {% for item in impact_scope %}
                                                                                                 <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Factory</td>
-                                                                                                    <td>Design - EE</td>
-                                                                                                    <td>3</td>
+                                                                                                    <td>{{ item.platformName__PartnerName }}</td>
+                                                                                                    <td>{{ item.platformName__Product_Segment }}</td>
+                                                                                                    <td>{{ item.impact_scope }}</td>
+                                                                                                    <td>{{ item.root_cause_category }}</td>
+                                                                                                    <td>{{ item.root_cause_category__count }}</td>
                                                                                                 </tr>
-                                                                                        <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Field+Factory</td>
-                                                                                                    <td>Design - EE</td>
-                                                                                                    <td>4</td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Factory</td>
-                                                                                                    <td>Design - EE</td>
-                                                                                                    <td>3</td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Field</td>
-                                                                                                    <td>Design - EE</td>
-                                                                                                    <td>4</td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Field+Factory</td>
-                                                                                                    <td>Design - EE DFM</td>
-                                                                                                    <td>3</td>
-                                                                                                </tr>
-
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Field+Factory</td>
-                                                                                                    <td>Design - EE DFM</td>
-                                                                                                    <td>2</td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Factory</td>
-                                                                                                    <td>Design - ME DFM</td>
-                                                                                                    <td>2</td>
-                                                                                                </tr>
-
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Factory</td>
-                                                                                                    <td>Design - ME DFM</td>
-                                                                                                    <td>23</td>
-                                                                                                </tr>
-
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Factory</td>
-                                                                                                    <td>Design - ME</td>
-                                                                                                    <td>23</td>
-                                                                                                </tr>
-
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Field+Factory</td>
-                                                                                                    <td>Design-SW</td>
-                                                                                                    <td>23</td>
-                                                                                                </tr>
-
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Field</td>
-                                                                                                    <td>comm</td>
-                                                                                                    <td>23</td>
-                                                                                                </tr>
-                                                                                                <tr>
-                                                                                                    <td>test</td>
-                                                                                                    <td>test</td>
-                                                                                                    <td>Factory</td>
-                                                                                                    <td>comm - DFM</td>
-                                                                                                    <td>23</td>
-                                                                                                </tr>
-
+                                                                                                {% endfor %}
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -662,7 +509,6 @@
                                                                <div class="row">
 
                                                                </div>-->
-
 
                                                               <!-- filter_button -->
                                                                 <div class="row ml-1">
@@ -764,141 +610,15 @@
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
+                                                                                            {% for item in factory_issue %}
                                                                                             <tr>
-                                                                                                <td>Design-BIOS</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Supplier</td>
-                                                                                                <td>4</td>
+                                                                                                <td>{{ item.root_cause_category }}</td>
+                                                                                                <td>{{ item.buildstage }}</td>
+                                                                                                <td>{{ item.short_term_category }}</td>
+                                                                                                <td>{{ item.long_term_category }}</td>
+                                                                                                <td>{{ item.buildstage__count }}</td>
                                                                                             </tr>
-                                                                                            <tr>
-                                                                                                <td>Design-EE</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Factory-Process</td>
-                                                                                                <td>23</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Design-EE</td>
-                                                                                                <td>SI-2</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Factory-Fixture</td>
-                                                                                                <td>34</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Design-BIOS</td>
-                                                                                                <td>PV-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Factory-Fixture</td>
-                                                                                                <td>34</td>
-                                                                                            </tr>
-                                                                                              <tr>
-                                                                                                <td>Design-ME</td>
-                                                                                                  <td>PV-2</td>
-                                                                                                  <td>test</td>
-                                                                                                <td>Factory-Fixture</td>
-                                                                                                <td>24</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Factory Operation</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Factory-Process</td>
-                                                                                                <td>12</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Design-BIOS</td>
-                                                                                                <td>MV-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>24</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Factory Operation</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>35</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>comm-ME</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                        <tr>
-                                                                                                <td>TBD</td>
-                                                                                                                                                                                            <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        <tr>
-                                                                                                <td>TBD</td>
-                                                                                                                                                                                            <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        <tr>
-                                                                                                <td>MM</td>
-                                                                                                                                                                                            <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                                                                                  <tr>
-                                                                                                <td>CC</td>
-                                                                                                                                                                                            <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        <tr>
-                                                                                                <td>MM</td>
-                                                                                                                                                                                            <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        <tr>
-                                                                                                <td>Factory Operation</td>
-                                                                                                                                                                                            <td>SI-2</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                        <tr>
-                                                                                                <td>Factory Operation</td>
-                                                                                                                                                                                            <td>PV-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>3</td>
-                                                                                            </tr>
-                                                                                                                                                                                        </tr>
-                                                                       </tr>
-
-                                                                                            <tr>
-                                                                                                <td>Design-EE</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>35</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>comm-ME</td>
-                                                                                                <td>SI-1</td>
-                                                                                                <td>test</td>
-                                                                                                <td>Design</td>
-                                                                                                <td>30</td>
-                                                                                            </tr>
+                                                                                            {% endfor %}
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
