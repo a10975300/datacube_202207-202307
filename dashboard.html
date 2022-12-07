@@ -210,7 +210,7 @@
 <!--                                                                            <th>DFM</th>-->
                                                                             <th>NPI Issue</th>
 <!--                                                                            <th>Sustaining</th>-->
-                                                                            <th>Yield Rate</th>
+                                                                            <!-- <th>Yield Rate</th>-->
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -277,7 +277,7 @@
 <!--                                                                                    <td><a href="#">...</a></td>-->
                                                                                     <td class="table_fontsize"><a href="{{request.path}}npi/issue/?_p_platformName__ProductName__in={{ item.ProductName }}" title=" click to check {{ item.ProductName }} issues" >{{ item.PlatformName__buildstage__count }}</a></td>
 <!--                                                                                    <td><a href="#">...</a></td>-->
-                                                                                    <td>TBD</td>
+                                                                                 <!--   <td>Yield rate</td>-->
                                                                                 {% endif %}
 
 
@@ -602,6 +602,7 @@
                                                                                     <table id="NPI-table4" class="display compact nowrap">
                                                                                         <thead>
                                                                                             <tr>
+                                                                                                <th>ODM</th>
                                                                                                 <th>Root Cause</th>
                                                                                                 <th>Build stage</th>
                                                                                                 <th>Short-term Category</th>
@@ -612,6 +613,7 @@
                                                                                         <tbody>
                                                                                             {% for item in factory_issue %}
                                                                                             <tr>
+                                                                                                <td>testtttttttttttt</td>
                                                                                                 <td>{{ item.root_cause_category }}</td>
                                                                                                 <td>{{ item.buildstage }}</td>
                                                                                                 <td>{{ item.short_term_category }}</td>
