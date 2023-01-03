@@ -36,7 +36,7 @@ class Dfm_General_Checklist(models.Model):
         db_table = "datacube_dfm_general_checklist"  # 指定数据表名称
 
     def __str__(self):
-        return str(self.dfm_item_desc)
+        return self.dfm_item_desc
 
 class Dfm_Review_Result(models.Model):
     """
@@ -101,4 +101,4 @@ class DFM_Report_Import_Records(models.Model):
         db_table = "datacube_dfm_import_records"  # 指定数据表名称
 
     def __str__(self):
-        return str(self.import_product_name.ProductName)
+        return self.import_product_name.ProductName

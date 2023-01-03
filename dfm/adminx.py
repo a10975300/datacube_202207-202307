@@ -107,7 +107,7 @@ class Dfm_Review_Admin(object):
 
             # 调用方法处理导入数据 Dfm_Import_to_Database.excel_to_database
             from .views import Dfm_Import_to_Database
-            Dfm_Import_to_Database.excel_to_database(self, workbook)
+            Dfm_Import_to_Database().excel_to_database(workbook)
 
             messages.success(request, "Dfm report was imported successfully.")
             return HttpResponseRedirect('/scpe/dfm/dfm_review_result/')

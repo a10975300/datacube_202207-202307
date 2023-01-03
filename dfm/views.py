@@ -15,8 +15,6 @@ class Dfm_Import_to_Database(object):
     get excel contents from each cell then write to mysql database
     """
     def excel_to_database(self, workbook):
-        user_id = self.request.user.id # get current user
-
         """
         从excel表dfm sheet里面读取产品相关的信息如：产品类别，segment,产品名称，产品尺寸，ODM名称 以及build year
         """
@@ -114,8 +112,7 @@ class Dfm_Import_to_Database(object):
             'touch_pad_size': key_materials.cell(25, 5).value,
 
         }
-        product_id = NewItemHandler.new_product(self,data)
-
+        product_id = NewItemHandler.new_product(self, data)
 
         # create = Dfm_Review_Result()
         # rows_number = dfm_sheet.max_row  #get total row numbers
@@ -130,24 +127,22 @@ class Dfm_Import_to_Database(object):
         # call method of dfm_import_record_handle to create or update an record when the above steps finished
         NewItemHandler.dfm_import_record_handle(self, dfm_sheet, product_id)
 
-
 # automatically handle product, new check-item related information
 class NewItemHandler(object):
-    def new_product(self,data):
+    def new_product(self, data):
         """
         check if this product already in the database 使用productName查询数据库里是否已有该产品,
             if yes, then return product id
             if no, create a new one and return the product id
         """
-
         item = Products.objects.filter(ProductName=data['product_name']).update_or_create(defaults={
             'ProductName': data['product_name'],
-            'Platform_Type': data['platform_type'] if data['platform_type'] else '...',
-            'Product_Segment': data['platform_segment'] if data['platform_segment'] else '...',
-            'Product_Type': data['product_type'] if data['product_type'] else '...',
+            'Platform_Type': data['platform_type'],
+            'Product_Segment': data['platform_segment'],
+            'Product_Type': data['product_type'],
             'Product_Size': data['product_size'],
             'PartnerName': data['odm_name'],
-            "Product_RCTO_Type": data['rcto'] if data['rcto'] else '...',
+            "Product_RCTO_Type": data['rcto'],
             # Product_MV_date = data['build_year'],
 
             'Product_A_Cover_material_Type': data['a_cover_material'],
@@ -221,7 +216,6 @@ class NewItemHandler(object):
             'Product_Touchpad_Solution01': data['touch_pad_solution_1'],
             'Product_Touchpad_Solution02': data['touch_pad_solution_2'],
             'Product_Touchpad_Outsize': data['touch_pad_size'],
-            'user_id': User.objects.filter(username=self.request.user)[0].id, #新家的
         })
         return item[0].id
 
