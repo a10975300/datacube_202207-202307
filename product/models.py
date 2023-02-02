@@ -164,12 +164,12 @@ class Products(models.Model):
     Product_TouchPanel_BondingVendor01 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Bonding Vendor-1")
     Product_TouchPanel_BondingVendor02 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Bonding Vendor-2")
     Product_TouchPanel_BondingVendor03 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Bonding Vendor-3")
-    Product_TouchPanel_Solution01 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Touch Solution-1")
-    Product_TouchPanel_Solution02 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Touch Solution-2")
-    Product_TouchPanel_Outsize = models.CharField(null=True, blank=True, max_length=20, verbose_name="Panel Outsize")
+    Product_TouchPanel_Solution01 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Touch Solution-1")#在Ver:3.0a是Touch solution type 欄位
+    Product_TouchPanel_Solution02 = models.CharField(null=True, blank=True, max_length=20, verbose_name="Touch Solution-2")#在Ver:3.0a沒有這欄位
+    Product_TouchPanel_Outsize = models.CharField(null=True, blank=True, max_length=20, verbose_name="Panel Outsize")#在Ver:3.0a沒有這欄位
 
-    Product_Touchpad_Solution01 = models.CharField(null=True, blank=True, max_length=20, verbose_name="TouchPad Solution01")
-    Product_Touchpad_Solution02 = models.CharField(null=True, blank=True, max_length=20, verbose_name="TouchPad Solution02")
+    Product_Touchpad_Solution01 = models.CharField(null=True, blank=True, max_length=20, verbose_name="TouchPad Solution01")#在Ver:3.0a是Touch Pad IC solution:vendor-1
+    Product_Touchpad_Solution02 = models.CharField(null=True, blank=True, max_length=20, verbose_name="TouchPad Solution02")#V在Ver:3.0a是Touch Pad IC solution: vendor-2
     Product_Touchpad_Outsize = models.CharField(null=True, blank=True, max_length=20, verbose_name="TouchPad Outsize")
 
     ProductFamilyName = models.CharField(null=True, blank=True, max_length=50, verbose_name="ProductFamilyName")
@@ -197,4 +197,4 @@ class Products(models.Model):
         db_table = "datacube_product" # 指定数据表名称
 
     def __str__(self):
-        return self.ProductName
+        return str(self.ProductName)

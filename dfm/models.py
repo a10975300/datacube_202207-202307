@@ -12,21 +12,22 @@ class Dfm_General_Checklist(models.Model):
     ITEM_PRIORITY = (
         (1, 1),
         (2, 2),
-        (3, 3)
+        (3, 3),
     )
     LEVEL = (
         ("Finished goods", "Finished goods"),
         ("Rework in sub-assy design", "Rework in sub-assy design"),
         ("General in sub-assy design", "General in sub-assy design"),
-        ("Sub-assy Hinge up unit", "Sub-assy Hinge up unit"),
-        ("Sub-assy base unit", "Sub-assy base unit"),
+        ("Sub-assy  Hinge uP unit", "Sub-assy  Hinge uP unit"),
+        ("Sub-assy  base unit", "Sub-assy  base unit"),
+        ("New finding","New finding"),
     )
     dfm_item_item_no = models.IntegerField(verbose_name="Item No")
     dfm_assembly_level = models.CharField(choices= LEVEL, verbose_name="Assembly Level", max_length=100, default="", null=True, blank=True, )
     dfm_item_desc = models.TextField(default='', verbose_name='Item Descriptions')
     dfm_item_priority = models.IntegerField(choices= ITEM_PRIORITY, verbose_name="Priority")
     dfm_item_attributes = models.CharField(default="General", null=True, blank=True, verbose_name='Item Type',max_length=20)
-    dfm_item_version = models.CharField(default="Ver 2_2021-1202", null=True, blank=True, verbose_name='Template Version',max_length=20)
+    dfm_item_version = models.CharField(default="Ver:2.0", null=True, blank=True, verbose_name='Template Version',max_length=20)
     dfm_item_notes = models.TextField(null=True, blank=True, verbose_name='Change Notes',max_length=200)
     crate_date = models.DateTimeField(default=datetime.now, verbose_name="Create Date")
 
@@ -36,7 +37,7 @@ class Dfm_General_Checklist(models.Model):
         db_table = "datacube_dfm_general_checklist"  # 指定数据表名称
 
     def __str__(self):
-        return self.dfm_item_desc
+        return str(self.dfm_item_desc)
 
 class Dfm_Review_Result(models.Model):
     """
@@ -50,28 +51,22 @@ class Dfm_Review_Result(models.Model):
         ("Unique", "Unique"),
         ("Difficult", "Difficult"),
     )
-    SLUTION_CATEG = (
-        ("By design improvement", "By design improvement"),
-        ("By defined test method/spec", "By defined test method/spec"),
-        ("By SOP/Fixture", "By SOP/Fixture"),
-        ("Dropped/Constrained features/Waived", "Dropped/Constrained features/Waived"),
-    )
 
     dfm_review_item_no = models.IntegerField(verbose_name="Item No")
     dfm_review_item_desc = models.ForeignKey(Dfm_General_Checklist, verbose_name="Item Descriptions", on_delete=models.CASCADE, default="",max_length=500)
     dfm_product = models.ForeignKey(Products, verbose_name="Product", on_delete=models.CASCADE, default="")
     dfm_product_nud = models.CharField(choices=NUD, default=NUD[0][0], max_length=15, null=True, blank=True, verbose_name="NUD")
     dfm_product_part_category = models.CharField(max_length=50, default="", null=True, blank=True, verbose_name="Parts/Portion(Where)")
-    dfm_product_issue_symptom = models.CharField(max_length=500, default="", null=True, blank=True, verbose_name="Issue Symptom")
-    dfm_product_design_structures = models.CharField(max_length=100, default="", null=True, blank=True, verbose_name="Design structures of issues")
+    dfm_product_issue_symptom = models.CharField(max_length=500, default="", null=True, blank=True, verbose_name="Issue Symptom")#在Ver:1.63-3是Feature欄位
+    dfm_product_design_structures = models.CharField(max_length=100, default="", null=True, blank=True, verbose_name="Design structures of issues")#在Ver:1.63-3是Category欄位
     dfm_product_nonmacth_item = models.TextField( default="", null=True, blank=True, verbose_name="Non-match Item")
     dfm_product_odm_actions = models.TextField(default="", null=True, blank=True, verbose_name="ODM  Corrective Action")
-    dfm_product_solution_category = models.CharField(choices=SLUTION_CATEG, default="", null=True, blank=True, max_length=50, verbose_name="Types of solutions")
+    dfm_product_solution_category = models.CharField(default="", null=True, blank=True, max_length=100, verbose_name="Types of solutions")
     dfm_product_cnc = models.CharField(default="...", max_length=10, null=True, blank=True, verbose_name="CNC")
     dfm_product_si = models.CharField(default="...", max_length=10, null=True, blank=True, verbose_name="SI")
     dfm_product_pv = models.CharField(default="...", max_length=10, null=True, blank=True, verbose_name="PV")
     dfm_product_mv = models.CharField(default="...", max_length=10, null=True, blank=True, verbose_name="MV")
-    photo = models.ImageField(upload_to="dfm/images/", null=True, blank=True, verbose_name="Defect Picture")
+    #photo = models.ImageField(upload_to="dfm/images/", null=True, blank=True, verbose_name="Defect Picture")
     create_date = models.DateTimeField(default=datetime.now, verbose_name="Create Date")
 
     class Meta:
@@ -88,7 +83,7 @@ class DFM_Report_Import_Records(models.Model):
     记录dfm report导入情况
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, null=True, verbose_name="User")
-    import_product_name = models.ForeignKey(Products, on_delete=models.CASCADE, editable=False, null=True, verbose_name="Product")
+    import_product_name = models.CharField(max_length=30, verbose_name="Product Name", help_text="Product Name")
     import_stage_cnc = models.CharField(max_length=30, null=True, blank=True, verbose_name="CNC", help_text="CNC")
     import_stage_si = models.CharField(max_length=30, null=True, blank=True, verbose_name="SI", help_text="SI")
     import_stage_pv = models.CharField(max_length=30, null=True, blank=True, verbose_name="PV", help_text="PV")
@@ -101,4 +96,4 @@ class DFM_Report_Import_Records(models.Model):
         db_table = "datacube_dfm_import_records"  # 指定数据表名称
 
     def __str__(self):
-        return self.import_product_name.ProductName
+        return str(self.import_product_name)

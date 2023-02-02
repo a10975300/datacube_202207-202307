@@ -216,6 +216,7 @@ class NewItemHandler(object):
             'Product_Touchpad_Solution01': data['touch_pad_solution_1'],
             'Product_Touchpad_Solution02': data['touch_pad_solution_2'],
             'Product_Touchpad_Outsize': data['touch_pad_size'],
+            'user_id': User.objects.filter(username=self.request.user)[0].id,  # 新家的
         })
         return item[0].id
 
@@ -266,6 +267,7 @@ class NewItemHandler(object):
             new_item.update_or_create(defaults={
                 'import_stage_mv': import_date
             })
+
 
     # creare or update new item
     def dfm_review_item_handle(self, dfm_sheet, check_item_id, product_id, row):

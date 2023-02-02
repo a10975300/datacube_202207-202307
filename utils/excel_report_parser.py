@@ -5,6 +5,10 @@ from io import BytesIO
 from django.contrib.auth.models import User
 from npi.models import Issue, Products, SymptomCategory_First, SymptomCategory_Second
 
+from dfm.models import Dfm_General_Checklist, Dfm_Review_Result,DFM_Report_Import_Records
+from product.models import Products
+from openpyxl.cell import MergedCell
+
 class SafelaunchParser():
     """
     parse safelaunch report
@@ -413,14 +417,695 @@ class SafelaunchParser():
                            action_flag='',
                            message="{}-{} safelaunch report uploaded sucessfully".format(product_name, build_stage))
 
-
 class DfmReportParser():
     """
     parse Dfm tear down report
     """
-    def __int__(self):
-        pass
+    def parse(self, request, workbook, currentuser,report_version):
+        """ check Dfm template version then assign the right method()"""
 
+        if report_version == "Ver:1.63":# report_version == Ver:1.63
+            result = self.oldest_template(request=request, workbook=workbook, currentuser=currentuser)
+            return result
+
+        elif report_version == "Ver:2.0":# report_version == Ver:2.0
+            result = self.old_template(request=request, workbook=workbook, currentuser=currentuser)
+            return result
+
+        else: # report_version == Ver:3.0a
+            result = self.new_template(request=request, workbook=workbook, currentuser=currentuser)
+            return result
+
+
+    # parse old template Ver:1.63
+    def oldest_template(self, request, workbook, currentuser):
+
+        dfm_sheet = workbook['DFm ']
+        """
+        以下product資料要自己手動輸入
+        """
+        platform_type = None
+        platform_segment = None
+        product_type = None
+        product_name = "test2"
+        product_size = None
+        odm_name = None
+        build_year = None
+        rcto = None
+
+        data = {
+            'product_name': product_name,
+            'platform_type': platform_type,
+            'platform_segment': platform_segment,
+            'product_type': product_type,
+            'product_size': product_size,
+            'odm_name': odm_name,
+            'build_year': build_year,
+            'rcto': rcto,
+
+            'a_cover_material': None,
+            'a_cover_surface': None,
+            'a_cover_thickness': None,
+            'a_cover_vendor1': None,
+            'a_cover_vendor2': None,
+            'a_cover_vendor3': None,
+            'a_cover_vendor4': None,
+            'a_cover_gule': None,
+            'a_bonding_vendor1': None,
+            'a_bonding_vendor2': None,
+            'a_bonding_vendor3': None,
+
+            'b_cover_material': None,
+            'b_cover_surface': None,
+            'b_cover_thickness': None,
+            'b_cover_vendor1': None,
+            'b_cover_vendor2': None,
+            'b_cover_vendor3': None,
+            'b_cover_vendor4': None,
+            'b_cover_gule': None,
+            'b_bonding_vendor1': None,
+            'b_bonding_vendor2': None,
+            'b_bonding_vendor3': None,
+
+            'c_cover_material': None,
+            'c_cover_surface': None,
+            'c_cover_thickness': None,
+            'c_cover_vendor1': None,
+            'c_cover_vendor2': None,
+            'c_cover_vendor3': None,
+            'c_cover_vendor4': None,
+            'c_cover_gule': None,
+            'c_bonding_vendor1': None,
+            'c_bonding_vendor2': None,
+            'c_bonding_vendor3': None,
+
+            'd_cover_material': None,
+            'd_cover_surface': None,
+            'd_cover_thickness': None,
+            'd_cover_vendor1':  None,
+            'd_cover_vendor2':  None,
+            'd_cover_vendor3':  None,
+            'd_cover_vendor4':  None,
+            'd_cover_gule':  None,
+            'd_bonding_vendor1':  None,
+            'd_bonding_vendor2':  None,
+            'd_bonding_vendor3':  None,
+
+            'hinge_material': None,
+            'hinged_cover_surface':  None,
+            'hinge_thickness':  None,
+            'hinge_vendor1': None,
+            'hinge_vendor2':  None,
+            'hinge_vendor3':  None,
+            'hinge_vendor4':  None,
+            'hinge_gule':  None,
+            'hinge_gule_vendor1':  None,
+            'hinge_gule_vendor2':  None,
+            'hinge_gule_vendor3':  None,
+
+            'touch_panel_bonding_type':  None,
+            'touch_panel_vendor1':  None,
+            'touch_panel_vendor2':  None,
+            'touch_panel_vendor3':  None,
+            'touch_panel_solution_1':  None,
+            'touch_panel_solution_2':  None,
+            'touch_panel_size':  None,
+
+            'touch_pad_solution_1':  None,
+            'touch_pad_solution_2':  None,
+            'touch_pad_size':  None,
+
+        }
+        """
+        product資料要自己手動輸入
+        """
+
+        product_id = self.new_product(data,currentuser)
+
+        rows_number = dfm_sheet.max_row  #get total row numbers
+        empty_time = 0 #檢查最大行數之後，有三次空白，才為真正的最大行數
+
+        for row in range(18, rows_number):  # rows_number = 100 写固定的行数，节省资源
+            checkingItem = dfm_sheet.cell(row, 2).value #Issue Category
+            if checkingItem:
+                dfm_check_item = (dfm_sheet.cell(row, 2).value).replace("\n","\r\n")  # 使用.replace("\n", "\r\n")处理excel单元格里有换行问题 "\r\n"是textarea换行符
+                check_item_id = self.dfm_check_item_handle_oldest(dfm_check_item, dfm_sheet.cell(row, 1).value,dfm_sheet.cell(row, 3).value, product_name)
+                self.dfm_review_item_handle_oldest(dfm_sheet, check_item_id, product_id, row)
+                empty_time = 0
+            else:
+                empty_time = empty_time+1
+                if empty_time == 3:
+                    break
+
+        # call method of dfm_import_record_handle to create or update an record when the above steps finished
+        dfm_stage="MV"
+
+        self.dfm_import_record_handle(product_name,dfm_stage,currentuser)
+        # log entries
+        self.log_entries(request, product_name, dfm_stage, currentuser)
+        return [product_name,dfm_stage]
+
+    # parse old template Ver:2.0
+    def old_template(self, request, workbook, currentuser):
+
+        dfm_sheet = workbook['DFm ']
+        platform_type = dfm_sheet.cell(3, 13).value
+        platform_segment = dfm_sheet.cell(4, 13).value
+        product_type = dfm_sheet.cell(5, 13).value
+        product_name = dfm_sheet.cell(6, 13).value
+        product_size = dfm_sheet.cell(7, 13).value
+        odm_name = dfm_sheet.cell(8, 13).value
+        build_year = dfm_sheet.cell(9, 13).value
+        rcto = dfm_sheet.cell(3, 15).value
+
+        key_materials = workbook['Key Material information']
+        data = {
+            'product_name': product_name,
+            'platform_type': platform_type,
+            'platform_segment': platform_segment,
+            'product_type': product_type,
+            'product_size': product_size,
+            'odm_name': odm_name,
+            'build_year': build_year,
+            'rcto': rcto,
+
+            'a_cover_material': key_materials.cell(4, 3).value,
+            'a_cover_surface': key_materials.cell(4, 4).value,
+            'a_cover_thickness': key_materials.cell(4, 5).value,
+            'a_cover_vendor1': key_materials.cell(4, 6).value,
+            'a_cover_vendor2': key_materials.cell(4, 7).value,
+            'a_cover_vendor3': key_materials.cell(4, 8).value,
+            'a_cover_vendor4': key_materials.cell(4, 9).value,
+            'a_cover_gule': key_materials.cell(12, 3).value,
+            'a_bonding_vendor1': key_materials.cell(12, 4).value,
+            'a_bonding_vendor2': key_materials.cell(12, 5).value,
+            'a_bonding_vendor3': key_materials.cell(12, 6).value,
+
+            'b_cover_material': key_materials.cell(5, 3).value,
+            'b_cover_surface': key_materials.cell(5, 4).value,
+            'b_cover_thickness': key_materials.cell(5, 5).value,
+            'b_cover_vendor1': key_materials.cell(5, 6).value,
+            'b_cover_vendor2': key_materials.cell(5, 7).value,
+            'b_cover_vendor3': key_materials.cell(5, 8).value,
+            'b_cover_vendor4': key_materials.cell(5, 9).value,
+            'b_cover_gule': key_materials.cell(13, 3).value,
+            'b_bonding_vendor1': key_materials.cell(13, 4).value,
+            'b_bonding_vendor2': key_materials.cell(13, 5).value,
+            'b_bonding_vendor3': key_materials.cell(13, 6).value,
+
+            'c_cover_material': key_materials.cell(6, 3).value,
+            'c_cover_surface': key_materials.cell(6, 4).value,
+            'c_cover_thickness': key_materials.cell(6, 5).value,
+            'c_cover_vendor1': key_materials.cell(6, 6).value,
+            'c_cover_vendor2': key_materials.cell(6, 7).value,
+            'c_cover_vendor3': key_materials.cell(6, 8).value,
+            'c_cover_vendor4': key_materials.cell(6, 9).value,
+            'c_cover_gule': key_materials.cell(14, 3).value,
+            'c_bonding_vendor1': key_materials.cell(14, 4).value,
+            'c_bonding_vendor2': key_materials.cell(14, 5).value,
+            'c_bonding_vendor3': key_materials.cell(14, 6).value,
+
+            'd_cover_material': key_materials.cell(7, 3).value,
+            'd_cover_surface': key_materials.cell(7, 4).value,
+            'd_cover_thickness': key_materials.cell(7, 5).value,
+            'd_cover_vendor1': key_materials.cell(7, 6).value,
+            'd_cover_vendor2': key_materials.cell(7, 7).value,
+            'd_cover_vendor3': key_materials.cell(7, 8).value,
+            'd_cover_vendor4': key_materials.cell(7, 9).value,
+            'd_cover_gule': key_materials.cell(15, 3).value,
+            'd_bonding_vendor1': key_materials.cell(15, 4).value,
+            'd_bonding_vendor2': key_materials.cell(15, 5).value,
+            'd_bonding_vendor3': key_materials.cell(15, 6).value,
+
+            'hinge_material': key_materials.cell(8, 3).value,
+            'hinged_cover_surface': key_materials.cell(8, 4).value,
+            'hinge_thickness': key_materials.cell(8, 5).value,
+            'hinge_vendor1': key_materials.cell(8, 6).value,
+            'hinge_vendor2': key_materials.cell(8, 7).value,
+            'hinge_vendor3': key_materials.cell(8, 8).value,
+            'hinge_vendor4': key_materials.cell(8, 9).value,
+            'hinge_gule': key_materials.cell(16, 3).value,
+            'hinge_gule_vendor1': key_materials.cell(16, 4).value,
+            'hinge_gule_vendor2': key_materials.cell(16, 5).value,
+            'hinge_gule_vendor3': key_materials.cell(16, 6).value,
+
+            'touch_panel_bonding_type': key_materials.cell(20, 3).value,
+            'touch_panel_vendor1': key_materials.cell(20, 4).value,
+            'touch_panel_vendor2': key_materials.cell(20, 5).value,
+            'touch_panel_vendor3': key_materials.cell(20, 6).value,
+            'touch_panel_solution_1': key_materials.cell(24, 3).value,
+            'touch_panel_solution_2': key_materials.cell(24, 4).value,
+            'touch_panel_size': key_materials.cell(24, 5).value,
+
+            'touch_pad_solution_1': key_materials.cell(25, 3).value,
+            'touch_pad_solution_2': key_materials.cell(25, 4).value,
+            'touch_pad_size': key_materials.cell(25, 5).value,
+
+        }
+        product_id = self.new_product(data,currentuser)
+
+        rows_number = dfm_sheet.max_row  #get total row numbers
+        empty_time = 0 #檢查最大行數之後，有三次空白，才為真正的最大行數
+
+        for row in range(31, rows_number):  # rows_number = 100 写固定的行数，节省资源
+            checkingItem = dfm_sheet.cell(row, 2).value #Issue Category
+            if checkingItem:
+                dfm_check_item = (dfm_sheet.cell(row, 2).value).replace("\n","\r\n")  # 使用.replace("\n", "\r\n")处理excel单元格里有换行问题 "\r\n"是textarea换行符
+                check_item_id = self.dfm_check_item_handle(dfm_check_item, dfm_sheet.cell(row, 1).value,dfm_sheet.cell(row, 3).value, product_name)
+                self.dfm_review_item_handle(dfm_sheet, check_item_id, product_id, row)
+                empty_time = 0
+            else:
+                empty_time = empty_time+1
+                if empty_time == 3:
+                    break
+
+        # call method of dfm_import_record_handle to create or update an record when the above steps finished
+        dfm_stage=""
+
+        if dfm_sheet.cell(32, 7).value:  # mv
+            dfm_stage = "MV"
+        elif dfm_sheet.cell(32, 6).value:  # pv
+            dfm_stage = "PV"
+        elif dfm_sheet.cell(32, 5).value:  # si
+            dfm_stage = "SI"
+        else:  # cnc
+            dfm_stage = "CNC"
+
+        self.dfm_import_record_handle(product_name,dfm_stage,currentuser)
+        # log entries
+        self.log_entries(request, product_name, dfm_stage, currentuser)
+        return [product_name,dfm_stage]
+
+    # parse new template Ver:3.0a
+    def new_template(self,request, workbook, currentuser):
+
+        dfm_sheet = workbook['DFm ']
+        platform_type = dfm_sheet.cell(3, 13).value
+        platform_segment = dfm_sheet.cell(4, 13).value
+        product_type = dfm_sheet.cell(5, 13).value
+        product_name = dfm_sheet.cell(6, 13).value
+        product_size = dfm_sheet.cell(7, 13).value
+        odm_name = dfm_sheet.cell(8, 13).value
+        build_year = dfm_sheet.cell(9, 13).value
+        rcto = dfm_sheet.cell(3, 15).value
+
+        key_materials = workbook['Key Material information']
+        data = {
+            'product_name': product_name,
+            'platform_type': platform_type,
+            'platform_segment': platform_segment,
+            'product_type': product_type,
+            'product_size': product_size,
+            'odm_name': odm_name,
+            'build_year': build_year,
+            'rcto': rcto,
+
+            'a_cover_material': key_materials.cell(4, 3).value,
+            'a_cover_surface': key_materials.cell(4, 4).value,
+            'a_cover_thickness': key_materials.cell(4, 5).value,
+            'a_cover_vendor1': key_materials.cell(4, 6).value,
+            'a_cover_vendor2': key_materials.cell(4, 7).value,
+            'a_cover_vendor3': key_materials.cell(4, 8).value,
+            'a_cover_vendor4': key_materials.cell(4, 9).value,
+            'a_cover_gule': key_materials.cell(12, 3).value,
+            'a_bonding_vendor1': key_materials.cell(12, 4).value,
+            'a_bonding_vendor2': key_materials.cell(12, 5).value,
+            'a_bonding_vendor3': key_materials.cell(12, 6).value,
+
+            'b_cover_material': key_materials.cell(5, 3).value,
+            'b_cover_surface': key_materials.cell(5, 4).value,
+            'b_cover_thickness': key_materials.cell(5, 5).value,
+            'b_cover_vendor1': key_materials.cell(5, 6).value,
+            'b_cover_vendor2': key_materials.cell(5, 7).value,
+            'b_cover_vendor3': key_materials.cell(5, 8).value,
+            'b_cover_vendor4': key_materials.cell(5, 9).value,
+            'b_cover_gule': key_materials.cell(13, 3).value,
+            'b_bonding_vendor1': key_materials.cell(13, 4).value,
+            'b_bonding_vendor2': key_materials.cell(13, 5).value,
+            'b_bonding_vendor3': key_materials.cell(13, 6).value,
+
+            'c_cover_material': key_materials.cell(6, 3).value,
+            'c_cover_surface': key_materials.cell(6, 4).value,
+            'c_cover_thickness': key_materials.cell(6, 5).value,
+            'c_cover_vendor1': key_materials.cell(6, 6).value,
+            'c_cover_vendor2': key_materials.cell(6, 7).value,
+            'c_cover_vendor3': key_materials.cell(6, 8).value,
+            'c_cover_vendor4': key_materials.cell(6, 9).value,
+            'c_cover_gule': key_materials.cell(14, 3).value,
+            'c_bonding_vendor1': key_materials.cell(14, 4).value,
+            'c_bonding_vendor2': key_materials.cell(14, 5).value,
+            'c_bonding_vendor3': key_materials.cell(14, 6).value,
+
+            'd_cover_material': key_materials.cell(7, 3).value,
+            'd_cover_surface': key_materials.cell(7, 4).value,
+            'd_cover_thickness': key_materials.cell(7, 5).value,
+            'd_cover_vendor1': key_materials.cell(7, 6).value,
+            'd_cover_vendor2': key_materials.cell(7, 7).value,
+            'd_cover_vendor3': key_materials.cell(7, 8).value,
+            'd_cover_vendor4': key_materials.cell(7, 9).value,
+            'd_cover_gule': key_materials.cell(15, 3).value,
+            'd_bonding_vendor1': key_materials.cell(15, 4).value,
+            'd_bonding_vendor2': key_materials.cell(15, 5).value,
+            'd_bonding_vendor3': key_materials.cell(15, 6).value,
+
+            'hinge_material': key_materials.cell(8, 3).value,
+            'hinged_cover_surface': key_materials.cell(8, 4).value,
+            'hinge_thickness': key_materials.cell(8, 5).value,
+            'hinge_vendor1': key_materials.cell(8, 6).value,
+            'hinge_vendor2': key_materials.cell(8, 7).value,
+            'hinge_vendor3': key_materials.cell(8, 8).value,
+            'hinge_vendor4': key_materials.cell(8, 9).value,
+            'hinge_gule': key_materials.cell(16, 3).value,
+            'hinge_gule_vendor1': key_materials.cell(16, 4).value,
+            'hinge_gule_vendor2': key_materials.cell(16, 5).value,
+            'hinge_gule_vendor3': key_materials.cell(16, 6).value,
+
+            'touch_panel_bonding_type': key_materials.cell(20, 4).value,
+            'touch_panel_vendor1': key_materials.cell(20, 5).value,
+            'touch_panel_vendor2': key_materials.cell(20, 6).value,
+            'touch_panel_vendor3': key_materials.cell(20, 7).value,
+            'touch_panel_solution_1': key_materials.cell(20, 3).value,
+            'touch_panel_solution_2': '',
+            'touch_panel_size': '',
+
+            'touch_pad_solution_1': key_materials.cell(24, 3).value,
+            'touch_pad_solution_2': key_materials.cell(24, 4).value,
+            'touch_pad_size': key_materials.cell(24, 5).value,
+
+        }
+        product_id = self.new_product(data,currentuser)
+
+        # create = Dfm_Review_Result()
+        rows_number = dfm_sheet.max_row  # get total row numbers
+        empty_time = 0  # 檢查最大行數之後，有三次空白，才為真正的最大行數
+        for row in range(32, rows_number):  # rows_number = 100 写固定的行数，节省资源
+            checkingItem = dfm_sheet.cell(row, 3).value
+            if checkingItem:
+                dfm_check_item = (dfm_sheet.cell(row, 3).value).replace("\n","\r\n")  # 使用.replace("\n", "\r\n")处理excel单元格里有换行问题 "\r\n"是textarea换行符
+                check_item_id = self.dfm_check_item_handle_newVersion(dfm_check_item, dfm_sheet.cell(row, 1).value,dfm_sheet.cell(row, 4).value, product_name, row,dfm_sheet)
+                self.dfm_review_item_handle_newVersion(dfm_sheet, check_item_id, product_id, row)
+                empty_time = 0
+            else:
+                empty_time = empty_time+1
+                if empty_time == 3:
+                    break
+
+        # call method of dfm_import_record_handle to create or update an record when the above steps finished
+        dfm_stage=""
+
+        if dfm_sheet.cell(32, 8).value:  # mv
+            dfm_stage = "MV"
+        elif dfm_sheet.cell(32, 7).value:  # pv
+            dfm_stage = "PV"
+        elif dfm_sheet.cell(32, 6).value:  # si
+            dfm_stage = "SI"
+        else:  # cnc
+            dfm_stage = "CNC"
+
+        self.dfm_import_record_handle(product_name,dfm_stage,currentuser)
+        # log entries
+        self.log_entries(request, product_name, dfm_stage, currentuser)
+        return [product_name,dfm_stage]
+
+    # create or update product Ver:1.63、Ver:2.0、Ver:3.0a
+    def new_product(self,data,currentuser):
+            """
+            check if this product already in the database 使用productName查询数据库里是否已有该产品,
+                if yes, then return product id
+                if no, create a new one and return the product id
+            """
+            item = Products.objects.filter(ProductName=data['product_name']).update_or_create(defaults={
+                'ProductName': data['product_name'],
+                'Platform_Type': data['platform_type'] if data['platform_type'] else '...',
+                'Product_Segment': data['platform_segment'] if data['platform_segment'] else '...',
+                'Product_Type': data['product_type'] if data['product_type'] else '...',
+                'Product_Size': data['product_size'],
+                'PartnerName': data['odm_name'],
+                "Product_RCTO_Type": data['rcto'] if data['rcto'] else '...',
+                "Product_MV_date" : data['build_year'],
+
+                'Product_A_Cover_material_Type': data['a_cover_material'],
+                'Product_A_Cover_material_Surface': data['a_cover_surface'],
+                'Product_A_Cover_material_Thickness': data['a_cover_thickness'],
+                'Product_A_Cover_material_Supplier01': data['a_cover_vendor1'],
+                'Product_A_Cover_material_Supplier02': data['a_cover_vendor2'],
+                'Product_A_Cover_material_Supplier03': data['a_cover_vendor3'],
+                'Product_A_Cover_material_Supplier04': data['a_cover_vendor4'],
+                'Product_A_Cover_Glue_Vendor': data['a_cover_gule'],
+                'Product_A_Cover_Bonding_Vendor01': data['a_bonding_vendor1'],
+                'Product_A_Cover_Bonding_Vendor02': data['a_bonding_vendor2'],
+                'Product_A_Cover_Bonding_Vendor03': data['a_bonding_vendor3'],
+
+                'Product_B_Cover_material_Type': data['b_cover_material'],
+                'Product_B_Cover_material_Surface': data['b_cover_surface'],
+                'Product_B_Cover_material_Thickness': data['b_cover_thickness'],
+                'Product_B_Cover_material_Supplier01': data['b_cover_vendor1'],
+                'Product_B_Cover_material_Supplier02': data['b_cover_vendor2'],
+                'Product_B_Cover_material_Supplier03': data['b_cover_vendor3'],
+                'Product_B_Cover_material_Supplier04': data['b_cover_vendor4'],
+                'Product_B_Cover_Glue_Vendor': data['b_cover_gule'],
+                'Product_B_Cover_Bonding_Vendor01': data['b_bonding_vendor1'],
+                'Product_B_Cover_Bonding_Vendor02': data['b_bonding_vendor2'],
+                'Product_B_Cover_Bonding_Vendor03': data['b_bonding_vendor3'],
+
+                'Product_C_Cover_material_Type': data['c_cover_material'],
+                'Product_C_Cover_material_Surface': data['c_cover_surface'],
+                'Product_C_Cover_material_Thickness': data['c_cover_thickness'],
+                'Product_C_Cover_material_Supplier01': data['c_cover_vendor1'],
+                'Product_C_Cover_material_Supplier02': data['c_cover_vendor2'],
+                'Product_C_Cover_material_Supplier03': data['c_cover_vendor3'],
+                'Product_C_Cover_material_Supplier04': data['c_cover_vendor4'],
+                'Product_C_Cover_Glue_Vendor': data['c_cover_gule'],
+                'Product_C_Cover_Bonding_Vendor01': data['c_bonding_vendor1'],
+                'Product_C_Cover_Bonding_Vendor02': data['c_bonding_vendor2'],
+                'Product_C_Cover_Bonding_Vendor03': data['c_bonding_vendor3'],
+
+                'Product_D_Cover_material_Type': data['d_cover_material'],
+                'Product_D_Cover_material_Surface': data['d_cover_surface'],
+                'Product_D_Cover_material_Thickness': data['d_cover_thickness'],
+                'Product_D_Cover_material_Supplier01': data['d_cover_vendor1'],
+                'Product_D_Cover_material_Supplier02': data['d_cover_vendor2'],
+                'Product_D_Cover_material_Supplier03': data['d_cover_vendor3'],
+                'Product_D_Cover_material_Supplier04': data['d_cover_vendor4'],
+                'Product_D_Cover_Glue_Vendor': data['d_cover_gule'],
+                'Product_D_Cover_Bonding_Vendor01': data['d_bonding_vendor1'],
+                'Product_D_Cover_Bonding_Vendor02': data['d_bonding_vendor2'],
+                'Product_D_Cover_Bonding_Vendor03': data['d_bonding_vendor3'],
+
+                'Product_Hinge_material_Type': data['hinge_material'],
+                'Product_Hinge_material_Surface': data['hinged_cover_surface'],
+                'Product_Hinge_material_Thickness': data['hinge_thickness'],
+                'Product_Hinge_material_Supplier01': data['hinge_vendor1'],
+                'Product_Hinge_material_Supplier02': data['hinge_vendor2'],
+                'Product_Hinge_material_Supplier03': data['hinge_vendor3'],
+                'Product_Hinge_material_Supplier04': data['hinge_vendor4'],
+                'Product_Hinge_Glue_Vendor': data['hinge_gule'],
+                'Product_Hinge_Bonding_Vendor01': data['hinge_gule_vendor1'],
+                'Product_Hinge_Bonding_Vendor02': data['hinge_gule_vendor2'],
+                'Product_Hinge_Bonding_Vendor03': data['hinge_gule_vendor3'],
+
+                'Product_TouchPanel': data['touch_panel_bonding_type'],
+                'Product_TouchPanel_BondingVendor01': data['touch_panel_vendor1'],
+                'Product_TouchPanel_BondingVendor02': data['touch_panel_vendor2'],
+                'Product_TouchPanel_BondingVendor03': data['touch_panel_vendor3'],
+                'Product_TouchPanel_Solution01': data['touch_panel_solution_1'],
+                'Product_TouchPanel_Solution02': data['touch_panel_solution_2'],
+                'Product_TouchPanel_Outsize': data['touch_panel_size'],
+
+                'Product_Touchpad_Solution01': data['touch_pad_solution_1'],
+                'Product_Touchpad_Solution02': data['touch_pad_solution_2'],
+                'Product_Touchpad_Outsize': data['touch_pad_size'],
+                'user': currentuser,
+            })
+            return item[0].id
+
+    # handle checking items Ver:2.0
+    def dfm_check_item_handle(self, dfm_check_item, dfm_item_item_no, dfm_item_priority, dfm_item_attributes):
+            """
+            check if this check item in reprot and compare with general check items
+                if yes, return dfm_review_item_desc_id
+                if no, create a new check item under the prodcut
+            """
+            item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item)  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
+            if item:
+                return item[0].id
+            else:
+                item = Dfm_General_Checklist.objects.create(
+                    dfm_item_item_no=dfm_item_item_no,
+                    dfm_item_desc=dfm_check_item,
+                    dfm_item_priority=dfm_item_priority,
+                    dfm_item_attributes=dfm_item_attributes,
+                )
+            item.save()
+            return item.id
+
+    # creare or update new item Ver:2.0
+    def dfm_review_item_handle(self, dfm_sheet, check_item_id, product_id, row):
+            nud = dfm_sheet.cell(row, 8).value
+            cnc = dfm_sheet.cell(row, 4).value
+            si = dfm_sheet.cell(row, 5).value
+            pv = dfm_sheet.cell(row, 6).value
+            mv = dfm_sheet.cell(row, 7).value
+
+            new_item = Dfm_Review_Result.objects.filter(dfm_review_item_desc_id=check_item_id,dfm_product_id=product_id)
+            new_item.update_or_create(defaults={
+                'dfm_review_item_no': dfm_sheet.cell(row, 1).value,
+                'dfm_review_item_desc_id': check_item_id,
+                'dfm_product_id': product_id,
+                'dfm_product_part_category': dfm_sheet.cell(row, 9).value,
+                'dfm_product_issue_symptom': dfm_sheet.cell(row, 10).value,
+                'dfm_product_design_structures': dfm_sheet.cell(row, 11).value,
+                'dfm_product_nonmacth_item': dfm_sheet.cell(row, 13).value,
+                'dfm_product_odm_actions': dfm_sheet.cell(row, 14).value,
+                'dfm_product_solution_category': dfm_sheet.cell(row, 15).value,
+                'dfm_product_nud': nud if nud else '...',
+                'dfm_product_cnc': cnc if cnc else '...',
+                'dfm_product_si': si if si else '...',
+                'dfm_product_pv': pv if pv else '...',
+                'dfm_product_mv': mv if mv else '...',
+            })
+
+    # handle checking items Ver:1.63
+    def dfm_check_item_handle_oldest(self, dfm_check_item, dfm_item_item_no, dfm_item_priority, dfm_item_attributes):
+            """
+            check if this check item in reprot and compare with general check items
+                if yes, return dfm_review_item_desc_id
+                if no, create a new check item under the prodcut
+            """
+            item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item)  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
+            if item:
+                return item[0].id
+            else:
+                item = Dfm_General_Checklist.objects.create(
+                    dfm_item_item_no=dfm_item_item_no,
+                    dfm_item_desc=dfm_check_item,
+                    dfm_item_priority=dfm_item_priority,
+                    dfm_item_attributes=dfm_item_attributes,
+                    dfm_item_version='Ver:1.63',
+                )
+            item.save()
+            return item.id
+
+    # creare or update new item Ver:1.63
+    def dfm_review_item_handle_oldest(self, dfm_sheet, check_item_id, product_id, row):
+            nud = dfm_sheet.cell(row, 10).value
+            cnc = dfm_sheet.cell(row, 4).value
+            si = dfm_sheet.cell(row, 5).value
+            pv = dfm_sheet.cell(row, 7).value
+            mv = dfm_sheet.cell(row, 9).value
+
+            new_item = Dfm_Review_Result.objects.filter(dfm_review_item_desc_id=check_item_id,dfm_product_id=product_id)
+            new_item.update_or_create(defaults={
+                'dfm_review_item_no': dfm_sheet.cell(row, 1).value,
+                'dfm_review_item_desc_id': check_item_id,
+                'dfm_product_id': product_id,
+                #'dfm_product_part_category': dfm_sheet.cell(row, 9).value,
+                'dfm_product_issue_symptom': dfm_sheet.cell(row, 11).value,  #是Ver:1.63的Feature欄位
+                'dfm_product_design_structures': dfm_sheet.cell(row, 12).value,#是Ver:1.63的Category欄位(他被隱藏起來)
+                'dfm_product_nonmacth_item': dfm_sheet.cell(row, 14).value,
+                'dfm_product_odm_actions': dfm_sheet.cell(row, 15).value,
+                'dfm_product_solution_category': dfm_sheet.cell(row, 16).value,
+                'dfm_product_nud': nud if nud else '...',
+                'dfm_product_cnc': cnc if cnc else '...',
+                'dfm_product_si': si if si else '...',
+                'dfm_product_pv': pv if pv else '...',
+                'dfm_product_mv': mv if mv else '...',
+            })
+
+    # handle checking items Ver:3.0a
+    def dfm_check_item_handle_newVersion(self, dfm_check_item, dfm_item_item_no, dfm_item_priority, dfm_item_attributes,row,dfm_sheet):
+        """
+        check if this check item in reprot and compare with general check items
+            if yes, return dfm_review_item_desc_id
+            if no, create a new check item under the prodcut
+        """
+
+        #檢查第2欄位，有沒有合併欄位
+        cell_merg = dfm_sheet.cell(row=row, column=2)
+        if isinstance(cell_merg, MergedCell):  # 判断该单元格是否为合并单元格
+            for merged_range in dfm_sheet.merged_cell_ranges:  # 循环查找该单元格所属的合并区域
+                if cell_merg.coordinate in merged_range:
+                    # 获取合并区域左上角的单元格作为该单元格的值返回
+                    cell_merg = dfm_sheet.cell(row=merged_range.min_row, column=merged_range.min_col)
+                    break
+        dfm_assembly_level = cell_merg.value
+        dfm_assembly_level = dfm_assembly_level.rstrip()
+        dfm_assembly_level = dfm_assembly_level.lstrip()
+
+        item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item)  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
+        if item:
+            return item[0].id
+        else:
+            item = Dfm_General_Checklist.objects.create(
+            dfm_item_item_no = dfm_item_item_no,
+            dfm_assembly_level = dfm_assembly_level, # for the version 2023 +
+            dfm_item_desc = dfm_check_item,
+            dfm_item_priority = dfm_item_priority,
+            dfm_item_attributes = dfm_item_attributes,
+            dfm_item_version = 'Ver:3.0a',
+        )
+        item.save()
+        return item.id
+
+    # creare or update new item Ver:3.0a
+    def dfm_review_item_handle_newVersion(self, dfm_sheet, check_item_id, product_id, row):
+        nud = dfm_sheet.cell(row, 9).value
+        cnc = dfm_sheet.cell(row, 5).value
+        si = dfm_sheet.cell(row, 6).value
+        pv = dfm_sheet.cell(row, 7).value
+        mv = dfm_sheet.cell(row, 8).value
+
+        new_item = Dfm_Review_Result.objects.filter(dfm_review_item_desc_id=check_item_id, dfm_product_id=product_id)
+        new_item.update_or_create(defaults={
+            'dfm_review_item_no': dfm_sheet.cell(row, 1).value,
+            'dfm_review_item_desc_id': check_item_id,
+            'dfm_product_id': product_id,
+            #'dfm_product_part_category': dfm_sheet.cell(row, 9).value,
+            'dfm_product_issue_symptom': dfm_sheet.cell(row, 10).value,
+            'dfm_product_design_structures': dfm_sheet.cell(row, 11).value,
+            'dfm_product_nonmacth_item': dfm_sheet.cell(row, 13).value,
+            'dfm_product_odm_actions': dfm_sheet.cell(row, 14).value,
+            'dfm_product_solution_category': dfm_sheet.cell(row, 15).value,
+            'dfm_product_nud': nud if nud else '...',
+            'dfm_product_cnc': cnc if cnc else '...',
+            'dfm_product_si': si if si else '...',
+            'dfm_product_pv': pv if pv else '...',
+            'dfm_product_mv': mv if mv else '...',
+        })
+
+    # create or update an record when dfm report import sucessfully Ver:1.63、Ver:2.0、Ver:3.0a
+    def dfm_import_record_handle(self,product_name,dfm_stage,currentuser):
+
+        new_item = DFM_Report_Import_Records.objects.filter(import_product_name=product_name)
+        new_item.update_or_create(defaults={
+            'user': currentuser,
+            'import_product_name': product_name,
+        })
+        if dfm_stage == "MV":
+            new_item.update_or_create(defaults={
+                'import_stage_mv': 'Y'
+            })
+        elif dfm_stage == "PV":
+            new_item.update_or_create(defaults={
+                'import_stage_pv': 'Y',
+            })
+        elif dfm_stage == "SI":
+            new_item.update_or_create(defaults={
+                'import_stage_si': 'Y',
+            })
+        elif dfm_stage == "CNC":
+            new_item.update_or_create(defaults={
+                'import_stage_cnc': 'Y',
+            })
+
+    # log entries Ver:1.63、Ver:2.0、Ver:3.0a
+    def log_entries(self, request, product_name, dfm_stage, currentuser):
+        from xadmin.models import Log
+        Log.objects.create(user=currentuser,
+                           ip_addr=request.META.get('REMOTE_ADDR'),
+                           object_repr=str(object),
+                           action_flag='',
+                           message="{}-{} dfm report uploaded sucessfully".format(product_name,dfm_stage))
 
 class DfaReportParser():
     """

@@ -6,6 +6,7 @@ import xadmin
 from .models import Dfm_General_Checklist,Dfm_Review_Result,DFM_Report_Import_Records
 from xadmin.layout import Main, Fieldset, Side, Row
 from import_export import resources
+from utils.notification import Notification
 
 # define dfm user interface
 class DfmAdmin(object):
@@ -99,17 +100,128 @@ class Dfm_Review_Admin(object):
     import_export_args = {'export_resource_class':Issue_import_export_Resource}
     import_excel = True
 
+    # rewrite post method for getting excel DFM reprot
     def post(self, request, *args, **kwargs):
+        currentuser = self.request.user # get current user
+
         if 'excel' in request.FILES:
             dfm_report = request.FILES.get('excel')
             from openpyxl import load_workbook
-            workbook = load_workbook(dfm_report, data_only=True)
+            workbook = load_workbook(dfm_report, data_only=True, keep_vba=False, keep_links=False)
 
-            # 调用方法处理导入数据 Dfm_Import_to_Database.excel_to_database
-            from .views import Dfm_Import_to_Database
-            Dfm_Import_to_Database().excel_to_database(workbook)
+            """ check Dfm template version then assign the right method()"""
+            dfm_sheet = workbook['DFm ']
+            product_name = dfm_sheet .cell(6, 13).value
+            report_version = dfm_sheet.cell(2, 2).value  # get dfm report template version
+            dfm_stage="" #cnc or si or pv or mv
 
-            messages.success(request, "Dfm report was imported successfully.")
+            if report_version and report_version.find("Ver:1.63") != -1: #report_version == Ver:1.63
+                dfm_stage = "MV"
+                report_version = "Ver:1.63"
+                record = None
+
+            elif report_version and report_version.find("Ver:2.0") != -1:  # report_version == Ver:2.0
+                # check if the product and dfm stage is the first upload or repeat to upload(don't support repeated upload)
+                cnc = dfm_sheet.cell(32, 4).value
+                si = dfm_sheet.cell(32, 5).value
+                pv = dfm_sheet.cell(32, 6).value
+                mv = dfm_sheet.cell(32, 7).value
+                report_version = "Ver:2.0"
+
+                if mv:  # mv
+                    dfm_stage = "MV"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y", import_stage_si="Y",
+                                                                      import_stage_pv="Y", import_stage_mv="Y")
+                elif pv:  # pv
+                    dfm_stage = "PV"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y", import_stage_si="Y",
+                                                                      import_stage_pv="Y")
+                elif si:  # si
+                    dfm_stage = "SI"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y", import_stage_si="Y")
+                else:  # cnc
+                    dfm_stage = "CNC"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y")
+
+            else:  # report_version == Ver:3.0a
+
+                # check if the product and dfm stage is the first upload or repeat to upload(don't support repeated upload)
+                cnc = dfm_sheet.cell(32, 5).value
+                si = dfm_sheet.cell(32, 6).value
+                pv = dfm_sheet.cell(32, 7).value
+                mv = dfm_sheet.cell(32, 8).value
+                report_version = "Ver:3.0a"
+
+                if mv:  # mv
+                    dfm_stage = "MV"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y", import_stage_si="Y",
+                                                                      import_stage_pv="Y", import_stage_mv="Y")
+                elif pv:  # pv
+                    dfm_stage = "PV"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y", import_stage_si="Y",
+                                                                      import_stage_pv="Y")
+                elif si:  # si
+                    dfm_stage = "SI"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y", import_stage_si="Y")
+                else:  # cnc
+                    dfm_stage = "CNC"
+                    record = DFM_Report_Import_Records.objects.filter(import_product_name=product_name,
+                                                                      import_stage_cnc="Y")
+
+
+            if record :#repeated uploads
+
+                # raise a message on webpage
+                messages.error(request,
+                               "Failed to import data! error message: [ProductId:{} -- {} -- {}'dfm data already imported, repeated uploads do not supported]".format(
+                                   record[0].id, record[0].import_product_name,dfm_stage))
+                """
+    
+                # send an alert by email
+                contents = "Failed to import data!  error message: [ProductId:{} -- {} -- {}'dfm data already imported, repeated uploads do not supported]".format(
+                    record[0].id, record[0].import_product_name,dfm_stage)
+                Notification().send_by_email(
+                    [str(currentuser)],
+                    currentuser,
+                    contents,
+                    record[0].import_product_name,  # platform name
+                    dfm_stage,  # dfm_stage
+                    "dfm report upload Failed",  # email title
+                    None,
+                    None, )
+                """
+            elif report_version == "Ver:1.63": #just for 1.63 upload
+                from utils.excel_report_parser import DfmReportParser
+                result = DfmReportParser().parse(request, workbook, currentuser,report_version)
+                # raise a message on webpage
+                messages.success(request, "{}-{}'s dfm data was imported successfully.".format(result[0],result[1]))
+
+            else: #upload field
+                from utils.excel_report_parser import DfmReportParser
+                result = DfmReportParser().parse(request, workbook, currentuser,report_version)
+                # raise a message on webpage
+                messages.success(request, "{}-{}'s dfm data was imported successfully.".format(result[0],result[1]))
+                """
+                #   send an alert by email
+                contents = "{}-{} dfm data was imported successfully.".format(result[0],result[1])
+                Notification().send_by_email(
+                                            [str(currentuser)],
+                                            currentuser,
+                                            contents,
+                                            result[0],                                  # platform name
+                                            result[1],                                  # dfm_stage
+                                            "Dfm report uploaded Successfully",  # email title
+                                            None,                                  # 返回data
+                                            None,)                                 # odm name
+                """
+            workbook.close()
             return HttpResponseRedirect('/scpe/dfm/dfm_review_result/')
         return super(Dfm_Review_Admin, self).post(request, *args, **kwargs)
 
@@ -143,7 +255,7 @@ class Dfm_Review_Admin(object):
         return super(Dfm_Review_Admin, self).get_form_layout()
 
 class Dfm_Upload_Records_Admin(object):
-    list_display = ["user","import_product_name","import_stage_cnc","import_stage_si","import_stage_pv","import_stage_mv","import_date"]
+    list_display = ["user","import_product_name","import_build_year","import_stage_cnc","import_stage_si","import_stage_pv","import_stage_mv","import_date"]
     list_display_links =["import_product_name"]
 
     def save_models(self):

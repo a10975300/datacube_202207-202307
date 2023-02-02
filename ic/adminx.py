@@ -106,8 +106,8 @@ class ICsAdmin(object):
             # 调用方法处理导入数据 IC_Import_to_Database.excel_to_database
             from .views import IC_Import_to_Database
             IC_Import_to_Database.excel_to_database(self, workbook,ic_sheet_name)
-
             messages.success(request, "IC report was imported successfully.")
+            workbook.close()
             return HttpResponseRedirect('/scpe/ic/ics/')
         return super(ICsAdmin, self).post(request, *args, **kwargs)
 

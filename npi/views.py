@@ -22,7 +22,7 @@ class IssueDashboardData:
         from django.db.models import Max, Min, Sum, Count, Avg, Q
 
         npi_issues = Issue.objects.all()
-        npi_issue_qty = npi_issues.count()
+        npi_issue_qty = 2
 
         closed_qty = npi_issues.filter(status='Close').count()
         tracking_qty = npi_issues.filter(status='Tracking').count()

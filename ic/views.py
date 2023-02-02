@@ -1,6 +1,4 @@
-from datetime import datetime
 
-from xlrd import open_workbook
 from django.contrib.auth.models import User
 from .models import ICs
 from openpyxl.cell import MergedCell
@@ -16,6 +14,9 @@ class IC_Import_to_Database(object):
         从excel表ic sheet里面读取产品相关的信息如：产品类别，segment,产品名称，产品尺寸，ODM名称 以及build year
         """
         ic_sheet = workbook[ic_sheet_name]
+        ic_Cycle = ic_sheet.cell(1, 2).value
+        ic_Project_name = ic_sheet.cell(2, 2).value
+
         rows_number = ic_sheet.max_row  #get total row numbers
         empty_time = 0 #檢查最大行數之後，有三次空白，才為真正的最大行數
 
@@ -24,12 +25,13 @@ class IC_Import_to_Database(object):
             checking_Vendor_PN = ic_sheet.cell(row, 3).value
             if checkingItem:
                 NewItemHandler.ic_review_item_handle(self, ic_sheet,checkingItem,checking_Vendor_PN,row)
-                NewItemHandler.ic_import_record_handle(self, ic_sheet, checkingItem,checking_Vendor_PN)
                 empty_time = 0
             else:
                 empty_time=empty_time+1
                 if empty_time == 5:
                     break
+        NewItemHandler.ic_import_record_handle(self,ic_Cycle,ic_Project_name)
+
 
 # automatically handle product, new check-item related information
 class NewItemHandler(object):
@@ -81,15 +83,14 @@ class NewItemHandler(object):
         })
 
     # create or update an record when ic report import sucessfully
-    def ic_import_record_handle(self, ic_sheet, checkingItem,checking_Vendor_PN):
+    def ic_import_record_handle(self, ic_Cycle,ic_Project_name):
         from .models import IC_Report_Import_Records
-        import_date = datetime.now().strftime('%Y-%m-%d')
 
-        new_item = IC_Report_Import_Records.objects.filter(import_IC_Function=checkingItem,import_Vendor_PN=checking_Vendor_PN)
+        new_item = IC_Report_Import_Records.objects.filter(import_Cycle=ic_Cycle,import_Project_name=ic_Project_name)
         new_item.update_or_create(defaults={
             'user_id': User.objects.filter(username=self.request.user)[0].id,
-            'import_IC_Function': checkingItem,
-            'import_Vendor_PN': checking_Vendor_PN,
-            'import_date': import_date,
+            'import_Cycle': ic_Cycle,
+            'import_Project_name': ic_Project_name,
         })
+
 

@@ -61,8 +61,8 @@ class IC_Report_Import_Records(models.Model):
     记录IC report导入情况
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, null=True, verbose_name="User")
-    import_IC_Function = models.CharField(max_length=50, null=True, verbose_name="IC_Function", help_text="IC_Function")
-    import_Vendor_PN = models.CharField(max_length=100, null=True, verbose_name="Vendor_PN",help_text="Vendor_PN")
+    import_Project_name = models.CharField(max_length=50, null=True, verbose_name="Project name", help_text="Project name")
+    import_Cycle = models.CharField(max_length=50, null=True, verbose_name="Cycle",help_text="Cycle")
     import_date = models.DateTimeField(default=datetime.now, verbose_name="Update Date", help_text="Date")
 
 
