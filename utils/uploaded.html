@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+    #customers tr td {
+    	height:8px;
+    }
+
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+    }
+    .td-1 {
+    	text-align:center;
+    }
+    p{
+    	font-size:15px;
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers tr:hover {background-color: #ddd;}
+    #customers tr {
+        font-size:12px;
+    }
+
+    #customers th {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      background-color: #00BFFF;
+      color: Black;
+      font-size:12px;
+    }
+    </style>
+</head>
+<body>
+	<p>
+		<span style="color:red">This is a notification message from the system, Please do not replay.</span><br/>
+		user {{ user }} triggered this message <br/><br/>
+	</p>
+	<p>
+	<span><strong>Platform: </strong></span> {{ product }} <br/>
+	<span><strong>Build stage: </strong></span> {{ stage }} <br/>
+	<span><strong>ODM: </strong></span> {{ odm }} <br/>
+	<span><strong>Issue qty: </strong></span> Total {{ total }}, Gating {{ gating }}, Tracking {{ tracking }}, Closed {{ close }}, Fix in next stage {{ fix_in_next_stage }} <br/>
+	</p>
+	<span>The following table shows the distribution of issues</span>
+	<table id="customers">
+		<tr>
+			<th style="text-align:left">Mfg Process</th>
+			<th class="td-1">Total Issue Qty</th>
+			<th class="td-1">Gating</th>
+			<th class="td-1">Tracking</th>
+			<th class="td-1">Close</th>
+			<th class="td-1">Fix in next stage</th>
+		</tr>
+		{% for d in data.items() %}
+		<tr>
+			<td>{{ d[0] }}</td>
+			<td class="td-1">{{ d[1]['toatl_issue_qty'] }}</td>
+			<td class="td-1">{{ d[1]['gating'] }}</td>
+			<td class="td-1">{{ d[1]['tracking'] }}</td>
+			<td class="td-1">{{ d[1]['close'] }}</td>
+			<td class="td-1">{{ d[1]['fix_in_next_stage'] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<p>
+	<span>SCPE DATAHOME</span><br/>
+	<span>http://15.36.145.93/scpe/</span>
+	</p>
+</body>
+</html>
