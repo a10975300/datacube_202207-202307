@@ -384,8 +384,8 @@ class SafelaunchParser():
 
     # 通过requests.post模拟游览器提交图片和信息
     def pictureUpload(self, product_name, stage_name, img_name, image):
-        url = 'http://127.0.0.1:8000/pictures_upload/'  # this url for localhost test only
-        # url = 'http://15.36.145.93/pictures_upload/'    # this url for server
+        # url = 'http://127.0.0.1:8000/pictures_upload/'  # this url for localhost test only
+        url = 'http://15.36.145.93/pictures_upload/'    # this url for server
         myData = {
             "product_name": product_name,
             "stage_name": stage_name,
@@ -447,7 +447,7 @@ class DfmReportParser():
         platform_type = None
         platform_segment = None
         product_type = None
-        product_name = "test2"
+        product_name = "Oski14"
         product_size = None
         odm_name = None
         build_year = None
@@ -828,96 +828,97 @@ class DfmReportParser():
         return [product_name,dfm_stage]
 
     # create or update product Ver:1.63、Ver:2.0、Ver:3.0a
-    def new_product(self,data,currentuser):
-            """
-            check if this product already in the database 使用productName查询数据库里是否已有该产品,
-                if yes, then return product id
-                if no, create a new one and return the product id
-            """
-            item = Products.objects.filter(ProductName=data['product_name']).update_or_create(defaults={
-                'ProductName': data['product_name'],
-                'Platform_Type': data['platform_type'] if data['platform_type'] else '...',
-                'Product_Segment': data['platform_segment'] if data['platform_segment'] else '...',
-                'Product_Type': data['product_type'] if data['product_type'] else '...',
-                'Product_Size': data['product_size'],
-                'PartnerName': data['odm_name'],
-                "Product_RCTO_Type": data['rcto'] if data['rcto'] else '...',
-                "Product_MV_date" : data['build_year'],
+    def new_product(self,data, currentuser):
+        """
+        check if this product already in the database 使用productName查询数据库里是否已有该产品,
+            if yes, then return product id
+            if no, create a new one and return the product id
+        """
+        item = Products.objects.filter(ProductName=data['product_name']).update_or_create(defaults={
+            'ProductName': data['product_name'],
+            'Platform_Type': data['platform_type'] if data['platform_type'] else '...',
+            'Product_Segment': data['platform_segment'] if data['platform_segment'] else '...',
+            'Product_Type': data['product_type'] if data['product_type'] else '...',
+            'Product_Size': data['product_size'],
+            'PartnerName': data['odm_name'],
+            "Product_RCTO_Type": data['rcto'] if data['rcto'] else '...',
+            "Product_MV_date" : data['build_year'],
 
-                'Product_A_Cover_material_Type': data['a_cover_material'],
-                'Product_A_Cover_material_Surface': data['a_cover_surface'],
-                'Product_A_Cover_material_Thickness': data['a_cover_thickness'],
-                'Product_A_Cover_material_Supplier01': data['a_cover_vendor1'],
-                'Product_A_Cover_material_Supplier02': data['a_cover_vendor2'],
-                'Product_A_Cover_material_Supplier03': data['a_cover_vendor3'],
-                'Product_A_Cover_material_Supplier04': data['a_cover_vendor4'],
-                'Product_A_Cover_Glue_Vendor': data['a_cover_gule'],
-                'Product_A_Cover_Bonding_Vendor01': data['a_bonding_vendor1'],
-                'Product_A_Cover_Bonding_Vendor02': data['a_bonding_vendor2'],
-                'Product_A_Cover_Bonding_Vendor03': data['a_bonding_vendor3'],
+            'Product_A_Cover_material_Type': data['a_cover_material'],
+            'Product_A_Cover_material_Surface': data['a_cover_surface'],
+            'Product_A_Cover_material_Thickness': data['a_cover_thickness'],
+            'Product_A_Cover_material_Supplier01': data['a_cover_vendor1'],
+            'Product_A_Cover_material_Supplier02': data['a_cover_vendor2'],
+            'Product_A_Cover_material_Supplier03': data['a_cover_vendor3'],
+            'Product_A_Cover_material_Supplier04': data['a_cover_vendor4'],
+            'Product_A_Cover_Glue_Vendor': data['a_cover_gule'],
+            'Product_A_Cover_Bonding_Vendor01': data['a_bonding_vendor1'],
+            'Product_A_Cover_Bonding_Vendor02': data['a_bonding_vendor2'],
+            'Product_A_Cover_Bonding_Vendor03': data['a_bonding_vendor3'],
 
-                'Product_B_Cover_material_Type': data['b_cover_material'],
-                'Product_B_Cover_material_Surface': data['b_cover_surface'],
-                'Product_B_Cover_material_Thickness': data['b_cover_thickness'],
-                'Product_B_Cover_material_Supplier01': data['b_cover_vendor1'],
-                'Product_B_Cover_material_Supplier02': data['b_cover_vendor2'],
-                'Product_B_Cover_material_Supplier03': data['b_cover_vendor3'],
-                'Product_B_Cover_material_Supplier04': data['b_cover_vendor4'],
-                'Product_B_Cover_Glue_Vendor': data['b_cover_gule'],
-                'Product_B_Cover_Bonding_Vendor01': data['b_bonding_vendor1'],
-                'Product_B_Cover_Bonding_Vendor02': data['b_bonding_vendor2'],
-                'Product_B_Cover_Bonding_Vendor03': data['b_bonding_vendor3'],
+            'Product_B_Cover_material_Type': data['b_cover_material'],
+            'Product_B_Cover_material_Surface': data['b_cover_surface'],
+            'Product_B_Cover_material_Thickness': data['b_cover_thickness'],
+            'Product_B_Cover_material_Supplier01': data['b_cover_vendor1'],
+            'Product_B_Cover_material_Supplier02': data['b_cover_vendor2'],
+            'Product_B_Cover_material_Supplier03': data['b_cover_vendor3'],
+            'Product_B_Cover_material_Supplier04': data['b_cover_vendor4'],
+            'Product_B_Cover_Glue_Vendor': data['b_cover_gule'],
+            'Product_B_Cover_Bonding_Vendor01': data['b_bonding_vendor1'],
+            'Product_B_Cover_Bonding_Vendor02': data['b_bonding_vendor2'],
+            'Product_B_Cover_Bonding_Vendor03': data['b_bonding_vendor3'],
 
-                'Product_C_Cover_material_Type': data['c_cover_material'],
-                'Product_C_Cover_material_Surface': data['c_cover_surface'],
-                'Product_C_Cover_material_Thickness': data['c_cover_thickness'],
-                'Product_C_Cover_material_Supplier01': data['c_cover_vendor1'],
-                'Product_C_Cover_material_Supplier02': data['c_cover_vendor2'],
-                'Product_C_Cover_material_Supplier03': data['c_cover_vendor3'],
-                'Product_C_Cover_material_Supplier04': data['c_cover_vendor4'],
-                'Product_C_Cover_Glue_Vendor': data['c_cover_gule'],
-                'Product_C_Cover_Bonding_Vendor01': data['c_bonding_vendor1'],
-                'Product_C_Cover_Bonding_Vendor02': data['c_bonding_vendor2'],
-                'Product_C_Cover_Bonding_Vendor03': data['c_bonding_vendor3'],
+            'Product_C_Cover_material_Type': data['c_cover_material'],
+            'Product_C_Cover_material_Surface': data['c_cover_surface'],
+            'Product_C_Cover_material_Thickness': data['c_cover_thickness'],
+            'Product_C_Cover_material_Supplier01': data['c_cover_vendor1'],
+            'Product_C_Cover_material_Supplier02': data['c_cover_vendor2'],
+            'Product_C_Cover_material_Supplier03': data['c_cover_vendor3'],
+            'Product_C_Cover_material_Supplier04': data['c_cover_vendor4'],
+            'Product_C_Cover_Glue_Vendor': data['c_cover_gule'],
+            'Product_C_Cover_Bonding_Vendor01': data['c_bonding_vendor1'],
+            'Product_C_Cover_Bonding_Vendor02': data['c_bonding_vendor2'],
+            'Product_C_Cover_Bonding_Vendor03': data['c_bonding_vendor3'],
 
-                'Product_D_Cover_material_Type': data['d_cover_material'],
-                'Product_D_Cover_material_Surface': data['d_cover_surface'],
-                'Product_D_Cover_material_Thickness': data['d_cover_thickness'],
-                'Product_D_Cover_material_Supplier01': data['d_cover_vendor1'],
-                'Product_D_Cover_material_Supplier02': data['d_cover_vendor2'],
-                'Product_D_Cover_material_Supplier03': data['d_cover_vendor3'],
-                'Product_D_Cover_material_Supplier04': data['d_cover_vendor4'],
-                'Product_D_Cover_Glue_Vendor': data['d_cover_gule'],
-                'Product_D_Cover_Bonding_Vendor01': data['d_bonding_vendor1'],
-                'Product_D_Cover_Bonding_Vendor02': data['d_bonding_vendor2'],
-                'Product_D_Cover_Bonding_Vendor03': data['d_bonding_vendor3'],
+            'Product_D_Cover_material_Type': data['d_cover_material'],
+            'Product_D_Cover_material_Surface': data['d_cover_surface'],
+            'Product_D_Cover_material_Thickness': data['d_cover_thickness'],
+            'Product_D_Cover_material_Supplier01': data['d_cover_vendor1'],
+            'Product_D_Cover_material_Supplier02': data['d_cover_vendor2'],
+            'Product_D_Cover_material_Supplier03': data['d_cover_vendor3'],
+            'Product_D_Cover_material_Supplier04': data['d_cover_vendor4'],
+            'Product_D_Cover_Glue_Vendor': data['d_cover_gule'],
+            'Product_D_Cover_Bonding_Vendor01': data['d_bonding_vendor1'],
+            'Product_D_Cover_Bonding_Vendor02': data['d_bonding_vendor2'],
+            'Product_D_Cover_Bonding_Vendor03': data['d_bonding_vendor3'],
 
-                'Product_Hinge_material_Type': data['hinge_material'],
-                'Product_Hinge_material_Surface': data['hinged_cover_surface'],
-                'Product_Hinge_material_Thickness': data['hinge_thickness'],
-                'Product_Hinge_material_Supplier01': data['hinge_vendor1'],
-                'Product_Hinge_material_Supplier02': data['hinge_vendor2'],
-                'Product_Hinge_material_Supplier03': data['hinge_vendor3'],
-                'Product_Hinge_material_Supplier04': data['hinge_vendor4'],
-                'Product_Hinge_Glue_Vendor': data['hinge_gule'],
-                'Product_Hinge_Bonding_Vendor01': data['hinge_gule_vendor1'],
-                'Product_Hinge_Bonding_Vendor02': data['hinge_gule_vendor2'],
-                'Product_Hinge_Bonding_Vendor03': data['hinge_gule_vendor3'],
+            'Product_Hinge_material_Type': data['hinge_material'],
+            'Product_Hinge_material_Surface': data['hinged_cover_surface'],
+            'Product_Hinge_material_Thickness': data['hinge_thickness'],
+            'Product_Hinge_material_Supplier01': data['hinge_vendor1'],
+            'Product_Hinge_material_Supplier02': data['hinge_vendor2'],
+            'Product_Hinge_material_Supplier03': data['hinge_vendor3'],
+            'Product_Hinge_material_Supplier04': data['hinge_vendor4'],
+            'Product_Hinge_Glue_Vendor': data['hinge_gule'],
+            'Product_Hinge_Bonding_Vendor01': data['hinge_gule_vendor1'],
+            'Product_Hinge_Bonding_Vendor02': data['hinge_gule_vendor2'],
+            'Product_Hinge_Bonding_Vendor03': data['hinge_gule_vendor3'],
 
-                'Product_TouchPanel': data['touch_panel_bonding_type'],
-                'Product_TouchPanel_BondingVendor01': data['touch_panel_vendor1'],
-                'Product_TouchPanel_BondingVendor02': data['touch_panel_vendor2'],
-                'Product_TouchPanel_BondingVendor03': data['touch_panel_vendor3'],
-                'Product_TouchPanel_Solution01': data['touch_panel_solution_1'],
-                'Product_TouchPanel_Solution02': data['touch_panel_solution_2'],
-                'Product_TouchPanel_Outsize': data['touch_panel_size'],
+            'Product_TouchPanel': data['touch_panel_bonding_type'],
+            'Product_TouchPanel_BondingVendor01': data['touch_panel_vendor1'],
+            'Product_TouchPanel_BondingVendor02': data['touch_panel_vendor2'],
+            'Product_TouchPanel_BondingVendor03': data['touch_panel_vendor3'],
+            'Product_TouchPanel_Solution01': data['touch_panel_solution_1'],
+            'Product_TouchPanel_Solution02': data['touch_panel_solution_2'],
+            'Product_TouchPanel_Outsize': data['touch_panel_size'],
 
-                'Product_Touchpad_Solution01': data['touch_pad_solution_1'],
-                'Product_Touchpad_Solution02': data['touch_pad_solution_2'],
-                'Product_Touchpad_Outsize': data['touch_pad_size'],
-                'user': currentuser,
-            })
-            return item[0].id
+            'Product_Touchpad_Solution01': data['touch_pad_solution_1'],
+            'Product_Touchpad_Solution02': data['touch_pad_solution_2'],
+            'Product_Touchpad_Outsize': data['touch_pad_size'],
+            'user': currentuser,
+        })
+        print('hey,before return product id')
+        return item[0].id
 
     # handle checking items Ver:2.0
     def dfm_check_item_handle(self, dfm_check_item, dfm_item_item_no, dfm_item_priority, dfm_item_attributes):
