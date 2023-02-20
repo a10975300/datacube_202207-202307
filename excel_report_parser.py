@@ -451,6 +451,8 @@ class DfmReportParser():
         product_size = None
         odm_name = None
         build_year = None
+        if build_year:#取YEAR
+            build_year = int(build_year)
         rcto = None
 
         data = {
@@ -576,6 +578,11 @@ class DfmReportParser():
         product_size = dfm_sheet.cell(7, 13).value
         odm_name = dfm_sheet.cell(8, 13).value
         build_year = dfm_sheet.cell(9, 13).value
+        if build_year:#取YEAR
+            build_year=str(build_year)
+            build_year_split = build_year.split('-')
+            build_year = build_year_split[0]
+            build_year = int(build_year)
         rcto = dfm_sheet.cell(3, 15).value
 
         key_materials = workbook['Key Material information']
@@ -707,6 +714,11 @@ class DfmReportParser():
         product_size = dfm_sheet.cell(7, 13).value
         odm_name = dfm_sheet.cell(8, 13).value
         build_year = dfm_sheet.cell(9, 13).value
+        if build_year:#取YEAR
+            build_year=str(build_year)
+            build_year_split = build_year.split('-')
+            build_year = build_year_split[0]
+            build_year = int(build_year)
         rcto = dfm_sheet.cell(3, 15).value
 
         key_materials = workbook['Key Material information']
@@ -927,8 +939,11 @@ class DfmReportParser():
                 if yes, return dfm_review_item_desc_id
                 if no, create a new check item under the prodcut
             """
-            item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item)  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
+            item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item,dfm_item_version="Ver:2.0")  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
             if item:
+                item.update_or_create(defaults={
+                    'dfm_item_attributes': 'Common',
+                })
                 return item[0].id
             else:
                 item = Dfm_General_Checklist.objects.create(
@@ -973,8 +988,11 @@ class DfmReportParser():
                 if yes, return dfm_review_item_desc_id
                 if no, create a new check item under the prodcut
             """
-            item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item)  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
+            item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item,dfm_item_version="Ver:1.63")  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
             if item:
+                item.update_or_create(defaults={
+                    'dfm_item_attributes': 'Common',
+                })
                 return item[0].id
             else:
                 item = Dfm_General_Checklist.objects.create(
@@ -1033,8 +1051,11 @@ class DfmReportParser():
         dfm_assembly_level = dfm_assembly_level.rstrip()
         dfm_assembly_level = dfm_assembly_level.lstrip()
 
-        item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item)  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
+        item = Dfm_General_Checklist.objects.filter(dfm_item_desc=dfm_check_item,dfm_item_version="Ver:3.0a")  # 通过从excel单元格获取到的item_desc，然后查询数据库获取id,priority...
         if item:
+            item.update_or_create(defaults={
+                'dfm_item_attributes': 'Common',
+            })
             return item[0].id
         else:
             item = Dfm_General_Checklist.objects.create(
