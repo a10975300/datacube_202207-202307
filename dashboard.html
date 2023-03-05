@@ -54,7 +54,6 @@
             <div id="content" class="bg-white">
                 <!-- Page Content -->
                 <div class="container-fluid" >
-
                     <!-- 4card -->
                     <div class="row mt-2">
                         <!-- product -->
@@ -120,16 +119,25 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold text-uppercase mb-1">DFM</div>
-                                            <div class="h5 mb-0 font-weight-bold text-center text-muted">under construction</div>
+                                            <div class="font-weight-bold text-uppercase mb-1">
+                                                <a href="{{request.path}}dfm/dfm_review_result/" title="Click to view the detail of dfm.">DFM</a>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6 text-center">
+                                                    XXX Teared
+                                                </div>
+                                                <div class="col-sm-6 text-center">
+                                                    XXX High Risk
+                                                </div>
+                                              </div>
                                              <hr>
                                               <div class="row">
-                                                    <div class="col-sm-6 text-center">
-
-                                                    </div>
-                                                    <div class="col-sm-6 text-center">
-
-                                                    </div>
+                                                  <div class="col-sm-6 text-center">
+                                                        XXX P1
+                                                  </div>
+                                                  <div class="col-sm-6 text-center">
+                                                        XXX NUD
+                                                  </div>
                                               </div>
                                         </div>
                                     </div>
@@ -252,22 +260,170 @@
 
                                         <!-- DFM-tab-page -->
                                         <div class="tab-pane" role="tabpanel" id="DFM-tab-page">
-                                            <div class="row ">
-                                                <div class="col-xl-12 col-lg-12 mt-4">
-                                                    <div class="card shadow mb-2 h-100">
-                                                        <!-- Card Header-->
-                                                        <a href="#DFM-collapse1" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="DFM-collapse1">
-                                                        <h5 class="m-0 font-weight-bold">DFM</h5>
-                                                        </a>
-                                                        <!--Collapse Card Content -->
-                                                        <div class="collapse" id="DFM-collapse1">
-                                                            <div class="card-body">
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                             <!-- issue1 -->
+                                             <div class="row ">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#DFM-collapse1" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="DFM-collapse1">
+                                                             <h5 class="m-0 font-weight-bold">DFM Issue</h5>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse show" id="DFM-collapse1">
+                                                             <div class="card-body">
+
+                                                                 <!-- row1 -->
+                                                                <div class="row">
+                                                                    <div class="col-xl-6 col-lg-6 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie">
+                                                                                    <canvas id="DFM-pie1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-6 col-lg-6 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <!-- chart-->
+                                                                                <div class="chart-pie">
+                                                                                    <canvas id="DFM-radar1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- row1-->
+
+                                                                 <!-- row2-->
+                                                               <div class="row">
+                                                                   <div class="col-xl-6 col-lg-6 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <!-- chart-->
+                                                                                <div class="chart-bar-md pt-2">
+                                                                                    <canvas id="DFM-bar1"></canvas>
+                                                                                </div>
+                                                                                <!-- chart table-->
+                                                                                 <div id="DFM-bar1-table"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                   <div class="col-xl-6 col-lg-6 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <!-- chart-->
+                                                                                <div class="chart-bar pt-2">
+                                                                                    <canvas id="DFM-bar2"></canvas>
+                                                                                </div>
+                                                                                <!-- chart table-->
+                                                                                 <div id="DFM-bar2-table"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                   <div class="col-xl-7 col-lg-7 mb-3" style="display:none;">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="DFM-table1" class="display compact nowrap">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Product</th>
+                                                                                                <th>Assembly Level</th>
+                                                                                                <th>Priority</th>
+                                                                                                <th>CNC</th>
+                                                                                                <th>SI</th>
+                                                                                                <th>PV</th>
+                                                                                                <th>MV</th>
+                                                                                                <th>NUD</th>
+                                                                                                <th>Issue Sympton</th>
+                                                                                                <th>Design Structures of issues</th>
+                                                                                                <th>Types of solutions</th>
+                                                                                                <th>Examined Items Qty</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            {% for item in dfm_issue %}
+                                                                                                <tr>
+                                                                                                    <td>{{ item.dfm_product__ProductName}}</td>
+                                                                                                    <td>{{ item.dfm_review_item_desc__dfm_assembly_level}}</td>
+                                                                                                    <td>{{ item.dfm_review_item_desc__dfm_item_priority}}</td>
+                                                                                                    <td>{{ item.dfm_product_cnc}}</td>
+                                                                                                    <td>{{ item.dfm_product_si}}</td>
+                                                                                                    <td>{{ item.dfm_product_pv}}</td>
+                                                                                                    <td>{{ item.dfm_product_mv}}</td>
+                                                                                                    <td>{{ item.dfm_product_nud}}</td>
+                                                                                                    <td>{{ item.dfm_product_issue_symptom}}</td>
+                                                                                                    <td>{{ item.dfm_product_design_structures}}</td>
+                                                                                                    <td>{{ item.dfm_product_solution_category}}</td>
+                                                                                                    <td>{{ item.dfm_review_item_desc__count}}</td>
+                                                                                                </tr>
+                                                                                            {% endfor %}
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                                 <!-- row2-->
+
+                                                              <!-- filter_button -->
+                                                                <div class="row ml-1">
+                                                                    <button id="DFM-filter-button1" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="icon fa fa-arrow-right"></i>
+                                                                        </span>
+                                                                        <span class="text">Filters</span>
+                                                                    </button>
+                                                                    <span class="text ml-3 mt-2 text-xs">(Multi-selection is available, please use “Left click” or press “Ctrl” to do so)</span>
+                                                                </div>
+                                                                 <!-- filter button -->
+
+                                                                <!-- filter -->
+                                                                <div class="row mt-2" style="display:none" id="DFM-filter1">
+                                                                    <div class="col-xl-12 col-lg-12">
+                                                                        <div class="card shadow">
+                                                                            <div class="card-body">
+
+                                                                              <!--   <form action="" method="post">
+                                                                                    <span>Date range control ： </span>
+                                                                                    <input type="date" name="NPI_datemin4" value="2022-01-01">
+                                                                                    <span>~</span>
+                                                                                    <input type="date" name="NPI_datemax4" value="2022-12-31">
+
+                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
+                                                                                        <span class="text">Sumbit</span>
+                                                                                    </button>
+
+                                                                                </form>-->
+
+
+                                                                                <div id="DFM-filter-panel1"></div>
+                                                                                <button id="DFM-redraw1" class="btn btn-primary btn-icon-split btn-sm">
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="icon fa fa-arrow-right"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Redraw Charts</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- filter -->
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- issue1 -->
+
                                         </div>
                                         <!-- DFM-tab-page -->
 

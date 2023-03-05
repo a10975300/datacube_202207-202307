@@ -1,12 +1,10 @@
 from datetime import datetime
-
 from django.contrib import messages
 from xlrd import open_workbook
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from .models import Dfm_General_Checklist, Dfm_Review_Result
+from dfm.models import Dfm_General_Checklist, Dfm_Review_Result
 from product.models import Products
-
 
 #Dfm excel report upload
 class Dfm_Import_to_Database(object):
@@ -294,3 +292,34 @@ class NewItemHandler(object):
             'dfm_product_pv': pv if pv else '...',
             'dfm_product_mv': mv if mv else '...',
         })
+
+
+# dashboard data
+class DfmDashboardData:
+
+    def get_dfm_dashbaord_data(self):
+        from django.db.models import Max, Min, Sum, Count, Avg, Q
+
+        dfm_issues = Dfm_Review_Result.objects.all()
+        dfm_issue_qty = dfm_issues.count()
+
+
+
+        # statistics by factory related issue
+        dfm_issue = dfm_issues.values('dfm_product__ProductName',
+                                      'dfm_review_item_desc__dfm_assembly_level',
+                                          'dfm_review_item_desc__dfm_item_priority',
+                                          'dfm_product_cnc',
+                                          'dfm_product_si',
+                                          'dfm_product_pv',
+                                          'dfm_product_mv',
+                                          'dfm_product_nud',
+                                          'dfm_product_issue_symptom',
+                                          'dfm_product_design_structures',
+                                          'dfm_product_solution_category',).annotate(Count('dfm_review_item_desc'))
+
+        dfm_context = {
+            "dfm_issue_qty": dfm_issue_qty,
+            'dfm_issue': dfm_issue,
+        }
+        return dfm_context
