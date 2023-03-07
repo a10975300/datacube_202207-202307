@@ -296,14 +296,11 @@ class NewItemHandler(object):
 
 # dashboard data
 class DfmDashboardData:
-
     def get_dfm_dashbaord_data(self):
         from django.db.models import Max, Min, Sum, Count, Avg, Q
 
         dfm_issues = Dfm_Review_Result.objects.all()
         dfm_issue_qty = dfm_issues.count()
-
-
 
         # statistics by factory related issue
         dfm_issue = dfm_issues.values('dfm_product__ProductName',
