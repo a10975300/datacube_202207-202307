@@ -1663,11 +1663,11 @@ for (var i = 1; i < tableLen; i++) {
 
 
 //pie
-  if (coltext2 === "1" && coltext7 !== "..." && data.col10.indexOf(coltext10) === -1 && coltext11!==0) {
+  if (coltext2 === "1" && coltext7 !== "..." && coltext10 !== "None" && data.col10.indexOf(coltext10) === -1 && coltext11!==0) {
   data.col10.push(coltext10);
   data.col11.push(coltext11);
 }
-else if (coltext2 === "1" && coltext7 !== "..." && data.col10.indexOf(coltext10) !== -1 && coltext11!==0) {
+else if (coltext2 === "1" && coltext7 !== "..." && coltext10 !== "None" && data.col10.indexOf(coltext10) !== -1 && coltext11!==0) {
 var coltext11_old = Number(data.col11[data.col10.indexOf(coltext10)])
 data.col11[data.col10.indexOf(coltext10)] = coltext11_old+ Number(coltext11)
 

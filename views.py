@@ -302,6 +302,11 @@ class DfmDashboardData:
         dfm_issues = Dfm_Review_Result.objects.all()
         dfm_issue_qty = dfm_issues.count()
 
+        dfm_teared_qty = dfm_issues.filter(dfm_review_item_desc__dfm_item_priority='1').count()
+        dfm_high_risk_qty = dfm_issues.filter(dfm_review_item_desc__dfm_item_priority='1').count()
+        dfm_p1_qty = dfm_issues.filter(dfm_review_item_desc__dfm_item_priority='1').count()
+        dfm_nud_qty = dfm_issues.filter().exclude(dfm_product_nud='...').count()
+
         # statistics by factory related issue
         dfm_issue = dfm_issues.values('dfm_product__ProductName',
                                       'dfm_review_item_desc__dfm_assembly_level',
@@ -316,6 +321,10 @@ class DfmDashboardData:
                                           'dfm_product_solution_category',).annotate(Count('dfm_review_item_desc'))
 
         dfm_context = {
+            "dfm_teared_qty": dfm_teared_qty,
+            "dfm_high_risk_qty": dfm_high_risk_qty,
+            "dfm_p1_qty": dfm_p1_qty,
+            "dfm_nud_qty": dfm_nud_qty,
             "dfm_issue_qty": dfm_issue_qty,
             'dfm_issue': dfm_issue,
         }
