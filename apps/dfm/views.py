@@ -321,7 +321,7 @@ class DfmDashboardData:
                                             'create_date').annotate(Count('dfm_review_item_desc'))
 
         dfm_context = {
-            "dfm_closerate": round((dfm_open_qty / dfm_issue_qty * 100), 2),
+            "dfm_closerate": "" if dfm_open_qty or dfm_issue_qty == 0 else round((dfm_open_qty / dfm_issue_qty * 100), 2),
             "dfm_p1_qty": dfm_p1_qty,
             "dfm_nud_qty": dfm_nud_qty,
             "dfm_issue_qty": dfm_issue_qty,

@@ -12,6 +12,7 @@ from utils.notification import Notification
 class DfaAdmin(object):
 
     list_display = [
+        "dfa_product",
         "dfa_object",
         "dfa_category",
         "dfa_production_line",
@@ -42,7 +43,7 @@ class DfaAdmin(object):
         ("dfa_HP_internal_assessment", MultiSelectFieldListFilter),
         ]
     search_fields = [
-        "dfa_product",
+        "dfa_product__ProductName",
         "dfa_category",
         "dfa_object",
         "dfa_estimated_hc",
@@ -66,7 +67,6 @@ class DfaAdmin(object):
         "dfa_pictures_from_factory",
         "dfa_HP_internal_discussion",
         "dfa_HP_internal_assessment",
-        "dfa_crate_date",
     ]
     list_display_links = ["dfa_object"]
     list_per_page = 50

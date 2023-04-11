@@ -8,12 +8,6 @@ from xadmin.util import static, vendor as util_vendor
 
 register = Library()
 
-@register.filter(name='split')
-def split(value, key):
-    """
-        Returns the value turned into a list.
-    """
-    return value.split(key)
 
 @register.simple_tag(takes_context=True)
 def view_block(context, block_name, *args, **kwargs):
@@ -74,4 +68,3 @@ def do_blockcapture(parser, token):
     parser.delete_first_token()
 
     return BlockcaptureNode(nodelist, args)
-

@@ -53,6 +53,7 @@ class ICsAdmin(object):
         #("ic_Vendor_PN_4th", MultiSelectFieldListFilter),
         #("ic_cratedate"),
         ]
+
     search_fields = [
         "ic_Cycle",
         "ic_Project_name",
@@ -76,7 +77,6 @@ class ICsAdmin(object):
         "ic_Vendor_PN_3rd",
         "ic_Vendor_4th",
         "ic_Vendor_PN_4th",
-        "ic_cratedate"
         ]
 
     list_display_links = ["ic_IC_Function"]
@@ -84,7 +84,6 @@ class ICsAdmin(object):
     date_hierarchy = 'ic_cratedate'
     list_editable = 'ic_IC_Function'
     model_icon = 'fa fa-bandcamp'
-
 
     # configuration for import and export data
     class Issue_import_export_Resource(resources.ModelResource):
@@ -109,7 +108,6 @@ class ICsAdmin(object):
             workbook.close()
             return HttpResponseRedirect('/scpe/ic/ics/')
         return super(ICsAdmin, self).post(request, *args, **kwargs)
-
 
     # 配置 编辑页面
     def get_form_layout(self):

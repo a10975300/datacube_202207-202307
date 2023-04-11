@@ -13,7 +13,7 @@ class DataImportRecords(models.Model):
     import_product_phase = models.CharField(max_length=10, verbose_name="Product Stage", help_text="导入产品阶段")
     import_date = models.DateTimeField(default=datetime.now, verbose_name="Import Date", help_text="导入时间")
     class Meta:
-        verbose_name = "Upload Logs"
+        verbose_name = "upload record"
         verbose_name_plural = verbose_name
         db_table = "datacube_import_records"  # 指定数据表名称
 
@@ -128,7 +128,7 @@ class Issue(models.Model):
         ("4-Final Assy ", "FA"),
         ("5-Pre Test", "Pre-Test"),
         ("6-Run-In", "Run-In"),
-        ("7-Image Dowanload", "Image D/L"),
+        ("7-Image Download", "Image D/L"),
         ("8-OOBA ", "OOBA"),
         ("9-Packing ", "Packing"),
     )
@@ -140,7 +140,7 @@ class Issue(models.Model):
     platformName = models.ForeignKey(Products, verbose_name="Platform Name", on_delete=models.CASCADE,
                                           related_name="PlatformName", default="")
     processName =models.CharField(choices=FACTORY_PROCESS,verbose_name="Mfg Process", max_length=50)
-    issue_desc = models.TextField(default='', verbose_name='Issue Description',max_length=200)
+    issue_desc = models.TextField(default='', verbose_name='Issue Description',max_length=250)
     issue_interaction = models.ForeignKey(SymptomCategory_First, verbose_name="Category I", on_delete=models.CASCADE,
                                           related_name="issue_interaction")
     issue_symptom = models.ForeignKey(SymptomCategory_Second, verbose_name="Category II", on_delete=models.CASCADE,
@@ -159,7 +159,7 @@ class Issue(models.Model):
     balance_qty = models.IntegerField(default=0, verbose_name="Balance/Main Input")
     balance_defcet_qty = models.IntegerField(default=0, verbose_name="Balance/Main Defect")
 
-    sn = models.TextField(default="", null=True, blank=True, verbose_name="SN Info", max_length=200)
+    sn = models.TextField(default="", null=True, blank=True, verbose_name="SN Info", max_length=300)
     sku = models.TextField(default="", null=True, blank=True, verbose_name="SKU Info", max_length=200)
     photo = models.ImageField(upload_to="issue/images/", null=True, blank=True, verbose_name="Defect Picture")
     issue_analysis = RichTextUploadingField(default="",verbose_name="Issue Analysis")

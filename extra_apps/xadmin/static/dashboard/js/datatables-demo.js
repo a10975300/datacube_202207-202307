@@ -297,6 +297,98 @@ var DFMtable1 =  $('#DFM-table1').DataTable({
     DFMtable1.searchPanes.resizePanes();
     DFMtable1_init();
 
+var DFMtable2 =  $('#DFM-table2').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-1',
+            initCollapsed: true,
+            cascadePanes: true,
+            collapse: false,
+            controls: false,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [1,2]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFMtable2, {});
+    DFMtable2.searchPanes.container().prependTo("#DFM-filter-panel2");
+    DFMtable2.searchPanes.resizePanes();
+
+
+
+var DFMtable3 =  $('#DFM-table3').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-1',
+            initCollapsed: true,
+            cascadePanes: true,
+            collapse: false,
+            controls: false,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [1,2]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFMtable3, {});
+    DFMtable3.searchPanes.container().prependTo("#DFM-filter-panel3");
+    DFMtable3.searchPanes.resizePanes();
+    DFMtable2_init();
 
 var EStable3 =  $('#ES-table3').DataTable({
     deferRender: true,
@@ -428,6 +520,16 @@ var EStable3 =  $('#ES-table3').DataTable({
   }
 } );
 
+  $('#DFM-filter-button2').on('click', function(){
+
+  var x = document.getElementById("DFM-filter2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
   $('#ES-filter-button3').on('click', function(){
 
   var x = document.getElementById("ES-filter3");
@@ -463,6 +565,11 @@ var EStable3 =  $('#ES-table3').DataTable({
   $('#DFM-redraw1').on('click', function(){
    DFMtable1_init();
 } );
+
+  $('#DFM-redraw2').on('click', function(){
+   DFMtable2_init();
+} );
+
 
   $('#ES-redraw3').on('click', function(){
    EStable3_init();
@@ -1685,12 +1792,9 @@ function DFMtable1_init(){
     var dict_Monitor = {CNC:0, SI:0, PV:0, MV:0};
     var dict_Open = {CNC:0, SI:0, PV:0, MV:0};
     var dict_New = {CNC:0, SI:0, PV:0, MV:0};
-    var dict_Ronin = {co:0, ui:0, ca:0, fi:0,no:0};
-    var dict_Warpath = {co:0, ui:0, ca:0, fi:0,no:0};
 
 for (var i = 1; i < tableLen; i++) {
 
-    var coltext0 = table.rows[i].cells[0].innerText;
     var coltext1 = table.rows[i].cells[1].innerText;
     var coltext2 = table.rows[i].cells[2].innerText;
     var coltext3 = table.rows[i].cells[3].innerText;
@@ -1698,7 +1802,6 @@ for (var i = 1; i < tableLen; i++) {
     var coltext5 = table.rows[i].cells[5].innerText;
     var coltext6 = table.rows[i].cells[6].innerText;
     var coltext7 = table.rows[i].cells[7].innerText;
-    var coltext8 = table.rows[i].cells[8].innerText;
     var coltext10 = table.rows[i].cells[10].innerText;
     var coltext11 = Number(table.rows[i].cells[11].innerText);
 
@@ -1854,47 +1957,6 @@ if (coltext2 === "1" && coltext7 !== "..." && coltext5 === "Close") { //PV Close
     dict_New.MV = coltextMV_old + Number(coltext11);
 }
 
-//radar
- if (coltext0.indexOf("Ronin") !== -1 && coltext8.indexOf("Cosmetic") !== -1) {
-    var coltextco_old = dict_Ronin.co
-    dict_Ronin.co = coltextco_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Ronin") !== -1 && coltext8.indexOf("User Interface") !== -1) {
-    var coltextui_old = dict_Ronin.ui
-    dict_Ronin.ui = coltextui_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Ronin") !== -1 && coltext8.indexOf("Cables") !== -1) {
-    var coltextca_old = dict_Ronin.ca
-    dict_Ronin.ca = coltextca_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Ronin") !== -1 && coltext8.indexOf("Fixture issue") !== -1) {
-    var coltextfi_old = dict_Ronin.fi
-    dict_Ronin.fi = coltextfi_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Ronin") !== -1 && coltext8.indexOf("Noise come from physical operation") !== -1) {
-    var coltextno_old = dict_Ronin.no
-    dict_Ronin.no = coltextno_old + Number(coltext11);
-}
- else if (coltext0.indexOf("Warpath") !== -1 && coltext8.indexOf("Cosmetic") !== -1) {
-    var coltextco_old = dict_Warpath.co
-    dict_Warpath.co = coltextco_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Warpath") !== -1 && coltext8.indexOf("User Interface") !== -1) {
-    var coltextui_old = dict_Warpath.ui
-    dict_Warpath.ui = coltextui_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Warpath") !== -1 && coltext8.indexOf("Cables") !== -1) {
-    var coltextca_old = dict_Warpath.ca
-    dict_Warpath.ca = coltextca_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Warpath") !== -1 && coltext8.indexOf("Fixture issue") !== -1) {
-    var coltextfi_old = dict_Warpath.fi
-    dict_Warpath.fi = coltextfi_old + Number(coltext11);
-}
-else if(coltext0.indexOf("Warpath") !== -1 && coltext8.indexOf("Noise come from physical operation") !== -1) {
-    var coltextno_old = dict_Warpath.no
-    dict_Warpath.no = coltextno_old + Number(coltext11);
-}
 
 }
     table_init.page.len(10).draw();
@@ -2155,27 +2217,119 @@ charttable += "</tr><tbody></table>";
 document.getElementById("DFM-bar2-table").innerHTML = charttable;*/
 
 
+}
+
+function DFMtable2_init(){
+
+//radar dataset 1
+
+    var table_init = $('#DFM-table2').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFM-table2");
+    var tableLen = table.rows.length;
+    var dict_D1 = {co:0, ui:0, ca:0, fi:0,no:0};
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext0 = table.rows[i].cells[0].innerText;
+    var coltext1 = table.rows[i].cells[1].innerText;
+    var coltext2 = Number(table.rows[i].cells[2].innerText);
+
+
+ if (coltext1.indexOf("Cosmetic") !== -1) {
+    var coltextco_old = dict_D1.co
+    dict_D1.co = coltextco_old + Number(coltext2);
+}
+else if(coltext1.indexOf("User Interface") !== -1) {
+    var coltextui_old = dict_D1.ui
+    dict_D1.ui = coltextui_old + Number(coltext2);
+}
+else if(coltext1.indexOf("Cables") !== -1) {
+    var coltextca_old = dict_D1.ca
+    dict_D1.ca = coltextca_old + Number(coltext2);
+}
+else if(coltext1.indexOf("Fixture issue") !== -1) {
+    var coltextfi_old = dict_D1.fi
+    dict_D1.fi = coltextfi_old + Number(coltext2);
+}
+else if(coltext1.indexOf("Noise come from physical operation") !== -1) {
+    var coltextno_old = dict_D1.no
+    dict_D1.no = coltextno_old + Number(coltext2);
+}
+
+
+}
+
+//radar dataset 2
+    var table_init2 = $('#DFM-table3').DataTable();
+    table_init2.page.len(-1).draw();
+
+    var table2 = document.getElementById("DFM-table3");
+    var tableLen2 = table2.rows.length;
+    var dict_D2 = {co:0, ui:0, ca:0, fi:0,no:0};
+
+for (var i = 1; i < tableLen2; i++) {
+
+    var coltext0 = table2.rows[i].cells[0].innerText;
+    var coltext1 = table2.rows[i].cells[1].innerText;
+    var coltext2 = Number(table2.rows[i].cells[2].innerText);
+
+
+if (coltext1.indexOf("Cosmetic") !== -1) {
+    var coltextco_old = dict_D2.co
+    dict_D2.co = coltextco_old + Number(coltext2);
+}
+else if(coltext1.indexOf("User Interface") !== -1) {
+    var coltextui_old = dict_D2.ui
+    dict_D2.ui = coltextui_old + Number(coltext2);
+}
+else if(coltext1.indexOf("Cables") !== -1) {
+    var coltextca_old = dict_D2.ca
+    dict_D2.ca = coltextca_old + Number(coltext2);
+}
+else if(coltext1.indexOf("Fixture issue") !== -1) {
+    var coltextfi_old = dict_D2.fi
+    dict_D2.fi = coltextfi_old + Number(coltext2);
+}
+else if(coltext1.indexOf("Noise come from physical operation") !== -1) {
+    var coltextno_old = dict_D2.no
+    dict_D2.no = coltextno_old + Number(coltext2);
+}
+
+
+}
+
+
     if(DFM_radar1_build === 1){
     DFM_radar1.destroy();
     }
 
 
-//NPI-barline1
+//DFM radar
 DFM_radar1_build=1
 var ctx = document.getElementById("DFM-radar1");
  DFM_radar1 = new Chart(ctx, {
+   //Increase spacing between legend and chart
+   plugins: [{
+    beforeInit: function(chart, options) {
+      chart.legend.afterFit = function() {
+        this.height = this.height + 20;
+      };
+    }
+  }],
   type: 'radar',
     data: {
         labels: ["Cosmetic","User Interface","Cables","Fixture issue","Noise come from physical operation"],
-    datasets:  [
+    datasets: [
                 {
-                    label: 'Ronin',
-                    data: [dict_Ronin.co,dict_Ronin.ui,dict_Ronin.ca,dict_Ronin.fi,dict_Ronin.no],
+                    label: 'Dataset1',
+                    data: [dict_D1.co,dict_D1.ui,dict_D1.ca,dict_D1.fi,dict_D1.no],
                     hoverBorderWidth: 4,
                 },
                 {
-                    label: 'Warpath',
-                    data: [dict_Warpath.co,dict_Warpath.ui,dict_Warpath.ca,dict_Warpath.fi,dict_Warpath.no],
+                    label: 'Dataset2',
+                    data: [dict_D2.co,dict_D2.ui,dict_D2.ca,dict_D2.fi,dict_D2.no],
                     hoverBorderWidth: 4,
                 },
         ]

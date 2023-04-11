@@ -71,7 +71,7 @@ class Dfm_Review_Result(models.Model):
     create_date = models.DateTimeField(default=datetime.now, verbose_name="Create Date")
 
     class Meta:
-        verbose_name = "Dfm Reports"
+        verbose_name = "Reviewed item"
         verbose_name_plural = verbose_name
         db_table = "datacube_dfm_review_result"  # 指定数据表名称
 
@@ -92,7 +92,7 @@ class DFM_Report_Import_Records(models.Model):
     import_date = models.DateTimeField(default=datetime.now, verbose_name="Update Date", help_text="Date")
 
     class Meta:
-        verbose_name = "upload logs"
+        verbose_name = "upload record"
         verbose_name_plural = verbose_name
         db_table = "datacube_dfm_import_records"  # 指定数据表名称
 

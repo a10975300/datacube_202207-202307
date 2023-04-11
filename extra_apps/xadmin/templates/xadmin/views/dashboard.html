@@ -120,20 +120,24 @@
                                             <div class="font-weight-bold text-uppercase mb-1">
                                                 <a href="{{request.path}}dfm/dfm_review_result/" title="Click to view the detail of dfm.">DFM</a>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-6 text-center">
-                                                    {{ dfm_issue_qty }} Reviewed
-                                                </div>
-                                                <div class="col-sm-6 text-center">
-                                                    {{ dfm_p1_qty }} P1
-                                                </div>
-                                            </div>
+<!--                                            <div class="row">-->
+<!--                                                <div class="h5 mb-0 font-weight-bold text-center">-->
+<!--                                                    {{ dfm_issue_qty }} Reviewed-->
+<!--                                                </div>-->
+<!--                                                <div class="col-sm-6 text-center">-->
+<!--                                                    {{ dfm_p1_qty }} P1-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                            <div class="h5 mb-0 font-weight-bold text-center">{{ dfm_issue_qty }} Reviewed</div>
                                              <hr>
                                               <div class="row">
-                                                  <div class="col-sm-6 text-center">
+                                                  <div class="col-sm-4 text-center">
+                                                      {{ dfm_p1_qty }} P1
+                                                  </div>
+                                                  <div class="col-sm-4 text-center">
                                                       {{ dfm_nud_qty }} NUD
                                                   </div>
-                                                  <div class="col-sm-6 text-center">
+                                                  <div class="col-sm-4 text-center">
                                                       {{ dfm_closerate }}% Close
                                                   </div>
                                               </div>
@@ -247,7 +251,7 @@
 
                                                         <div class="col-xl-5 col-lg-5 mb-3">
                                                             <div class="card-body">
-                                                                <div class="chart-pie">
+                                                                <div class="chart-pie-md">
                                                                     <canvas id="ES-pie5"></canvas>
                                                                 </div>
                                                             </div>
@@ -260,7 +264,7 @@
                                                     <!-- issue3 -->
                                                     <!-- row1-->
                                                     <div class="row align-items-center">
-                                                        <div class="col-xl-6 col-lg-6">
+                                                        <div class="col-xl-5 col-lg-5">
                                                             <div class="card-body text-sm text-center">
                                                                 <div class="d-inline-block text-left">
                                                                     <p><span id="ES-i3-text1" class="text-primary font-weight-bold"></span> impact factory and customer</p>
@@ -274,7 +278,7 @@
                                                     <div class="row align-items-center">
                                                         <div class="col-xl-5 col-lg-5 mb-3">
                                                             <div class="card-body">
-                                                                <div class="chart-pie">
+                                                                <div class="chart-pie-md">
                                                                     <canvas id="ES-pie3"></canvas>
                                                                 </div>
                                                             </div>
@@ -344,7 +348,7 @@
                                                         </div>
                                                         <div class="col-xl-5 col-lg-5 mb-3">
                                                             <div class="card-body">
-                                                                <div class="chart-pie">
+                                                                <div class="chart-pie-md">
                                                                     <canvas id="ES-pie6"></canvas>
                                                                 </div>
                                                             </div>
@@ -381,7 +385,7 @@
 
                                                         <div class="col-xl-5 col-lg-5 mb-3">
                                                             <div class="card-body">
-                                                                <div class="chart-pie">
+                                                                <div class="chart-pie-md">
                                                                     <canvas id="ES-pie8"></canvas>
                                                                 </div>
                                                             </div>
@@ -391,7 +395,7 @@
                                                     <!-- row1 -->
                                                     <!-- row2-->
                                                     <div class="row align-items-center">
-                                                        <div class="col-xl-6 col-lg-6">
+                                                        <div class="col-xl-5 col-lg-5">
                                                             <div class="card-body text-sm text-center">
                                                                 <div class="d-inline-block text-left">
                                                                    <p><span id="ES-i6-text4" class="text-primary font-weight-bold"></span> issues caused by Design in MV stage</p>
@@ -402,7 +406,7 @@
                                                     <!-- row2-->
                                                     <!-- row3-->
                                                     <div class="row align-items-center">
-                                                        <div class="col-xl-6 col-lg-6 mb-3">
+                                                        <div class="col-xl-5 col-lg-5 mb-3">
                                                             <div class="card-body">
                                                                 <div class="chart-bar-md pt-2">
                                                                     <canvas id="ES-bar4"></canvas>
@@ -410,7 +414,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-xl-6 col-lg-6 mb-3">
+                                                        <div class="col-xl-7 col-lg-7 mb-3">
                                                             <div class="card-body">
                                                                 <div class="chart-bar-md pt-2">
                                                                     <canvas id="ES-bar5"></canvas>
@@ -1180,7 +1184,7 @@
                                                                             <div class="card-body">
                                                                                 <!-- chart-->
                                                                                 <div class="chart-pie">
-                                                                                    <canvas id="DFM-radar1"></canvas>
+                                                                                    <canvas id=""></canvas>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1317,6 +1321,130 @@
                                                  </div>
                                              </div>
                                              <!-- issue1 -->
+
+                                             <!-- issue2 -->
+                                             <div class="row ">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#DFM-collapse2" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="DFM-collapse2">
+                                                             <h5 class="m-0 font-weight-bold">DFM Issue</h5>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse show" id="DFM-collapse2">
+                                                             <div class="card-body">
+
+                                                                 <!-- row1 -->
+                                                                <div class="row">
+                                                                    <div class="col-xl-6 col-lg-6 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <!-- chart-->
+                                                                                <div class="chart-pie-lg">
+                                                                                    <canvas id="DFM-radar1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-6 col-lg-6 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <!-- filter_button -->
+                                                                                <div class="row ml-1">
+                                                                                    <button id="DFM-filter-button2" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                                        <span class="icon text-white-50">
+                                                                                            <i class="icon fa fa-arrow-right"></i>
+                                                                                        </span>
+                                                                                        <span class="text">Filters</span>
+                                                                                    </button>
+                                                                                    <button id="DFM-redraw2" class="btn btn-primary btn-icon-split btn-sm ml-3">
+                                                                                        <span class="icon text-white-50">
+                                                                                            <i class="icon fa fa-arrow-right"></i>
+                                                                                        </span>
+                                                                                        <span class="text">Redraw Charts</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <!-- filter button -->
+
+                                                                                <!-- filter -->
+                                                                                <div class="row mt-2" style="display:none" id="DFM-filter2">
+                                                                                    <div class="col-xl-12 col-lg-12">
+                                                                                        <div class="card shadow">
+                                                                                            <div class="card-body">
+                                                                                                <div class="col-xl-6 col-lg-6" id="DFM-filter-panel2"></div>
+                                                                                                <div class="col-xl-6 col-lg-6" id="DFM-filter-panel3"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- filter -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-7 col-lg-7 mb-3" style="display:none;">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="DFM-table2" class="display compact nowrap">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Dataset1</th>
+                                                                                                <th>Issue Sympton</th>
+                                                                                                <th>Examined Items Qty</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            {% for item in dfm_issue %}
+                                                                                                <tr>
+                                                                                                    <td>{{ item.dfm_product__ProductName}}</td>
+                                                                                                    <td>{{ item.dfm_product_issue_symptom}}</td>
+                                                                                                    <td>{{ item.dfm_review_item_desc__count}}</td>
+                                                                                                </tr>
+                                                                                            {% endfor %}
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-7 col-lg-7 mb-3" style="display:none;">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="DFM-table3" class="display compact nowrap">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Dataset2</th>
+                                                                                                <th>Issue Sympton</th>
+                                                                                                <th>Examined Items Qty</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            {% for item in dfm_issue %}
+                                                                                                <tr>
+                                                                                                    <td>{{ item.dfm_product__ProductName}}</td>
+                                                                                                    <td>{{ item.dfm_product_issue_symptom}}</td>
+                                                                                                    <td>{{ item.dfm_review_item_desc__count}}</td>
+                                                                                                </tr>
+                                                                                            {% endfor %}
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- row1-->
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- issue2 -->
                                          </div>
                                         <!-- DFM-tab-page -->
 

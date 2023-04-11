@@ -40,9 +40,9 @@ class IssueAdmin(object):
                    ("status", MultiSelectFieldListFilter),
                    ("cratedate"),
                    ]
-    search_fields = ["platformName__ProductName", "issue_desc", "impact_scope","buildstage","owner","status","cratedate","processName"]
+    search_fields = ["platformName__ProductName", "issue_desc", "impact_scope","buildstage","owner","status","processName"]
     list_display_links = ["issue_desc"]
-    list_per_page = 10
+    list_per_page = 20
     date_hierarchy = 'cratedate'
     # list_editable = ('issue_desc')
     model_icon = 'fa fa-list' #fa fa-cogs
@@ -101,18 +101,23 @@ class IssueAdmin(object):
                 from utils.excel_report_parser import SafelaunchParser
                 result = SafelaunchParser().parse(request, workbook, currentuser,)
                 # raise a message on webpage
-                messages.success(request, "{}-{}'s safe-launch data was imported successfully.".format(result[0],result[1]))
-                #   send an alert by email
-                contents = "{}-{} safe-launch data was imported successfully.".format(result[0],result[1])
-                Notification().send_by_email(
-                                            [str(currentuser)],
-                                            currentuser,
-                                            contents,
-                                            result[0],                                  # platform name
-                                            result[1],                                  # build stage
-                                            "safelaunch report uploaded Successfully",  # email title
-                                            result[3],                                  # 返回data
-                                            result[2],)                                 # odm name
+                if len(result) != 1:
+                    messages.success(request, "{}-{}'s safe-launch data was imported successfully.".format(result[0],result[1]))
+
+                    #   send an alert by email
+                    contents = "{}-{} safe-launch data was imported successfully.".format(result[0],result[1])
+                    Notification().send_by_email(
+                                                [str(currentuser)],
+                                                currentuser,
+                                                contents,
+                                                result[0],                                  # platform name
+                                                result[1],                                  # build stage
+                                                "safelaunch report uploaded Successfully",  # email title
+                                                result[3],                                  # 返回data
+                                                result[2],)                                 # odm name
+                else:
+                    messages.error(request,"Failed, error: {}, Please use check tool to check the report first!".format(result[0]))
+
             workbook.close()
             return HttpResponseRedirect('/scpe/npi/issue/')
         return super(IssueAdmin, self).post(request, *args, **kwargs)

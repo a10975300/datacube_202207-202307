@@ -88,7 +88,7 @@ class Dfa_Review_Result(models.Model):
     dfa_crate_date = models.DateTimeField(default=datetime.now, verbose_name="CreateDate")
 
     class Meta:
-        verbose_name = "Dfa result"
+        verbose_name = "Reviewed item"
         verbose_name_plural = verbose_name
         db_table = "datacube_dfa_result"  # 指定数据表名称
 
@@ -104,7 +104,7 @@ class Dfa_Report_Import_Records(models.Model):
     import_date = models.DateTimeField(default=datetime.now, verbose_name="Update Date", help_text="Date")
 
     class Meta:
-        verbose_name = "Upload logs"
+        verbose_name = "upload record"
         verbose_name_plural = verbose_name
         db_table = "datacube_dfa_import_records"  # 指定数据表名称
 

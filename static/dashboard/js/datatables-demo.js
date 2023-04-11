@@ -1,13 +1,14 @@
 $(document).ready(function () {
 
 /////////////Stay at the same page after Refresh ///////////
-	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-		localStorage.setItem('activeTab', $(e.target).attr('href'));
-	});
-	var activeTab = localStorage.getItem('activeTab');
-	if(activeTab){
-		$('#myTab a[href="' + activeTab + '"]').tab('show');
-	}
+//	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+//		localStorage.setItem('activeTab', $(e.target).attr('href'));
+//	});
+//	var activeTab = localStorage.getItem('activeTab');
+//	if(activeTab){
+//		$('#myTab a[href="' + activeTab + '"]').tab('show');
+//	}
+
 
   /////////////table///////////
 
@@ -45,7 +46,7 @@ var NPItable1 =  $('#NPI-table1').DataTable({
             'pageLength'
         ],
         searchPanes: {
-            layout: 'columns-3',
+            layout: 'columns-5',
             initCollapsed: true,
             cascadePanes: true,
             dtOpts:{
@@ -59,7 +60,7 @@ var NPItable1 =  $('#NPI-table1').DataTable({
                 searchPanes: {
                     show: true
                 },
-                targets: [0,1,2]
+                targets: [0,1,2,4,5]
             },
             {
                 searchPanes: {
@@ -90,7 +91,7 @@ var NPItable3 =  $('#NPI-table3').DataTable({
             'pageLength'
         ],
         searchPanes: {
-            layout: 'columns-4',
+            layout: 'columns-6',
             initCollapsed: true,
             cascadePanes: true,
             dtOpts:{
@@ -104,7 +105,7 @@ var NPItable3 =  $('#NPI-table3').DataTable({
                 searchPanes: {
                     show: true
                 },
-                targets: [0,1,2,3]
+                targets: [0,1,2,3,5,6]
             },
             {
                 searchPanes: {
@@ -135,7 +136,7 @@ var NPItable4 =  $('#NPI-table4').DataTable({
             'pageLength'
         ],
         searchPanes: {
-            layout: 'columns-5',
+            layout: 'columns-7',
             initCollapsed: true,
             cascadePanes: true,
             dtOpts:{
@@ -149,7 +150,7 @@ var NPItable4 =  $('#NPI-table4').DataTable({
                 searchPanes: {
                     show: true
                 },
-                targets: [0,1,2,3,4]
+                targets: [0,1,2,3,4,6,7]
             },
             {
                 searchPanes: {
@@ -179,7 +180,7 @@ var NPItable5 =  $('#NPI-table5').DataTable({
             'pageLength'
         ],
         searchPanes: {
-            layout: 'columns-3',
+            layout: 'columns-5',
             initCollapsed: true,
             cascadePanes: true,
             dtOpts:{
@@ -193,7 +194,7 @@ var NPItable5 =  $('#NPI-table5').DataTable({
                 searchPanes: {
                     show: true
                 },
-                targets: [0,1,2]
+                targets: [0,1,2,4,5]
             },
             {
                 searchPanes: {
@@ -207,7 +208,6 @@ var NPItable5 =  $('#NPI-table5').DataTable({
     NPItable5.searchPanes.container().prependTo("#NPI-filter-panel5");
     NPItable5.searchPanes.resizePanes();
     NPItable5_init();
-
 
 var NPItable6 =  $('#NPI-table6').DataTable({
     deferRender: true,
@@ -224,7 +224,7 @@ var NPItable6 =  $('#NPI-table6').DataTable({
             'pageLength'
         ],
         searchPanes: {
-            layout: 'columns-5',
+            layout: 'columns-7',
             initCollapsed: true,
             cascadePanes: true,
             dtOpts:{
@@ -238,7 +238,7 @@ var NPItable6 =  $('#NPI-table6').DataTable({
                 searchPanes: {
                     show: true
                 },
-                targets: [0,1,2,3,4]
+                targets: [0,1,2,3,4,6,7]
             },
             {
                 searchPanes: {
@@ -268,7 +268,7 @@ var DFMtable1 =  $('#DFM-table1').DataTable({
             'pageLength'
         ],
         searchPanes: {
-            layout: 'columns-5',
+            layout: 'columns-6',
             initCollapsed: true,
             cascadePanes: true,
             dtOpts:{
@@ -282,7 +282,7 @@ var DFMtable1 =  $('#DFM-table1').DataTable({
                 searchPanes: {
                     show: true
                 },
-                targets: [0,1,2,3,4,5,6,7,8,9,10]
+                targets: [0,1,2,3,4,5,6,7,8,9,10,12,13]
             },
             {
                 searchPanes: {
@@ -297,6 +297,52 @@ var DFMtable1 =  $('#DFM-table1').DataTable({
     DFMtable1.searchPanes.resizePanes();
     DFMtable1_init();
 
+
+var EStable3 =  $('#ES-table3').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'Overall issue impact factory / factory+field'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,7,8]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [1,2,3,4,5,6]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(EStable3, {});
+    EStable3.searchPanes.container().prependTo("#ES-filter-panel3");
+    EStable3.searchPanes.resizePanes();
+    EStable3_init();
+    EStable5_init();
+    EStable6_init();
 
 });
 
@@ -382,6 +428,16 @@ var DFMtable1 =  $('#DFM-table1').DataTable({
   }
 } );
 
+  $('#ES-filter-button3').on('click', function(){
+
+  var x = document.getElementById("ES-filter3");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
 //////////////////////redraw///////////////////////////////////
 
   $('#NPI-redraw1').on('click', function(){
@@ -408,6 +464,12 @@ var DFMtable1 =  $('#DFM-table1').DataTable({
    DFMtable1_init();
 } );
 
+  $('#ES-redraw3').on('click', function(){
+   EStable3_init();
+   EStable5_init();
+   EStable6_init();
+} );
+
 /////////////////////chart colors///////////////////////////////
 
 var blue = '#c0d6eb'
@@ -426,7 +488,7 @@ var NPI_bar1_colors = [orange,purple,blue,green,yellow,gray,lightgreen,pink,brow
 var NPI_pie3_colors = [green,blue,yellow,purple,brown,lightgreen];
 var NPI_bar2_colors = [lightgreen,yellow,orange,purple,green,blue,gray,lightgreen];
 var NPI_pie4_colors = [yellow,green,blue,yellow];
-var NPI_bar3_colors = [blue,orange, green];
+var NPI_bar3_colors = [green,blue,orange];
 var NPI_pie5_colors = [orange,yellow,green,blue,purple,lightgreen];
 var NPI_pie6_colors = [orange,purple,blue,green,yellow,lightgreen,gray,pink,brown];
 var NPI_pie7_colors = [blue,yellow,orange,green,purple];
@@ -435,7 +497,7 @@ var NPI_pie8_colors = [orange,purple,blue,green,gray,lightgreen,pink,brown]; //�
 var NPI_bar5_colors = [yellow,gray,purple,orange,green,blue,pink,brown];
 var DFM_pie1_colors = [blue,yellow,green,orange,purple,lightgreen,gray,pink,brown];
 var DFM_bar1_colors = [lightgreen,orange];
-var DFM_bar2_colors = [lightgreen,yellow,orange];
+var DFM_bar2_colors = [lightgreen,yellow,orange,blue];
 var DFM_radar1_colors = [lightgreen,yellow];
 
 /////////////////////chart init function///////////////////////////////
@@ -458,6 +520,14 @@ var DFM_bar1_build = 0
 var DFM_bar2_build = 0
 var DFM_radar1_build =0
 
+var ES_pie3_build = 0
+var ES_bar2_build = 0
+var ES_pie5_build = 0
+var ES_pie6_build = 0
+var ES_bar4_build = 0
+var ES_pie8_build = 0
+var ES_bar5_build = 0
+
 
 function producttable1_init(){
 
@@ -471,12 +541,12 @@ function producttable1_init(){
   for (var i = 1; i < tableLen; i++) {
 
     var coltext1 = table.rows[i].cells[1].innerText;
-    var coltext2 = table.rows[i].cells[2].innerText;
 
     if (data.col1.indexOf(coltext1) === -1) {
     data.col1.push(coltext1);
     data.col2.push(1);
     }
+
     else if (data.col1.indexOf(coltext1) !== -1) {
 
     var coltext2_old = Number(data.col2[data.col1.indexOf(coltext1)])
@@ -1096,21 +1166,21 @@ var ctx = document.getElementById("NPI-bar3");
             datasets: [
 
                 {
-                    label: 'PV',
-                    data: data.PV,
+                    label: 'SI',
+                    data: data.SI,
                     stack: 'Stack 0',
                     hoverBorderWidth: 4,
                 },
 
                   {
-                    label: 'MV',
-                    data: data.MV,
+                    label: 'PV',
+                    data: data.PV,
                     stack: 'Stack 1',
                     hoverBorderWidth: 4,
                 },
                                   {
-                    label: 'SI',
-                    data: data.SI,
+                    label: 'MV',
+                    data: data.MV,
                     stack: 'Stack 2',
                     hoverBorderWidth: 4,
                 }
@@ -1145,7 +1215,7 @@ var ctx = document.getElementById("NPI-bar3");
                 stacked: true,
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 1
+                    //stepSize: 1
                 }
             }]
         }
@@ -1663,11 +1733,11 @@ for (var i = 1; i < tableLen; i++) {
 
 
 //pie
-  if (coltext2 === "1" && coltext7 !== "..." && data.col10.indexOf(coltext10) === -1 && coltext11!==0) {
+  if (coltext2 === "1" && coltext7 !== "..." && coltext10 !== "None" && data.col10.indexOf(coltext10) === -1 && coltext11!==0) {
   data.col10.push(coltext10);
   data.col11.push(coltext11);
 }
-else if (coltext2 === "1" && coltext7 !== "..." && data.col10.indexOf(coltext10) !== -1 && coltext11!==0) {
+else if (coltext2 === "1" && coltext7 !== "..." && coltext10 !== "None" && data.col10.indexOf(coltext10) !== -1 && coltext11!==0) {
 var coltext11_old = Number(data.col11[data.col10.indexOf(coltext10)])
 data.col11[data.col10.indexOf(coltext10)] = coltext11_old+ Number(coltext11)
 
@@ -1783,11 +1853,6 @@ if (coltext2 === "1" && coltext7 !== "..." && coltext5 === "Close") { //PV Close
     var coltextMV_old = dict_New.MV
     dict_New.MV = coltextMV_old + Number(coltext11);
 }
-//total
-    Total_CNC = dict_Close.CNC+dict_Monitor.CNC+dict_Open.CNC+dict_New.CNC
-    Total_SI = dict_Close.SI+dict_Monitor.SI+dict_Open.SI+dict_New.SI
-    Total_PV = dict_Close.PV+dict_Monitor.PV+dict_Open.PV+dict_New.PV
-    Total_MV = dict_Close.MV+dict_Monitor.MV+dict_Open.MV+dict_New.MV
 
 //radar
  if (coltext0.indexOf("Ronin") !== -1 && coltext8.indexOf("Cosmetic") !== -1) {
@@ -1936,7 +2001,7 @@ var ctx = document.getElementById("DFM-bar1");
     }
   }
 });
-
+/*
 chartlabel = ["CNC","SI","PV","MV"];
 chartdata1 = [dict_P1.CNC,dict_P1.SI,dict_P1.PV,dict_P1.MV];
 chartdata2 = [dict_NUD.CNC,dict_NUD.SI,dict_NUD.PV,dict_NUD.MV];
@@ -1960,6 +2025,7 @@ for (i = 0; i < chartlabel.length; i++) {
 charttable += "</tr><tbody></table>";
 
 document.getElementById("DFM-bar1-table").innerHTML = charttable;
+*/
 
 
     if(DFM_bar2_build === 1){
@@ -1991,6 +2057,12 @@ var ctx = document.getElementById("DFM-bar2");
                   {
                     label: 'Open',
                     data: [dict_Open.CNC,dict_Open.SI,dict_Open.PV,dict_Open.MV],
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                },
+                  {
+                    label: 'New Finding',
+                    data: [dict_New.CNC,dict_New.SI,dict_New.PV,dict_New.MV],
                     stack: 'Stack 0',
                     hoverBorderWidth: 4,
                 }
@@ -2032,6 +2104,11 @@ var ctx = document.getElementById("DFM-bar2");
   }
 });
 
+/*
+Total_CNC = dict_Close.CNC+dict_Monitor.CNC+dict_Open.CNC+dict_New.CNC
+Total_SI = dict_Close.SI+dict_Monitor.SI+dict_Open.SI+dict_New.SI
+Total_PV = dict_Close.PV+dict_Monitor.PV+dict_Open.PV+dict_New.PV
+Total_MV = dict_Close.MV+dict_Monitor.MV+dict_Open.MV+dict_New.MV
 chartlabel = ["CNC","SI","PV","MV"];
 chartdata1 = [dict_Close.CNC,dict_Close.SI,dict_Close.PV,dict_Close.MV];
 chartdata2 = [dict_Monitor.CNC,dict_Monitor.SI,dict_Monitor.PV,dict_Monitor.MV];
@@ -2075,7 +2152,8 @@ for (i = 0; i < chartlabel.length; i++) {
 }
 charttable += "</tr><tbody></table>";
 
-document.getElementById("DFM-bar2-table").innerHTML = charttable;
+document.getElementById("DFM-bar2-table").innerHTML = charttable;*/
+
 
     if(DFM_radar1_build === 1){
     DFM_radar1.destroy();
@@ -2131,5 +2209,780 @@ var ctx = document.getElementById("DFM-radar1");
 });
 
 }
+
+function EStable3_init(){
+
+    var table_init = $('#ES-table3').DataTable();
+     table_init.page.len(-1).draw();
+
+    var table = document.getElementById("ES-table3");
+    var tableLen = table.rows.length;
+    var data = {col0: [],col2: [], col3: [],col55: [],COMM:[],Commodity:[],Design:[],Diags:[],FactoryOperation:[],Material:[]};
+
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext0 = table.rows[i].cells[0].innerText;
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext3 = table.rows[i].cells[3].innerText;
+    coltext3_split = coltext3.split('-');
+    coltext3 = coltext3_split[0];
+    coltext3=coltext3.replace(/\s*/g,""); //去空白
+    var coltext5 = Number(table.rows[i].cells[5].innerText);
+
+
+//pie
+  if (data.col2.indexOf(coltext2) === -1 && coltext5!==0) {
+  data.col2.push(coltext2);
+  data.col55.push(coltext5);
+}
+else if (data.col2.indexOf(coltext2) !== -1 && coltext5!==0) {
+var coltext54_old = Number(data.col55[data.col2.indexOf(coltext2)])
+data.col55[data.col2.indexOf(coltext2)] = coltext54_old+ Number(coltext5)
+
+}
+
+
+//bar
+ if (coltext2 !== "Field" && data.col0.indexOf(coltext0) === -1 && coltext3 === "COMM") {
+  data.col0.push(coltext0);
+  data.COMM.push(coltext5);
+  data.Commodity.push(0);
+  data.Design.push(0);
+  data.Diags.push(0);
+  data.FactoryOperation.push(0);
+  data.Material.push(0);
+
+}
+
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) === -1 && coltext3 === "Commodity") {
+  data.col0.push(coltext0);
+  data.COMM.push(0);
+  data.Commodity.push(coltext5);
+  data.Design.push(0);
+  data.Diags.push(0);
+  data.FactoryOperation.push(0);
+  data.Material.push(0);
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) === -1 && coltext3 === "Design") {
+  data.col0.push(coltext0);
+  data.COMM.push(0);
+  data.Commodity.push(0);
+  data.Design.push(coltext5);
+  data.Diags.push(0);
+  data.FactoryOperation.push(0);
+  data.Material.push(0);
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) === -1 && coltext3 === "Diags") {
+  data.col0.push(coltext0);
+  data.COMM.push(0);
+  data.Commodity.push(0);
+  data.Design.push(0);
+  data.Diags.push(coltext5);
+  data.FactoryOperation.push(0);
+  data.Material.push(0);
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) === -1 && coltext3 === "FactoryOperation") {
+  data.col0.push(coltext0);
+  data.COMM.push(0);
+  data.Commodity.push(0);
+  data.Design.push(0);
+  data.Diags.push(0);
+  data.FactoryOperation.push(coltext5);
+  data.Material.push(0);
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) === -1 && coltext3 === "Material") {
+  data.col0.push(coltext0);
+  data.COMM.push(0);
+  data.Commodity.push(0);
+  data.Design.push(0);
+  data.Diags.push(0);
+  data.FactoryOperation.push(0);
+  data.Material.push(coltext5);
+
+}
+
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) !== -1 && coltext3 === "COMM") {
+   var coltext5_old = Number(data.COMM[data.col0.indexOf(coltext0)])
+   data.COMM[data.col0.indexOf(coltext0)] = coltext5_old+ Number(coltext5)
+
+}
+
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) !== -1 && coltext3 === "Commodity") {
+   var coltext5_old = Number(data.Commodity[data.col0.indexOf(coltext0)])
+   data.Commodity[data.col0.indexOf(coltext0)] = coltext5_old+ Number(coltext5)
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) !== -1 && coltext3 === "Design") {
+   var coltext5_old = Number(data.Design[data.col0.indexOf(coltext0)])
+   data.Design[data.col0.indexOf(coltext0)] = coltext5_old+ Number(coltext5)
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) !== -1 && coltext3 === "Diags") {
+   var coltext5_old = Number(data.Diags[data.col0.indexOf(coltext0)])
+   data.Diags[data.col0.indexOf(coltext0)] = coltext5_old+ Number(coltext5)
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) !== -1 && coltext3 === "FactoryOperation") {
+   var coltext5_old = Number(data.FactoryOperation[data.col0.indexOf(coltext0)])
+   data.FactoryOperation[data.col0.indexOf(coltext0)] = coltext5_old+ Number(coltext5)
+
+
+}
+ else if (coltext2 !== "Field" && data.col0.indexOf(coltext0) !== -1 && coltext3 === "Material") {
+
+  var coltext5_old = Number(data.Material[data.col0.indexOf(coltext0)])
+  data.Material[data.col0.indexOf(coltext0)] = coltext5_old+ Number(coltext5)
+
+
+}
+
+
+}
+    table_init.page.len(10).draw();
+
+        if(ES_pie3_build===1){
+          ES_pie3.destroy();
+    }
+
+
+ES_pie3_build=1
+var canvasP = document.getElementById("ES-pie3")
+var ctxP = canvasP.getContext('2d')
+ ES_pie3 = new Chart(ctxP, {
+  type: 'pie',
+  data: {
+    labels: data.col2,
+    datasets: [{
+      data: data.col55,
+      hoverBorderWidth: 4,
+    }]
+  },
+  options: {
+        maintainAspectRatio: false,
+      responsive: true,
+        legend: {
+          labels: {
+            fontColor: "black",
+            fontSize: 10
+                }
+        },
+        plugins: {
+          labels: {
+        fontColor: 'black',
+      },
+             colorschemes: {
+        scheme: NPI_pie3_colors
+      }
+    }
+  }
+});
+
+// 算字
+let sum = 0;
+for(let n of data.col55) {
+  sum += n;
+}
+
+var ES_i3_text1 = Number(data.col55[data.col2.indexOf("Field + Factory")])
+var ES_i3_text2 = Number(data.col55[data.col2.indexOf("Factory")])
+if (isNaN(ES_i3_text1)){ //不是數字的話
+    ES_i3_text1 = 0+"%"
+}
+else{
+    ES_i3_text1 = Math.round(ES_i3_text1/sum*100)+"%"
+}
+
+if (isNaN(ES_i3_text2)){ //不是數字的話
+    ES_i3_text2 = 0+"%"
+}
+else{
+    ES_i3_text2 = Math.round(ES_i3_text2/sum*100)+"%"
+}
+
+document.getElementById("ES-i3-text1").innerHTML = ES_i3_text1;
+document.getElementById("ES-i3-text2").innerHTML = ES_i3_text2;
+
+    if(ES_bar2_build === 1){
+    ES_bar2.destroy();
+    }
+
+//NPI-barline1
+ES_bar2_build=1
+var ctx = document.getElementById("ES-bar2");
+ ES_bar2 = new Chart(ctx, {
+  type: 'bar',
+  data: {
+            labels:data.col0,
+            datasets: [
+
+                {
+                    label: 'COMM',
+                    data: data.COMM,
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                },
+
+                  {
+                    label: 'Commodity',
+                    data: data.Commodity,
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                },
+                                  {
+                    label: 'Design',
+                    data: data.Design,
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                },
+                                  {
+                    label: 'Diags',
+                    data: data.Diags,
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                },
+                                  {
+                    label: 'FactoryOperation',
+                    data: data.FactoryOperation,
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                },
+                                  {
+                    label: 'Material',
+                    data: data.Material,
+                    stack: 'Stack 0',
+                    hoverBorderWidth: 4,
+                }
+            ]
+        },
+  options: {
+    maintainAspectRatio: false,
+    responsive: true,
+        legend: {
+          labels: {
+            fontColor: "black",
+            fontSize: 10
+                }
+        },
+        scales: {
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true,
+               ticks: {
+                  beginAtZero: true,
+          }
+            }]
+        },
+
+    tooltips: {
+      mode: 'index',
+      intersect: false
+    },
+              plugins: {
+        labels: {
+        fontColor: 'transparent',
+        render: 'value'
+      },
+             colorschemes: {
+        scheme: NPI_bar2_colors
+      }
+    }
+  }
+});
+
+
+}
+
+function EStable5_init(){
+
+    var table_init = $('#ES-table3').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("ES-table3");
+    var tableLen = table.rows.length;
+    var data = {col3: [], col1: [],col6: [], col5: [], col55: []};
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext3 = table.rows[i].cells[3].innerText;
+    coltext3_split = coltext3.split('-');
+    coltext3 = coltext3_split[0];
+    coltext3=coltext3.replace(/\s*/g,""); //去空白
+    var coltext1 = table.rows[i].cells[1].innerText;
+    var coltext5 = Number(table.rows[i].cells[5].innerText);
+    var coltext6 = table.rows[i].cells[6].innerText;
+
+//換字
+  if (coltext3.indexOf("COMM") !== -1 || coltext3.indexOf("Commodity") !== -1) {
+    coltext3 = 'Design';
+}
+ else if(coltext3.indexOf("TBD") !== -1 || coltext3 ==="Diags" ) {
+    coltext3 = 'Others';
+}
+else if(coltext3.indexOf("FactoryOperation")!== -1) {
+    coltext3 = 'Factory';
+}
+
+//Long-term Category
+    if(coltext1.indexOf("Factory") === -1){
+        coltext1_split = coltext1.split('-');
+        coltext1 = coltext1_split[0];
+        coltext1=coltext1.replace(/\s*/g,""); //去空白
+    }
+
+
+//pie1
+  if (data.col3.indexOf(coltext3) === -1 && coltext5!==0) {
+  data.col3.push(coltext3);
+  data.col5.push(coltext5);
+}
+else if(data.col3.indexOf(coltext3) !== -1 && coltext5!==0) {
+
+var coltext5_old = Number(data.col5[data.col3.indexOf(coltext3)])
+data.col5[data.col3.indexOf(coltext3)] = coltext5_old+ Number(coltext5)
+
+}
+
+//pie2
+  if (data.col1.indexOf(coltext1) === -1 && coltext5!==0) {
+  data.col1.push(coltext1);
+  data.col55.push(coltext5);
+}
+else if(data.col1.indexOf(coltext1) !== -1 && coltext5!==0) {
+
+var coltext55_old = Number(data.col55[data.col1.indexOf(coltext1)])
+data.col55[data.col1.indexOf(coltext1)] = coltext55_old+ Number(coltext5)
+
+}
+
+}
+
+    table_init.page.len(10).draw();
+
+
+        if(ES_pie5_build===1){
+          ES_pie5.destroy();
+    }
+
+
+ES_pie5_build=1
+var canvasP = document.getElementById("ES-pie5")
+var ctxP = canvasP.getContext('2d')
+ ES_pie5 = new Chart(ctxP, {
+ type: 'pie',
+  data: {
+    labels: data.col3,
+    datasets: [{
+      data: data.col5,
+      hoverBorderWidth: 4,
+    }]
+  },
+  options: {
+        maintainAspectRatio: false,
+      responsive: true,
+        legend: {
+          labels: {
+            fontColor: "black",
+            fontSize: 10
+                }
+        },
+        plugins: {
+                  labels: {
+        fontColor: 'black',
+      },
+             colorschemes: {
+        scheme: NPI_pie5_colors
+      }
+    }
+  }
+});
+
+        if(ES_pie6_build===1){
+          ES_pie6.destroy();
+    }
+
+
+ES_pie6_build=1
+var canvasP = document.getElementById("ES-pie6")
+var ctxP = canvasP.getContext('2d')
+ ES_pie6 = new Chart(ctxP, {
+ type: 'pie',
+  data: {
+    labels: data.col1,
+    datasets: [{
+      data: data.col55,
+      hoverBorderWidth: 4,
+    }]
+  },
+  options: {
+        maintainAspectRatio: false,
+      responsive: true,
+        legend: {
+          labels: {
+            fontColor: "black",
+            fontSize: 10
+                }
+        },
+        plugins: {
+          labels: {
+        fontColor: 'black',
+      },
+             colorschemes: {
+        scheme: NPI_pie6_colors
+      }
+    }
+  }
+});
+
+// 算字
+let sum = 0;
+for(let n of data.col5) {
+  sum += n;
+}
+
+var ES_i5_text5 = Number(data.col5[data.col3.indexOf("Design")])
+var ES_i5_text6 = Number(data.col5[data.col3.indexOf("Factory")])
+
+if(isNaN(ES_i5_text5)){
+    ES_i5_text5 = 0+"%"
+}
+else{
+    ES_i5_text5 = Math.round(ES_i5_text5/sum*100)+"%"
+}
+
+if(isNaN(ES_i5_text6)){
+    ES_i5_text6 = 0+"%"
+}
+else{
+    ES_i5_text6 = Math.round(ES_i5_text6/sum*100)+"%"
+}
+
+
+
+var ES_i5_text7_FF = 0
+var ES_i5_text7_FP = 0
+
+if(data.col1.indexOf("Factory - Fixture") !== -1 ){
+    ES_i5_text7_FF = Number(data.col55[data.col1.indexOf("Factory - Fixture")])
+}
+if(data.col1.indexOf("Factory - Process") !== -1 ){
+    ES_i5_text7_FP = Number(data.col55[data.col1.indexOf("Factory - Process")])
+}
+
+var ES_i5_text7 = ES_i5_text7_FF +ES_i5_text7_FP
+var ES_i5_text8 = Number(data.col55[data.col1.indexOf("Design")])
+var ES_i5_text9 = Number(data.col55[data.col1.indexOf("Supplier")])
+
+if(isNaN(ES_i5_text8)){
+    ES_i5_text8 = 0
+}
+
+if(isNaN(ES_i5_text9)){
+    ES_i5_text9 = 0
+}
+
+document.getElementById("ES-i5-text5").innerHTML = ES_i5_text5;
+document.getElementById("ES-i5-text6").innerHTML = ES_i5_text6;
+document.getElementById("ES-i5-text7").innerHTML = ES_i5_text7;
+document.getElementById("ES-i5-text8").innerHTML = ES_i5_text8;
+document.getElementById("ES-i5-text9").innerHTML = ES_i5_text9;
+
+}
+
+function EStable6_init(){
+
+    var table_init = $('#ES-table3').DataTable();
+     table_init.page.len(-1).draw();
+
+    var table = document.getElementById("ES-table3");
+    var tableLen = table.rows.length;
+    var data = {col3: [], col3_2: [], col1: [], col6: [], col5_2: [],col5_3: [],col5_4: []};
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext3 = table.rows[i].cells[3].innerText;
+    coltext3_split = coltext3.split('-');
+    coltext3 = coltext3_split[0];
+    coltext3=coltext3.replace(/\s*/g,""); //去空白
+    var coltext4 = table.rows[i].cells[4].innerText;
+    coltext4_split = coltext4.split('-');
+    coltext4 = coltext4_split[0];
+    coltext4=coltext4.replace(/\s*/g,""); //去空白
+    var coltext1 = table.rows[i].cells[1].innerText;
+    var coltext5 = Number(table.rows[i].cells[5].innerText);
+    var coltext6 = table.rows[i].cells[6].innerText;
+
+
+//換字
+  if (coltext3.indexOf("COMM") !== -1 || coltext3.indexOf("Commodity") !== -1) {
+    coltext3 = 'Design';
+}
+ else if(coltext3.indexOf("TBD") !== -1 || coltext3 ==="Diags" ) {
+    coltext3 = 'Others';
+}
+else if(coltext3.indexOf("FactoryOperation")!== -1) {
+    coltext3 = 'Factory';
+}
+else if(coltext3 ==="Design") {
+
+    var coltext31 = coltext3_split[1];
+    coltext31=coltext31.replace(/\s*/g,""); //去空白
+
+}
+
+//Long-term Category
+    if(coltext1.indexOf("Factory") === -1){
+        coltext1_split = coltext1.split('-');
+        coltext1 = coltext1_split[0];
+        coltext1=coltext1.replace(/\s*/g,""); //去空白
+    }
+
+
+//換字PRB
+ if(coltext4 ==="PRB/TLD/PVR") {
+
+   coltext4 = 'PRB/TLD';
+
+}
+
+
+
+//bar1
+  if (coltext4 === "MV" && data.col3.indexOf(coltext3) === -1 && coltext5!==0) {
+
+  data.col3.push(coltext3);
+  data.col5_2.push(coltext5);
+}
+
+ else if (coltext4 === "MV" && data.col3.indexOf(coltext3) !== -1 && coltext5!==0) {
+
+var coltext5_2_old = Number(data.col5_2[data.col3.indexOf(coltext3)])
+data.col5_2[data.col3.indexOf(coltext3)] = coltext5_2_old+ Number(coltext5)
+}
+
+
+//pie2
+  if (coltext4 === "MV" && data.col1.indexOf(coltext1) === -1 && coltext5!==0) {
+  data.col1.push(coltext1);
+  data.col5_3.push(coltext5);
+}
+else if(coltext4 === "MV" && data.col1.indexOf(coltext1) !== -1 && coltext5!==0) {
+
+var coltext5_3_old = Number(data.col5_3[data.col1.indexOf(coltext1)])
+data.col5_3[data.col1.indexOf(coltext1)] = coltext5_3_old+ Number(coltext5)
+
+}
+
+//bar2
+  if (coltext4 === "MV" && coltext3 ==="Design" && data.col3_2.indexOf(coltext31) === -1 && coltext5!==0) {
+
+  data.col3_2.push(coltext31);
+  data.col5_4.push(coltext5);
+}
+
+ else if (coltext4 === "MV" && coltext3 ==="Design" && data.col3_2.indexOf(coltext31) !== -1 && coltext5!==0) {
+
+var coltext5_4_old = Number(data.col5_4[data.col3_2.indexOf(coltext31)])
+data.col5_4[data.col3_2.indexOf(coltext31)] = coltext5_4_old+ Number(coltext5)
+}
+
+}
+
+    table_init.page.len(10).draw();
+
+
+    if(ES_bar4_build === 1){
+    ES_bar4.destroy();
+    }
+
+// NPI-bar4
+ES_bar4_build=1
+var ctx = document.getElementById("ES-bar4");
+ ES_bar4 = new Chart(ctx, {
+  //Increase spacing between legend and chart
+   plugins: [{
+    beforeInit: function(chart, options) {
+      chart.legend.afterFit = function() {
+        this.height = this.height + 20;
+      };
+    }
+  }],
+    type: 'bar',
+        data: {
+        labels: data.col3,
+    datasets:  [
+        {
+      data: data.col5_2,
+      backgroundColor: NPI_bar4_colors,
+      hoverBorderWidth: 4,
+        },
+    ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+        legend: {
+           display: false,
+          labels: {
+            fontColor: "black",
+            fontSize: 10,
+                }
+        },
+        plugins: {
+        labels: {
+        fontColor: 'black',
+        render: 'value'
+      },
+    },
+        scales: {
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true,
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+        if(ES_pie8_build===1){
+          ES_pie8.destroy();
+    }
+
+
+ES_pie8_build=1
+var canvasP = document.getElementById("ES-pie8")
+var ctxP = canvasP.getContext('2d')
+ ES_pie8 = new Chart(ctxP, {
+ type: 'pie',
+  data: {
+    labels: data.col1,
+    datasets: [{
+      data: data.col5_3,
+      hoverBorderWidth: 4,
+    }]
+  },
+  options: {
+        maintainAspectRatio: false,
+      responsive: true,
+        legend: {
+          labels: {
+            fontColor: "black",
+            fontSize: 10
+                }
+        },
+        plugins: {
+          labels: {
+        fontColor: 'black',
+      },
+             colorschemes: {
+        scheme: NPI_pie8_colors
+      }
+    }
+  }
+});
+
+
+    if(ES_bar5_build === 1){
+    ES_bar5.destroy();
+    }
+
+// NPI-bar5
+ES_bar5_build=1
+var ctx = document.getElementById("ES-bar5");
+ ES_bar5 = new Chart(ctx, {
+  //Increase spacing between legend and chart
+   plugins: [{
+    beforeInit: function(chart, options) {
+      chart.legend.afterFit = function() {
+        this.height = this.height + 20;
+      };
+    }
+  }],
+    type: 'bar',
+        data: {
+        labels: data.col3_2,
+    datasets:  [
+        {
+      data: data.col5_4,
+      backgroundColor: NPI_bar5_colors,
+      hoverBorderWidth: 4,
+        },
+    ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+        legend: {
+          display: false,
+          labels: {
+            fontColor: "black",
+            fontSize: 10,
+                }
+        },
+        plugins: {
+        labels: {
+        fontColor: 'black',
+        render: 'value'
+      },
+    },
+        scales: {
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true,
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+// 算字
+let sum = 0;
+for(let n of data.col5_2) {
+  sum += n;
+}
+
+var ES_i6_text3_FF = 0
+var ES_i6_text3_FP = 0
+
+if(data.col1.indexOf("Factory - Fixture") !== -1 ){
+    ES_i6_text3_FF = Number(data.col5_3[data.col1.indexOf("Factory - Fixture")])
+}
+if(data.col1.indexOf("Factory - Process") !== -1 ){
+    ES_i6_text3_FP = Number(data.col5_3[data.col1.indexOf("Factory - Process")])
+}
+
+var ES_i6_text3 = ES_i6_text3_FF + ES_i6_text3_FP
+
+var ES_i6_text4 = Number(data.col5_2[data.col3.indexOf("Design")])
+
+
+if(isNaN(ES_i6_text4)){
+    ES_i6_text4 = 0 +"%"
+}
+else{
+    ES_i6_text4 = Math.round(ES_i6_text4/sum*100) +"%"
+}
+
+document.getElementById("ES-i6-text3").innerHTML = ES_i6_text3;
+document.getElementById("ES-i6-text4").innerHTML = ES_i6_text4;
+
+}
+
+
 
 

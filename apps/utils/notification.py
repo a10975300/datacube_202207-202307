@@ -9,8 +9,8 @@ from jinja2 import Environment, FileSystemLoader
 class Notification(object):
     def send_by_email(self, to_receivers, currentuser, contents, platformname, stage, flag, data, odmName):
         sender = 'notification@hp.com'
-        # cc_recivers = []
-        cc_recivers = ['meg.wu@hp.com'] # cc email addresses
+        cc_recivers = []
+        # cc_recivers = ['jessica.yu@hp.com', 'li-wei.ko@hp.com', 'meg.wu@hp.com', 'matt.peng@hp.com'] # cc email addresses
         subject = '{}_{}_{}'.format(platformname, stage, flag)
 
         if data != None:

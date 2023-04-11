@@ -29,7 +29,7 @@ class DfmAdmin(object):
         ("dfm_item_notes", MultiSelectFieldListFilter),
         ("crate_date"),
         ]
-    search_fields = ["dfm_assembly_level","dfm_item_desc", "dfm_item_priority", "dfm_item_attributes", "dfm_item_version", "dfm_item_notes", "crate_date"]
+    search_fields = ["dfm_item_desc","dfm_assembly_level","dfm_item_priority","dfm_assembly_level","dfm_item_attributes","dfm_item_version","dfm_item_notes"]
     list_display_links = ["dfm_item_desc"]
     list_per_page = 50
     date_hierarchy = 'crate_date'
@@ -86,7 +86,8 @@ class Dfm_Review_Admin(object):
         ("dfm_product_pv", MultiSelectFieldListFilter),
         ("dfm_product_mv", MultiSelectFieldListFilter),
         ]
-    search_fields = ["dfm_review_item_desc",]
+    search_fields = ["dfm_review_item_desc__dfm_item_desc","dfm_product__ProductName","dfm_product_issue_symptom",
+                     "dfm_product_design_structures","dfm_product_solution_category"]
     list_display_links = ["dfm_review_item_desc"]
     list_per_page = 10
     date_hierarchy = 'crate_date'
