@@ -1,7 +1,4 @@
 from datetime import datetime
-from django.contrib import messages
-from xlrd import open_workbook
-from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from dfm.models import Dfm_General_Checklist, Dfm_Review_Result
 from product.models import Products
@@ -304,7 +301,7 @@ class DfmDashboardData:
 
         dfm_p1_qty = dfm_issues.filter(dfm_review_item_desc__dfm_item_priority='1').count()
         dfm_nud_qty = dfm_issues.filter().exclude(dfm_product_nud='...').count()
-        dfm_open_qty = dfm_issues.exclude(Q(dfm_product_mv='N') | Q(dfm_product_mv='Open')).count()
+        dfm_close_qty = dfm_issues.exclude(Q(dfm_product_mv='N') | Q(dfm_product_mv='Open')).count()#取得dfm的close的item數量
 
         # statistics by factory related issue
         dfm_issue = dfm_issues.values('dfm_product__ProductName',
@@ -321,7 +318,7 @@ class DfmDashboardData:
                                             'create_date').annotate(Count('dfm_review_item_desc'))
 
         dfm_context = {
-            "dfm_closerate": "" if dfm_open_qty or dfm_issue_qty == 0 else round((dfm_open_qty / dfm_issue_qty * 100), 2),
+            "dfm_closerate": "" if dfm_close_qty or dfm_issue_qty == 0 else round((dfm_close_qty / dfm_issue_qty * 100), 2),
             "dfm_p1_qty": dfm_p1_qty,
             "dfm_nud_qty": dfm_nud_qty,
             "dfm_issue_qty": dfm_issue_qty,

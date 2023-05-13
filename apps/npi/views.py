@@ -25,16 +25,17 @@ class IssueDashboardData:
 
         npi_issues = Issue.objects.all()
         npi_issue_qty = npi_issues.count()
+        npi_issue_mv_qty = npi_issues.filter(Q(buildstage='MV-1') | Q(buildstage='MV-2')).count()#取得在MV的issue數量
 
         closed_qty = npi_issues.filter(status='Close').count()
         tracking_qty = npi_issues.filter(status='Tracking').count()
         gating_qty = npi_issues.filter(status='Gating').count()
         ooc_qty = npi_issues.filter(status='Fix in next phase').count()
 
-        #計算三個前的NPI Issue 增長數量
-        today = timezone.now().date()
-        three_months_ago = today - timedelta(days=90)
-        monthly_npi_issue_qty = npi_issues.filter(cratedate__range=(three_months_ago, today)).count()
+        #計算三個月前的NPI Issue 增長數量
+        today = timezone.now().date()#取得今天日期
+        three_months_ago = today - timedelta(days=90)#取得三個月的日期
+        monthly_npi_issue_qty = npi_issues.filter(cratedate__range=(three_months_ago, today)).count()#取的三個月到今天的product數量
 
         #statistics by root cause category
         result = npi_issues.values('root_cause_category', 'short_term_category', 'long_term_category','cratedate').annotate(Count('root_cause_category'))
@@ -98,6 +99,8 @@ class IssueDashboardData:
 
         issue_context = {
             "npi_issue_qty": npi_issue_qty,
+            "npi_issue_mv_qty": npi_issue_mv_qty,
+            'monthly_npi_issue_qty': monthly_npi_issue_qty,
             "closed_rate": round(((npi_issue_qty - ooc_qty) / npi_issue_qty * 100), 2),
             "occ_rate": round((ooc_qty / npi_issue_qty * 100), 2),
             "closed_qty": closed_qty,
@@ -114,8 +117,6 @@ class IssueDashboardData:
             # 'issue_by_stage': issue_by_stage,
             # 'issue_vs_repeated': issue_vs_repeated,
             'executive_summary': executive_summary,
-            'monthly_npi_issue_qty':monthly_npi_issue_qty,
-
         }
         return issue_context
 

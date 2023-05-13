@@ -1,13 +1,13 @@
 $(document).ready(function () {
 
 /////////////Stay at the same page after Refresh ///////////
-//	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-//		localStorage.setItem('activeTab', $(e.target).attr('href'));
-//	});
-//	var activeTab = localStorage.getItem('activeTab');
-//	if(activeTab){
-//		$('#myTab a[href="' + activeTab + '"]').tab('show');
-//	}
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('#myTab a[href="' + activeTab + '"]').tab('show');
+	}
 
 
   /////////////table///////////
@@ -119,7 +119,6 @@ var NPItable3 =  $('#NPI-table3').DataTable({
     NPItable3.searchPanes.container().prependTo("#NPI-filter-panel3");
     NPItable3.searchPanes.resizePanes();
     NPItable3_init();
-
 
 var NPItable4 =  $('#NPI-table4').DataTable({
     deferRender: true,
@@ -342,8 +341,6 @@ var DFMtable2 =  $('#DFM-table2').DataTable({
     DFMtable2.searchPanes.container().prependTo("#DFM-filter-panel2");
     DFMtable2.searchPanes.resizePanes();
 
-
-
 var DFMtable3 =  $('#DFM-table3').DataTable({
     deferRender: true,
         dom: 'Bfrtip',
@@ -436,27 +433,278 @@ var EStable3 =  $('#ES-table3').DataTable({
     EStable5_init();
     EStable6_init();
 
+var DFAtable1 =  $('#DFA-table1').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,1,2]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [3,4,5,6,7,8]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFAtable1, {});
+    DFAtable1.searchPanes.container().prependTo("#DFA-filter-panel1");
+    DFAtable1.searchPanes.resizePanes();
+    DFAtable1_init();
+
+var DFAtable2 =  $('#DFA-table2').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,1,2]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [3,4,5,6,7,8]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFAtable2, {});
+    DFAtable2.searchPanes.container().prependTo("#DFA-filter-panel2");
+    DFAtable2.searchPanes.resizePanes();
+    DFAtable2_init();
+
+var DFAtable3 =  $('#DFA-table3').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,1,2]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [3,4,5,6,7,8]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFAtable3, {});
+    DFAtable3.searchPanes.container().prependTo("#DFA-filter-panel3");
+    DFAtable3.searchPanes.resizePanes();
+    DFAtable3_init();
+
+var DFAtable4 =  $('#DFA-table4').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,1,2]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [3,4,5,6,7,8]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFAtable4, {});
+    DFAtable4.searchPanes.container().prependTo("#DFA-filter-panel4");
+    DFAtable4.searchPanes.resizePanes();
+    DFAtable4_init();
+
+var DFAtable5 =  $('#DFA-table5').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,1,2]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [3,4,5,6,7,8]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFAtable5, {});
+    DFAtable5.searchPanes.container().prependTo("#DFA-filter-panel5");
+    DFAtable5.searchPanes.resizePanes();
+    DFAtable5_init();
+
+var DFAtable6 =  $('#DFA-table6').DataTable({
+    deferRender: true,
+        dom: 'Bfrtip',
+        lengthchartlabel: [
+            [ 10, 20, 50, -1 ],
+            [ '10 rows', '20 rows', '50 rows', 'Show all' ]
+        ],
+        buttons: [
+            {
+                extend: 'excel',
+                title: 'NPI Design issue'
+            },
+            'pageLength'
+        ],
+        searchPanes: {
+            layout: 'columns-3',
+            initCollapsed: true,
+            cascadePanes: true,
+            dtOpts:{
+                select:{
+                style: 'multi'
+                }
+            },
+        },
+         columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0,1,2]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [3,4,5,6,7,8]
+            }
+        ]
+    });
+    new $.fn.dataTable.SearchPanes(DFAtable6, {});
+    DFAtable6.searchPanes.container().prependTo("#DFA-filter-panel6");
+    DFAtable6.searchPanes.resizePanes();
+    DFAtable6_init();
+
+//////////////////////ready///////////////
 });
+
 
 //////////table select feature/////////////
     $('#product-table1 tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
     });
-       // $('#NPI-table1 tbody').on('click', 'tr', function () {
-       // $(this).toggleClass('selected');
-    //});
-       // $('#NPI-table3 tbody').on('click', 'tr', function () {
-        //$(this).toggleClass('selected');
-    //});
-      //  $('#NPI-table4 tbody').on('click', 'tr', function () {
-       // $(this).toggleClass('selected');
-   // });
-     //   $('#NPI-table5 tbody').on('click', 'tr', function () {
-       // $(this).toggleClass('selected');
-   // });
-     //   $('#NPI-table6 tbody').on('click', 'tr', function () {
-       // $(this).toggleClass('selected');
-   // });
 
 //////////NPI-filter-button/////////////
 
@@ -540,6 +788,67 @@ var EStable3 =  $('#ES-table3').DataTable({
   }
 } );
 
+  $('#DFA-filter-button1').on('click', function(){
+
+  var x = document.getElementById("DFA-filter1");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
+  $('#DFA-filter-button2').on('click', function(){
+
+  var x = document.getElementById("DFA-filter2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
+  $('#DFA-filter-button3').on('click', function(){
+
+  var x = document.getElementById("DFA-filter3");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
+  $('#DFA-filter-button4').on('click', function(){
+
+  var x = document.getElementById("DFA-filter4");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
+  $('#DFA-filter-button5').on('click', function(){
+
+  var x = document.getElementById("DFA-filter5");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
+  $('#DFA-filter-button6').on('click', function(){
+
+  var x = document.getElementById("DFA-filter6");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} );
+
+
 //////////////////////redraw///////////////////////////////////
 
   $('#NPI-redraw1').on('click', function(){
@@ -570,11 +879,34 @@ var EStable3 =  $('#ES-table3').DataTable({
    DFMtable2_init();
 } );
 
-
   $('#ES-redraw3').on('click', function(){
    EStable3_init();
    EStable5_init();
    EStable6_init();
+} );
+
+  $('#DFA-redraw1').on('click', function(){
+   DFAtable1_init();
+} );
+
+  $('#DFA-redraw2').on('click', function(){
+   DFAtable2_init();
+} );
+
+  $('#DFA-redraw3').on('click', function(){
+   DFAtable3_init();
+} );
+
+  $('#DFA-redraw4').on('click', function(){
+   DFAtable4_init();
+} );
+
+  $('#DFA-redraw5').on('click', function(){
+   DFAtable5_init();
+} );
+
+  $('#DFA-redraw6').on('click', function(){
+   DFAtable6_init();
 } );
 
 /////////////////////chart colors///////////////////////////////
@@ -634,6 +966,9 @@ var ES_pie6_build = 0
 var ES_bar4_build = 0
 var ES_pie8_build = 0
 var ES_bar5_build = 0
+
+var DFA_card_build = 0
+
 
 
 function producttable1_init(){
@@ -3137,6 +3472,2490 @@ document.getElementById("ES-i6-text4").innerHTML = ES_i6_text4;
 
 }
 
+function DFAtable1_init(){
+
+    var table_init = $('#DFA-table1').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table1");
+    var tableLen = table.rows.length;
+
+    var fa_line_func_bond1 = 0;
+    var fa_line_func_bond2 = 0;
+    var fa_line_func_bond3 = 0;
+    var fa_line_func_bond4 = 0;
+    var fa_line_func_bond5 = 0;
+    var fa_line_func_bond6 = 0;
+    var fa_line_func_bond7 = 0;
+    var fa_line_func_bond8 = 0;
+    var fa_line_func_bond9 = 0;
+
+    var fa_line_func_glu1 = 0;
+    var fa_line_func_glu2 = 0;
+    var fa_line_func_glu3 = 0;
+    var fa_line_func_glu4 = 0;
+    var fa_line_func_glu5 = 0;
+    var fa_line_func_glu6 = 0;
+    var fa_line_func_glu7 = 0;
+    var fa_line_func_glu8 = 0;
+    var fa_line_func_glu9 = 0;
+
+    var fa_line_func_ass1 = 0;
+    var fa_line_func_ass2 = 0;
+    var fa_line_func_ass3 = 0;
+    var fa_line_func_ass4 = 0;
+    var fa_line_func_ass5 = 0;
+    var fa_line_func_ass6 = 0;
+    var fa_line_func_ass7 = 0;
+    var fa_line_func_ass8 = 0;
+    var fa_line_func_ass9 = 0;
+
+    var fa_line_func_scr1 = 0;
+    var fa_line_func_scr2 = 0;
+    var fa_line_func_scr3 = 0;
+    var fa_line_func_scr4 = 0;
+    var fa_line_func_scr5 = 0;
+    var fa_line_func_scr6 = 0;
+    var fa_line_func_scr7 = 0;
+    var fa_line_func_scr8 = 0;
+    var fa_line_func_scr9 = 0;
+
+    var fa_line_func_cab1 = 0;
+    var fa_line_func_cab2 = 0;
+    var fa_line_func_cab3 = 0;
+    var fa_line_func_cab4 = 0;
+    var fa_line_func_cab5 = 0;
+    var fa_line_func_cab6 = 0;
+    var fa_line_func_cab7 = 0;
+    var fa_line_func_cab8 = 0;
+    var fa_line_func_cab9 = 0;
+
+    var fa_line_func_mat1 = 0;
+    var fa_line_func_mat2 = 0;
+    var fa_line_func_mat3 = 0;
+    var fa_line_func_mat4 = 0;
+    var fa_line_func_mat5 = 0;
+    var fa_line_func_mat6 = 0;
+    var fa_line_func_mat7 = 0;
+    var fa_line_func_mat8 = 0;
+    var fa_line_func_mat9 = 0;
+
+    var fa_line_func_sum1 = 0;
+    var fa_line_func_sum2 = 0;
+    var fa_line_func_sum3 = 0;
+    var fa_line_func_sum4 = 0;
+    var fa_line_func_sum5 = 0;
+    var fa_line_func_sum6 = 0;
+    var fa_line_func_sum7 = 0;
+    var fa_line_func_sum8 = 0;
+    var fa_line_func_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//FA-bond
+    if (coltext4 === "FA" && coltext2 === "Bonding") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_func_bond1 = fa_line_func_bond1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_func_bond4 = fa_line_func_bond4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_func_bond7 = fa_line_func_bond7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_func_bond2 = fa_line_func_bond2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_line_func_bond5 = fa_line_func_bond5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_line_func_bond8 = fa_line_func_bond8 + coltext8
+        }
+
+    }
+//FA-glu
+    else if (coltext4 === "FA" && coltext2 === "Gluing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_func_glu1 = fa_line_func_glu1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_func_glu4 = fa_line_func_glu4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_func_glu7 = fa_line_func_glu7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_func_glu2 = fa_line_func_glu2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_line_func_glu5 = fa_line_func_glu5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_line_func_glu8 = fa_line_func_glu8 + coltext8
+        }
+
+    }
+//FA-ass
+        else if (coltext4 === "FA" && coltext2 === "Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_func_ass1 = fa_line_func_ass1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_func_ass4 = fa_line_func_ass4 + coltext8
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_func_ass7 = fa_line_func_ass7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_func_ass2 = fa_line_func_ass2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_line_func_ass5 = fa_line_func_ass5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_line_func_ass8 = fa_line_func_ass8 + coltext8
+        }
+
+    }
+//FA-scr
+        else if (coltext4 === "FA" && coltext2 === "Screwing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_func_scr1 = fa_line_func_scr1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_func_scr4 = fa_line_func_scr4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_func_scr7 = fa_line_func_scr7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_func_scr2 = fa_line_func_scr2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_line_func_scr5 = fa_line_func_scr5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_line_func_scr8 = fa_line_func_scr8 + coltext8
+        }
+
+    }
+//FA-cab
+        else if (coltext4 === "FA" && coltext2 === "Cables Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_func_cab1 = fa_line_func_cab1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_func_cab4 = fa_line_func_cab4 + coltext8
+        }
+         if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_func_cab7 = fa_line_func_cab7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_func_cab2 = fa_line_func_cab2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_line_func_cab5 = fa_line_func_cab5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_line_func_cab8 = fa_line_func_cab8 + coltext8
+        }
+
+    }
+//FA-mat
+        else if (coltext4 === "FA" && coltext2 === "Material Scan & link") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_func_mat1 = fa_line_func_mat1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_func_mat4 = fa_line_func_mat4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_func_mat7 = fa_line_func_mat7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_func_mat2 = fa_line_func_mat2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_line_func_mat5 = fa_line_func_mat5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_line_func_mat8 = fa_line_func_mat8 + coltext8
+        }
+
+    }
+}
+
+//FA-bond %
+
+if(fa_line_func_bond1 ===0 || fa_line_func_bond2 ===0 ){
+    fa_line_func_bond3 = 0+"%"
+}
+else {
+    fa_line_func_bond3 = Math.round(fa_line_func_bond2/fa_line_func_bond1*100)+"%"
+}
+
+if(fa_line_func_bond4 ===0 || fa_line_func_bond5 ===0 ){
+    fa_line_func_bond6 = 0+"%"
+}
+else {
+    fa_line_func_bond6 = Math.round(fa_line_func_bond5/fa_line_func_bond4*100)+"%"
+}
+
+if(fa_line_func_bond7 ===0 || fa_line_func_bond8 ===0 ){
+    fa_line_func_bond9 = 0+"%"
+}
+else {
+    fa_line_func_bond9 = Math.round(fa_line_func_bond8/fa_line_func_bond7*100)+"%"
+}
+
+//FA-glu %
+
+if(fa_line_func_glu1 ===0 || fa_line_func_glu2 ===0 ){
+    fa_line_func_glu3 = 0+"%"
+}
+else {
+    fa_line_func_glu3 = Math.round(fa_line_func_glu2/fa_line_func_glu1*100)+"%"
+}
+
+if(fa_line_func_glu4 ===0 || fa_line_func_glu5 ===0 ){
+    fa_line_func_glu6 = 0+"%"
+}
+else {
+    fa_line_func_glu6 = Math.round(fa_line_func_glu5/fa_line_func_glu4*100)+"%"
+}
+
+if(fa_line_func_glu7 ===0 || fa_line_func_glu8 ===0 ){
+    fa_line_func_glu9 = 0+"%"
+}
+else {
+    fa_line_func_glu9 = Math.round(fa_line_func_glu8/fa_line_func_glu7*100)+"%"
+}
+
+//FA-ass %
+
+if(fa_line_func_ass1 ===0 || fa_line_func_ass2 ===0 ){
+    fa_line_func_ass3 = 0+"%"
+}
+else {
+    fa_line_func_ass3 = Math.round(fa_line_func_ass2/fa_line_func_ass1*100)+"%"
+}
+
+if(fa_line_func_ass4 ===0 || fa_line_func_ass5 ===0 ){
+    fa_line_func_ass6 = 0+"%"
+}
+else {
+    fa_line_func_ass6 = Math.round(fa_line_func_ass5/fa_line_func_ass4*100)+"%"
+}
+
+if(fa_line_func_ass7 ===0 || fa_line_func_ass8 ===0 ){
+    fa_line_func_ass9 = 0+"%"
+}
+else {
+    fa_line_func_ass9 = Math.round(fa_line_func_ass8/fa_line_func_ass7*100)+"%"
+}
+
+//FA-scr %
+
+if(fa_line_func_scr1 ===0 || fa_line_func_scr2 ===0 ){
+    fa_line_func_scr3 = 0+"%"
+}
+else {
+    fa_line_func_scr3 = Math.round(fa_line_func_scr2/fa_line_func_scr1*100)+"%"
+}
+
+if(fa_line_func_scr4 ===0 || fa_line_func_scr5 ===0 ){
+    fa_line_func_scr6 = 0+"%"
+}
+else {
+    fa_line_func_scr6 = Math.round(fa_line_func_scr5/fa_line_func_scr4*100)+"%"
+}
+
+if(fa_line_func_scr7 ===0 || fa_line_func_scr8 ===0 ){
+    fa_line_func_scr9 = 0+"%"
+}
+else {
+    fa_line_func_scr9 = Math.round(fa_line_func_scr8/fa_line_func_scr7*100)+"%"
+}
+
+//FA-cab %
+
+if(fa_line_func_cab1 ===0 || fa_line_func_cab2 ===0 ){
+    fa_line_func_cab3 = 0+"%"
+}
+else {
+    fa_line_func_cab3 = Math.round(fa_line_func_cab2/fa_line_func_cab1*100)+"%"
+}
+
+if(fa_line_func_cab4 ===0 || fa_line_func_cab5 ===0 ){
+    fa_line_func_cab6 = 0+"%"
+}
+else {
+    fa_line_func_cab6 = Math.round(fa_line_func_cab5/fa_line_func_cab4*100)+"%"
+}
+
+if(fa_line_func_cab7 ===0 || fa_line_func_cab8 ===0 ){
+    fa_line_func_cab9 = 0+"%"
+}
+else {
+    fa_line_func_cab9 = Math.round(fa_line_func_cab8/fa_line_func_cab7*100)+"%"
+}
+
+//FA-mat %
+
+if(fa_line_func_mat1 ===0 || fa_line_func_mat2 ===0 ){
+    fa_line_func_mat3 = 0+"%"
+}
+else {
+    fa_line_func_mat3 = Math.round(fa_line_func_mat2/fa_line_func_mat1*100)+"%"
+}
+
+if(fa_line_func_mat4 ===0 || fa_line_func_mat5 ===0 ){
+    fa_line_func_mat6 = 0+"%"
+}
+else {
+    fa_line_func_mat6 = Math.round(fa_line_func_mat5/fa_line_func_mat4*100)+"%"
+}
+
+if(fa_line_func_mat7 ===0 || fa_line_func_mat8 ===0 ){
+    fa_line_func_mat9 = 0+"%"
+}
+else {
+    fa_line_func_mat9 = Math.round(fa_line_func_mat8/fa_line_func_mat7*100)+"%"
+}
+
+//FA-sum
+fa_line_func_sum1 = fa_line_func_bond1+fa_line_func_glu1+fa_line_func_ass1+fa_line_func_scr1+fa_line_func_cab1+fa_line_func_mat1
+fa_line_func_sum2 = fa_line_func_bond2+fa_line_func_glu2+fa_line_func_ass2+fa_line_func_scr2+fa_line_func_cab2+fa_line_func_mat2
+fa_line_func_sum4 = fa_line_func_bond4+fa_line_func_glu4+fa_line_func_ass4+fa_line_func_scr4+fa_line_func_cab4+fa_line_func_mat4
+fa_line_func_sum5 = fa_line_func_bond5+fa_line_func_glu5+fa_line_func_ass5+fa_line_func_scr5+fa_line_func_cab5+fa_line_func_mat5
+fa_line_func_sum7 = fa_line_func_bond7+fa_line_func_glu7+fa_line_func_ass7+fa_line_func_scr7+fa_line_func_cab7+fa_line_func_mat7
+fa_line_func_sum8 = fa_line_func_bond8+fa_line_func_glu8+fa_line_func_ass8+fa_line_func_scr8+fa_line_func_cab8+fa_line_func_mat8
+
+//FA-sum %
+
+if(fa_line_func_sum1 ===0 || fa_line_func_sum2 ===0 ){
+    fa_line_func_sum3 = 0+"%"
+}
+else {
+    fa_line_func_sum3 = Math.round(fa_line_func_sum2/fa_line_func_sum1*100)+"%"
+}
+
+if(fa_line_func_sum4 ===0 || fa_line_func_sum5 ===0 ){
+    fa_line_func_sum6 = 0+"%"
+}
+else {
+    fa_line_func_sum6 = Math.round(fa_line_func_sum5/fa_line_func_sum4*100)+"%"
+}
+
+if(fa_line_func_sum7 ===0 || fa_line_func_sum8 ===0 ){
+    fa_line_func_sum9 = 0+"%"
+}
+else {
+    fa_line_func_sum9 = Math.round(fa_line_func_sum8/fa_line_func_sum7*100)+"%"
+}
 
 
+document.getElementById("fa-line-func-bond1").innerHTML = fa_line_func_bond1
+document.getElementById("fa-line-func-bond2").innerHTML = fa_line_func_bond2
+document.getElementById("fa-line-func-bond3").innerHTML = fa_line_func_bond3
+document.getElementById("fa-line-func-bond4").innerHTML = fa_line_func_bond4
+document.getElementById("fa-line-func-bond5").innerHTML = fa_line_func_bond5
+document.getElementById("fa-line-func-bond6").innerHTML = fa_line_func_bond6
+document.getElementById("fa-line-func-bond7").innerHTML = fa_line_func_bond7
+document.getElementById("fa-line-func-bond8").innerHTML = fa_line_func_bond8
+document.getElementById("fa-line-func-bond9").innerHTML = fa_line_func_bond9
 
+document.getElementById("fa-line-func-glu1").innerHTML = fa_line_func_glu1
+document.getElementById("fa-line-func-glu2").innerHTML = fa_line_func_glu2
+document.getElementById("fa-line-func-glu3").innerHTML = fa_line_func_glu3
+document.getElementById("fa-line-func-glu4").innerHTML = fa_line_func_glu4
+document.getElementById("fa-line-func-glu5").innerHTML = fa_line_func_glu5
+document.getElementById("fa-line-func-glu6").innerHTML = fa_line_func_glu6
+document.getElementById("fa-line-func-glu7").innerHTML = fa_line_func_glu7
+document.getElementById("fa-line-func-glu8").innerHTML = fa_line_func_glu8
+document.getElementById("fa-line-func-glu9").innerHTML = fa_line_func_glu9
+
+document.getElementById("fa-line-func-ass1").innerHTML = fa_line_func_ass1
+document.getElementById("fa-line-func-ass2").innerHTML = fa_line_func_ass2
+document.getElementById("fa-line-func-ass3").innerHTML = fa_line_func_ass3
+document.getElementById("fa-line-func-ass4").innerHTML = fa_line_func_ass4
+document.getElementById("fa-line-func-ass5").innerHTML = fa_line_func_ass5
+document.getElementById("fa-line-func-ass6").innerHTML = fa_line_func_ass6
+document.getElementById("fa-line-func-ass7").innerHTML = fa_line_func_ass7
+document.getElementById("fa-line-func-ass8").innerHTML = fa_line_func_ass8
+document.getElementById("fa-line-func-ass9").innerHTML = fa_line_func_ass9
+
+document.getElementById("fa-line-func-scr1").innerHTML = fa_line_func_scr1
+document.getElementById("fa-line-func-scr2").innerHTML = fa_line_func_scr2
+document.getElementById("fa-line-func-scr3").innerHTML = fa_line_func_scr3
+document.getElementById("fa-line-func-scr4").innerHTML = fa_line_func_scr4
+document.getElementById("fa-line-func-scr5").innerHTML = fa_line_func_scr5
+document.getElementById("fa-line-func-scr6").innerHTML = fa_line_func_scr6
+document.getElementById("fa-line-func-scr7").innerHTML = fa_line_func_scr7
+document.getElementById("fa-line-func-scr8").innerHTML = fa_line_func_scr8
+document.getElementById("fa-line-func-scr9").innerHTML = fa_line_func_scr9
+
+document.getElementById("fa-line-func-cab1").innerHTML = fa_line_func_cab1
+document.getElementById("fa-line-func-cab2").innerHTML = fa_line_func_cab2
+document.getElementById("fa-line-func-cab3").innerHTML = fa_line_func_cab3
+document.getElementById("fa-line-func-cab4").innerHTML = fa_line_func_cab4
+document.getElementById("fa-line-func-cab5").innerHTML = fa_line_func_cab5
+document.getElementById("fa-line-func-cab6").innerHTML = fa_line_func_cab6
+document.getElementById("fa-line-func-cab7").innerHTML = fa_line_func_cab7
+document.getElementById("fa-line-func-cab8").innerHTML = fa_line_func_cab8
+document.getElementById("fa-line-func-cab9").innerHTML = fa_line_func_cab9
+
+document.getElementById("fa-line-func-mat1").innerHTML = fa_line_func_mat1
+document.getElementById("fa-line-func-mat2").innerHTML = fa_line_func_mat2
+document.getElementById("fa-line-func-mat3").innerHTML = fa_line_func_mat3
+document.getElementById("fa-line-func-mat4").innerHTML = fa_line_func_mat4
+document.getElementById("fa-line-func-mat5").innerHTML = fa_line_func_mat5
+document.getElementById("fa-line-func-mat6").innerHTML = fa_line_func_mat6
+document.getElementById("fa-line-func-mat7").innerHTML = fa_line_func_mat7
+document.getElementById("fa-line-func-mat8").innerHTML = fa_line_func_mat8
+document.getElementById("fa-line-func-mat9").innerHTML = fa_line_func_mat9
+
+document.getElementById("fa-line-func-sum1").innerHTML = fa_line_func_sum1
+document.getElementById("fa-line-func-sum2").innerHTML = fa_line_func_sum2
+document.getElementById("fa-line-func-sum3").innerHTML = fa_line_func_sum3
+document.getElementById("fa-line-func-sum4").innerHTML = fa_line_func_sum4
+document.getElementById("fa-line-func-sum5").innerHTML = fa_line_func_sum5
+document.getElementById("fa-line-func-sum6").innerHTML = fa_line_func_sum6
+document.getElementById("fa-line-func-sum7").innerHTML = fa_line_func_sum7
+document.getElementById("fa-line-func-sum8").innerHTML = fa_line_func_sum8
+document.getElementById("fa-line-func-sum9").innerHTML = fa_line_func_sum9
+
+document.getElementById("fa-line-func-cnc").innerHTML = fa_line_func_sum3
+document.getElementById("fa-line-func-sipv").innerHTML = fa_line_func_sum6
+document.getElementById("fa-line-func-mvmp").innerHTML = fa_line_func_sum9
+
+//DFA 4card 的CNC PV MV 的數值，只算第一次而已
+if(DFA_card_build === 0){
+document.getElementById("card-fa-line-func-cnc").innerHTML = fa_line_func_sum3
+document.getElementById("card-fa-line-func-sipv").innerHTML = fa_line_func_sum6
+document.getElementById("card-fa-line-func-mvmp").innerHTML = fa_line_func_sum9
+DFA_card_build = 1
+}
+
+
+}
+
+function DFAtable2_init(){
+
+    var table_init = $('#DFA-table2').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table2");
+    var tableLen = table.rows.length;
+
+    var fa_line_est_bond1 = 0;
+    var fa_line_est_bond2 = 0;
+    var fa_line_est_bond3 = 0;
+    var fa_line_est_bond4 = 0;
+    var fa_line_est_bond5 = 0;
+    var fa_line_est_bond6 = 0;
+    var fa_line_est_bond7 = 0;
+    var fa_line_est_bond8 = 0;
+    var fa_line_est_bond9 = 0;
+
+    var fa_line_est_glu1 = 0;
+    var fa_line_est_glu2 = 0;
+    var fa_line_est_glu3 = 0;
+    var fa_line_est_glu4 = 0;
+    var fa_line_est_glu5 = 0;
+    var fa_line_est_glu6 = 0;
+    var fa_line_est_glu7 = 0;
+    var fa_line_est_glu8 = 0;
+    var fa_line_est_glu9 = 0;
+
+    var fa_line_est_ass1 = 0;
+    var fa_line_est_ass2 = 0;
+    var fa_line_est_ass3 = 0;
+    var fa_line_est_ass4 = 0;
+    var fa_line_est_ass5 = 0;
+    var fa_line_est_ass6 = 0;
+    var fa_line_est_ass7 = 0;
+    var fa_line_est_ass8 = 0;
+    var fa_line_est_ass9 = 0;
+
+    var fa_line_est_scr1 = 0;
+    var fa_line_est_scr2 = 0;
+    var fa_line_est_scr3 = 0;
+    var fa_line_est_scr4 = 0;
+    var fa_line_est_scr5 = 0;
+    var fa_line_est_scr6 = 0;
+    var fa_line_est_scr7 = 0;
+    var fa_line_est_scr8 = 0;
+    var fa_line_est_scr9 = 0;
+
+    var fa_line_est_cab1 = 0;
+    var fa_line_est_cab2 = 0;
+    var fa_line_est_cab3 = 0;
+    var fa_line_est_cab4 = 0;
+    var fa_line_est_cab5 = 0;
+    var fa_line_est_cab6 = 0;
+    var fa_line_est_cab7 = 0;
+    var fa_line_est_cab8 = 0;
+    var fa_line_est_cab9 = 0;
+
+    var fa_line_est_mat1 = 0;
+    var fa_line_est_mat2 = 0;
+    var fa_line_est_mat3 = 0;
+    var fa_line_est_mat4 = 0;
+    var fa_line_est_mat5 = 0;
+    var fa_line_est_mat6 = 0;
+    var fa_line_est_mat7 = 0;
+    var fa_line_est_mat8 = 0;
+    var fa_line_est_mat9 = 0;
+
+    var fa_line_est_sum1 = 0;
+    var fa_line_est_sum2 = 0;
+    var fa_line_est_sum3 = 0;
+    var fa_line_est_sum4 = 0;
+    var fa_line_est_sum5 = 0;
+    var fa_line_est_sum6 = 0;
+    var fa_line_est_sum7 = 0;
+    var fa_line_est_sum8 = 0;
+    var fa_line_est_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext3 = Number(table.rows[i].cells[3].innerText);
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//FA-bond
+    if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Bonding") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_est_bond1 = fa_line_est_bond1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_est_bond4 = fa_line_est_bond4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_est_bond7 = fa_line_est_bond7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_est_bond2 = fa_line_est_bond2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_line_est_bond5 = fa_line_est_bond5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_line_est_bond8 = fa_line_est_bond8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-glu
+    else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Gluing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_est_glu1 = fa_line_est_glu1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_est_glu4 = fa_line_est_glu4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_est_glu7 = fa_line_est_glu7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_est_glu2 = fa_line_est_glu2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_line_est_glu5 = fa_line_est_glu5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_line_est_glu8 = fa_line_est_glu8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-ass
+        else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_est_ass1 = fa_line_est_ass1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_est_ass4 = fa_line_est_ass4 + (coltext3 * coltext8)
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_est_ass7 = fa_line_est_ass7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_est_ass2 = fa_line_est_ass2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_line_est_ass5 = fa_line_est_ass5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_line_est_ass8 = fa_line_est_ass8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-scr
+        else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Screwing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_est_scr1 = fa_line_est_scr1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_est_scr4 = fa_line_est_scr4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_est_scr7 = fa_line_est_scr7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_est_scr2 = fa_line_est_scr2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_line_est_scr5 = fa_line_est_scr5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_line_est_scr8 = fa_line_est_scr8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-cab
+        else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Cables Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_est_cab1 = fa_line_est_cab1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_est_cab4 = fa_line_est_cab4 + (coltext3 * coltext8)
+        }
+         if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_est_cab7 = fa_line_est_cab7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_est_cab2 = fa_line_est_cab2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_line_est_cab5 = fa_line_est_cab5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_line_est_cab8 = fa_line_est_cab8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-mat
+        else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Material Scan & link") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_line_est_mat1 = fa_line_est_mat1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_line_est_mat4 = fa_line_est_mat4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_line_est_mat7 = fa_line_est_mat7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_line_est_mat2 = fa_line_est_mat2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_line_est_mat5 = fa_line_est_mat5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_line_est_mat8 = fa_line_est_mat8 + (coltext3 * coltext8)
+        }
+
+    }
+}
+
+//FA-bond %
+
+if(fa_line_est_bond1 ===0 || fa_line_est_bond2 ===0 ){
+    fa_line_est_bond3 = 0+"%"
+}
+else {
+    fa_line_est_bond3 = Math.round(fa_line_est_bond2/fa_line_est_bond1*100)+"%"
+}
+
+if(fa_line_est_bond4 ===0 || fa_line_est_bond5 ===0 ){
+    fa_line_est_bond6 = 0+"%"
+}
+else {
+    fa_line_est_bond6 = Math.round(fa_line_est_bond5/fa_line_est_bond4*100)+"%"
+}
+
+if(fa_line_est_bond7 ===0 || fa_line_est_bond8 ===0 ){
+    fa_line_est_bond9 = 0+"%"
+}
+else {
+    fa_line_est_bond9 = Math.round(fa_line_est_bond8/fa_line_est_bond7*100)+"%"
+}
+
+//FA-glu %
+
+if(fa_line_est_glu1 ===0 || fa_line_est_glu2 ===0 ){
+    fa_line_est_glu3 = 0+"%"
+}
+else {
+    fa_line_est_glu3 = Math.round(fa_line_est_glu2/fa_line_est_glu1*100)+"%"
+}
+
+if(fa_line_est_glu4 ===0 || fa_line_est_glu5 ===0 ){
+    fa_line_est_glu6 = 0+"%"
+}
+else {
+    fa_line_est_glu6 = Math.round(fa_line_est_glu5/fa_line_est_glu4*100)+"%"
+}
+
+if(fa_line_est_glu7 ===0 || fa_line_est_glu8 ===0 ){
+    fa_line_est_glu9 = 0+"%"
+}
+else {
+    fa_line_est_glu9 = Math.round(fa_line_est_glu8/fa_line_est_glu7*100)+"%"
+}
+
+//FA-ass %
+
+if(fa_line_est_ass1 ===0 || fa_line_est_ass2 ===0 ){
+    fa_line_est_ass3 = 0+"%"
+}
+else {
+    fa_line_est_ass3 = Math.round(fa_line_est_ass2/fa_line_est_ass1*100)+"%"
+}
+
+if(fa_line_est_ass4 ===0 || fa_line_est_ass5 ===0 ){
+    fa_line_est_ass6 = 0+"%"
+}
+else {
+    fa_line_est_ass6 = Math.round(fa_line_est_ass5/fa_line_est_ass4*100)+"%"
+}
+
+if(fa_line_est_ass7 ===0 || fa_line_est_ass8 ===0 ){
+    fa_line_est_ass9 = 0+"%"
+}
+else {
+    fa_line_est_ass9 = Math.round(fa_line_est_ass8/fa_line_est_ass7*100)+"%"
+}
+
+//FA-scr %
+
+if(fa_line_est_scr1 ===0 || fa_line_est_scr2 ===0 ){
+    fa_line_est_scr3 = 0+"%"
+}
+else {
+    fa_line_est_scr3 = Math.round(fa_line_est_scr2/fa_line_est_scr1*100)+"%"
+}
+
+if(fa_line_est_scr4 ===0 || fa_line_est_scr5 ===0 ){
+    fa_line_est_scr6 = 0+"%"
+}
+else {
+    fa_line_est_scr6 = Math.round(fa_line_est_scr5/fa_line_est_scr4*100)+"%"
+}
+
+if(fa_line_est_scr7 ===0 || fa_line_est_scr8 ===0 ){
+    fa_line_est_scr9 = 0+"%"
+}
+else {
+    fa_line_est_scr9 = Math.round(fa_line_est_scr8/fa_line_est_scr7*100)+"%"
+}
+
+//FA-cab %
+
+if(fa_line_est_cab1 ===0 || fa_line_est_cab2 ===0 ){
+    fa_line_est_cab3 = 0+"%"
+}
+else {
+    fa_line_est_cab3 = Math.round(fa_line_est_cab2/fa_line_est_cab1*100)+"%"
+}
+
+if(fa_line_est_cab4 ===0 || fa_line_est_cab5 ===0 ){
+    fa_line_est_cab6 = 0+"%"
+}
+else {
+    fa_line_est_cab6 = Math.round(fa_line_est_cab5/fa_line_est_cab4*100)+"%"
+}
+
+if(fa_line_est_cab7 ===0 || fa_line_est_cab8 ===0 ){
+    fa_line_est_cab9 = 0+"%"
+}
+else {
+    fa_line_est_cab9 = Math.round(fa_line_est_cab8/fa_line_est_cab7*100)+"%"
+}
+
+//FA-mat %
+
+if(fa_line_est_mat1 ===0 || fa_line_est_mat2 ===0 ){
+    fa_line_est_mat3 = 0+"%"
+}
+else {
+    fa_line_est_mat3 = Math.round(fa_line_est_mat2/fa_line_est_mat1*100)+"%"
+}
+
+if(fa_line_est_mat4 ===0 || fa_line_est_mat5 ===0 ){
+    fa_line_est_mat6 = 0+"%"
+}
+else {
+    fa_line_est_mat6 = Math.round(fa_line_est_mat5/fa_line_est_mat4*100)+"%"
+}
+
+if(fa_line_est_mat7 ===0 || fa_line_est_mat8 ===0 ){
+    fa_line_est_mat9 = 0+"%"
+}
+else {
+    fa_line_est_mat9 = Math.round(fa_line_est_mat8/fa_line_est_mat7*100)+"%"
+}
+
+//FA-sum
+fa_line_est_sum1 = fa_line_est_bond1+fa_line_est_glu1+fa_line_est_ass1+fa_line_est_scr1+fa_line_est_cab1+fa_line_est_mat1
+fa_line_est_sum2 = fa_line_est_bond2+fa_line_est_glu2+fa_line_est_ass2+fa_line_est_scr2+fa_line_est_cab2+fa_line_est_mat2
+fa_line_est_sum4 = fa_line_est_bond4+fa_line_est_glu4+fa_line_est_ass4+fa_line_est_scr4+fa_line_est_cab4+fa_line_est_mat4
+fa_line_est_sum5 = fa_line_est_bond5+fa_line_est_glu5+fa_line_est_ass5+fa_line_est_scr5+fa_line_est_cab5+fa_line_est_mat5
+fa_line_est_sum7 = fa_line_est_bond7+fa_line_est_glu7+fa_line_est_ass7+fa_line_est_scr7+fa_line_est_cab7+fa_line_est_mat7
+fa_line_est_sum8 = fa_line_est_bond8+fa_line_est_glu8+fa_line_est_ass8+fa_line_est_scr8+fa_line_est_cab8+fa_line_est_mat8
+
+//FA-sum %
+
+if(fa_line_est_sum1 ===0 || fa_line_est_sum2 ===0 ){
+    fa_line_est_sum3 = 0+"%"
+}
+else {
+    fa_line_est_sum3 = Math.round(fa_line_est_sum2/fa_line_est_sum1*100)+"%"
+}
+
+if(fa_line_est_sum4 ===0 || fa_line_est_sum5 ===0 ){
+    fa_line_est_sum6 = 0+"%"
+}
+else {
+    fa_line_est_sum6 = Math.round(fa_line_est_sum5/fa_line_est_sum4*100)+"%"
+}
+
+if(fa_line_est_sum7 ===0 || fa_line_est_sum8 ===0 ){
+    fa_line_est_sum9 = 0+"%"
+}
+else {
+    fa_line_est_sum9 = Math.round(fa_line_est_sum8/fa_line_est_sum7*100)+"%"
+}
+
+
+document.getElementById("fa-line-est-bond1").innerHTML = fa_line_est_bond1
+document.getElementById("fa-line-est-bond2").innerHTML = fa_line_est_bond2
+document.getElementById("fa-line-est-bond3").innerHTML = fa_line_est_bond3
+document.getElementById("fa-line-est-bond4").innerHTML = fa_line_est_bond4
+document.getElementById("fa-line-est-bond5").innerHTML = fa_line_est_bond5
+document.getElementById("fa-line-est-bond6").innerHTML = fa_line_est_bond6
+document.getElementById("fa-line-est-bond7").innerHTML = fa_line_est_bond7
+document.getElementById("fa-line-est-bond8").innerHTML = fa_line_est_bond8
+document.getElementById("fa-line-est-bond9").innerHTML = fa_line_est_bond9
+
+document.getElementById("fa-line-est-glu1").innerHTML = fa_line_est_glu1
+document.getElementById("fa-line-est-glu2").innerHTML = fa_line_est_glu2
+document.getElementById("fa-line-est-glu3").innerHTML = fa_line_est_glu3
+document.getElementById("fa-line-est-glu4").innerHTML = fa_line_est_glu4
+document.getElementById("fa-line-est-glu5").innerHTML = fa_line_est_glu5
+document.getElementById("fa-line-est-glu6").innerHTML = fa_line_est_glu6
+document.getElementById("fa-line-est-glu7").innerHTML = fa_line_est_glu7
+document.getElementById("fa-line-est-glu8").innerHTML = fa_line_est_glu8
+document.getElementById("fa-line-est-glu9").innerHTML = fa_line_est_glu9
+
+document.getElementById("fa-line-est-ass1").innerHTML = fa_line_est_ass1
+document.getElementById("fa-line-est-ass2").innerHTML = fa_line_est_ass2
+document.getElementById("fa-line-est-ass3").innerHTML = fa_line_est_ass3
+document.getElementById("fa-line-est-ass4").innerHTML = fa_line_est_ass4
+document.getElementById("fa-line-est-ass5").innerHTML = fa_line_est_ass5
+document.getElementById("fa-line-est-ass6").innerHTML = fa_line_est_ass6
+document.getElementById("fa-line-est-ass7").innerHTML = fa_line_est_ass7
+document.getElementById("fa-line-est-ass8").innerHTML = fa_line_est_ass8
+document.getElementById("fa-line-est-ass9").innerHTML = fa_line_est_ass9
+
+document.getElementById("fa-line-est-scr1").innerHTML = fa_line_est_scr1
+document.getElementById("fa-line-est-scr2").innerHTML = fa_line_est_scr2
+document.getElementById("fa-line-est-scr3").innerHTML = fa_line_est_scr3
+document.getElementById("fa-line-est-scr4").innerHTML = fa_line_est_scr4
+document.getElementById("fa-line-est-scr5").innerHTML = fa_line_est_scr5
+document.getElementById("fa-line-est-scr6").innerHTML = fa_line_est_scr6
+document.getElementById("fa-line-est-scr7").innerHTML = fa_line_est_scr7
+document.getElementById("fa-line-est-scr8").innerHTML = fa_line_est_scr8
+document.getElementById("fa-line-est-scr9").innerHTML = fa_line_est_scr9
+
+document.getElementById("fa-line-est-cab1").innerHTML = fa_line_est_cab1
+document.getElementById("fa-line-est-cab2").innerHTML = fa_line_est_cab2
+document.getElementById("fa-line-est-cab3").innerHTML = fa_line_est_cab3
+document.getElementById("fa-line-est-cab4").innerHTML = fa_line_est_cab4
+document.getElementById("fa-line-est-cab5").innerHTML = fa_line_est_cab5
+document.getElementById("fa-line-est-cab6").innerHTML = fa_line_est_cab6
+document.getElementById("fa-line-est-cab7").innerHTML = fa_line_est_cab7
+document.getElementById("fa-line-est-cab8").innerHTML = fa_line_est_cab8
+document.getElementById("fa-line-est-cab9").innerHTML = fa_line_est_cab9
+
+document.getElementById("fa-line-est-mat1").innerHTML = fa_line_est_mat1
+document.getElementById("fa-line-est-mat2").innerHTML = fa_line_est_mat2
+document.getElementById("fa-line-est-mat3").innerHTML = fa_line_est_mat3
+document.getElementById("fa-line-est-mat4").innerHTML = fa_line_est_mat4
+document.getElementById("fa-line-est-mat5").innerHTML = fa_line_est_mat5
+document.getElementById("fa-line-est-mat6").innerHTML = fa_line_est_mat6
+document.getElementById("fa-line-est-mat7").innerHTML = fa_line_est_mat7
+document.getElementById("fa-line-est-mat8").innerHTML = fa_line_est_mat8
+document.getElementById("fa-line-est-mat9").innerHTML = fa_line_est_mat9
+
+document.getElementById("fa-line-est-sum1").innerHTML = fa_line_est_sum1
+document.getElementById("fa-line-est-sum2").innerHTML = fa_line_est_sum2
+document.getElementById("fa-line-est-sum3").innerHTML = fa_line_est_sum3
+document.getElementById("fa-line-est-sum4").innerHTML = fa_line_est_sum4
+document.getElementById("fa-line-est-sum5").innerHTML = fa_line_est_sum5
+document.getElementById("fa-line-est-sum6").innerHTML = fa_line_est_sum6
+document.getElementById("fa-line-est-sum7").innerHTML = fa_line_est_sum7
+document.getElementById("fa-line-est-sum8").innerHTML = fa_line_est_sum8
+document.getElementById("fa-line-est-sum9").innerHTML = fa_line_est_sum9
+
+document.getElementById("fa-line-est-cnc").innerHTML = fa_line_est_sum3
+document.getElementById("fa-line-est-sipv").innerHTML = fa_line_est_sum6
+document.getElementById("fa-line-est-mvmp").innerHTML = fa_line_est_sum9
+
+}
+
+function DFAtable3_init(){
+
+    var table_init = $('#DFA-table3').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table3");
+    var tableLen = table.rows.length;
+
+    var fa_all_func_aud1 = 0;
+    var fa_all_func_aud2 = 0;
+    var fa_all_func_aud3 = 0;
+    var fa_all_func_aud4 = 0;
+    var fa_all_func_aud5 = 0;
+    var fa_all_func_aud6 = 0;
+    var fa_all_func_aud7 = 0;
+    var fa_all_func_aud8 = 0;
+    var fa_all_func_aud9 = 0;
+
+    var fa_all_func_test1 = 0;
+    var fa_all_func_test2 = 0;
+    var fa_all_func_test3 = 0;
+    var fa_all_func_test4 = 0;
+    var fa_all_func_test5 = 0;
+    var fa_all_func_test6 = 0;
+    var fa_all_func_test7 = 0;
+    var fa_all_func_test8 = 0;
+    var fa_all_func_test9 = 0;
+
+    var fa_all_func_lab1 = 0;
+    var fa_all_func_lab2 = 0;
+    var fa_all_func_lab3 = 0;
+    var fa_all_func_lab4 = 0;
+    var fa_all_func_lab5 = 0;
+    var fa_all_func_lab6 = 0;
+    var fa_all_func_lab7 = 0;
+    var fa_all_func_lab8 = 0;
+    var fa_all_func_lab9 = 0;
+
+
+    var fa_all_func_sum1 = 0;
+    var fa_all_func_sum2 = 0;
+    var fa_all_func_sum3 = 0;
+    var fa_all_func_sum4 = 0;
+    var fa_all_func_sum5 = 0;
+    var fa_all_func_sum6 = 0;
+    var fa_all_func_sum7 = 0;
+    var fa_all_func_sum8 = 0;
+    var fa_all_func_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//FA-aud
+    if (coltext4 === "FA" && coltext2 === "Audits") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_all_func_aud1 = fa_all_func_aud1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_all_func_aud4 = fa_all_func_aud4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_all_func_aud7 = fa_all_func_aud7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_all_func_aud2 = fa_all_func_aud2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_all_func_aud5 = fa_all_func_aud5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_all_func_aud8 = fa_all_func_aud8 + coltext8
+        }
+
+    }
+//FA-test
+    else if (coltext4 === "FA" && coltext2 === "Test") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_all_func_test1 = fa_all_func_test1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_all_func_test4 = fa_all_func_test4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_all_func_test7 = fa_all_func_test7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_all_func_test2 = fa_all_func_test2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_all_func_test5 = fa_all_func_test5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_all_func_test8 = fa_all_func_test8 + coltext8
+        }
+
+    }
+//FA-lab
+        else if (coltext4 === "FA" && coltext2 === "Labeling & Packing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_all_func_lab1 = fa_all_func_lab1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_all_func_lab4 = fa_all_func_lab4 + coltext8
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_all_func_lab7 = fa_all_func_lab7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            fa_all_func_lab2 = fa_all_func_lab2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            fa_all_func_lab5 = fa_all_func_lab5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            fa_all_func_lab8 = fa_all_func_lab8 + coltext8
+        }
+
+    }
+}
+
+//FA-aud %
+
+if(fa_all_func_aud1 ===0 || fa_all_func_aud2 ===0){
+    fa_all_func_aud3 = 0+"%"
+}
+else {
+    fa_all_func_aud3 = Math.round(fa_all_func_aud2/fa_all_func_aud1*100)+"%"
+}
+
+if(fa_all_func_aud4 ===0 || fa_all_func_aud5 ===0 ){
+    fa_all_func_aud6 = 0+"%"
+}
+else {
+    fa_all_func_aud6 = Math.round(fa_all_func_aud5/fa_all_func_aud4*100)+"%"
+}
+
+if(fa_all_func_aud7 ===0 || fa_all_func_aud8 ===0 ){
+    fa_all_func_aud9 = 0+"%"
+}
+else {
+    fa_all_func_aud9 = Math.round(fa_all_func_aud8/fa_all_func_aud7*100)+"%"
+}
+
+//FA-test %
+
+if(fa_all_func_test1 ===0 || fa_all_func_test2 ===0 ){
+    fa_all_func_test3 = 0+"%"
+}
+else {
+    fa_all_func_test3 = Math.round(fa_all_func_test2/fa_all_func_test1*100)+"%"
+}
+
+if(fa_all_func_test4 ===0 || fa_all_func_test5 ===0 ){
+    fa_all_func_test6 = 0+"%"
+}
+else {
+    fa_all_func_test6 = Math.round(fa_all_func_test5/fa_all_func_test4*100)+"%"
+}
+
+if(fa_all_func_test7 ===0 || fa_all_func_test8 ===0 ){
+    fa_all_func_test9 = 0+"%"
+}
+else {
+    fa_all_func_test9 = Math.round(fa_all_func_test8/fa_all_func_test7*100)+"%"
+}
+
+//FA-lab %
+
+if(fa_all_func_lab1 ===0 || fa_all_func_lab2 ===0 ){
+    fa_all_func_lab3 = 0+"%"
+}
+else {
+    fa_all_func_lab3 = Math.round(fa_all_func_lab2/fa_all_func_lab1*100)+"%"
+}
+
+if(fa_all_func_lab4 ===0 || fa_all_func_lab5 ===0 ){
+    fa_all_func_lab6 = 0+"%"
+}
+else {
+    fa_all_func_lab6 = Math.round(fa_all_func_lab5/fa_all_func_lab4*100)+"%"
+}
+
+if(fa_all_func_lab7 ===0 || fa_all_func_lab8 ===0 ){
+    fa_all_func_lab9 = 0+"%"
+}
+else {
+    fa_all_func_lab9 = Math.round(fa_all_func_lab8/fa_all_func_lab7*100)+"%"
+}
+
+
+//FA-sum
+fa_all_func_sum1 = fa_all_func_aud1+fa_all_func_test1+fa_all_func_lab1
+fa_all_func_sum2 = fa_all_func_aud2+fa_all_func_test2+fa_all_func_lab2
+fa_all_func_sum4 = fa_all_func_aud4+fa_all_func_test4+fa_all_func_lab4
+fa_all_func_sum5 = fa_all_func_aud5+fa_all_func_test5+fa_all_func_lab5
+fa_all_func_sum7 = fa_all_func_aud7+fa_all_func_test7+fa_all_func_lab7
+fa_all_func_sum8 = fa_all_func_aud8+fa_all_func_test8+fa_all_func_lab8
+
+//FA-sum %
+
+if(fa_all_func_sum1 ===0 || fa_all_func_sum2 ===0 ){
+    fa_all_func_sum3 = 0+"%"
+}
+else {
+    fa_all_func_sum3 = Math.round(fa_all_func_sum2/fa_all_func_sum1*100)+"%"
+}
+
+if(fa_all_func_sum4 ===0 || fa_all_func_sum5 ===0 ){
+    fa_all_func_sum6 = 0+"%"
+}
+else {
+    fa_all_func_sum6 = Math.round(fa_all_func_sum5/fa_all_func_sum4*100)+"%"
+}
+
+if(fa_all_func_sum7 ===0 || fa_all_func_sum8 ===0 ){
+    fa_all_func_sum9 = 0+"%"
+}
+else {
+    fa_all_func_sum9 = Math.round(fa_all_func_sum8/fa_all_func_sum7*100)+"%"
+}
+
+
+document.getElementById("fa-all-func-aud1").innerHTML = fa_all_func_aud1
+document.getElementById("fa-all-func-aud2").innerHTML = fa_all_func_aud2
+document.getElementById("fa-all-func-aud3").innerHTML = fa_all_func_aud3
+document.getElementById("fa-all-func-aud4").innerHTML = fa_all_func_aud4
+document.getElementById("fa-all-func-aud5").innerHTML = fa_all_func_aud5
+document.getElementById("fa-all-func-aud6").innerHTML = fa_all_func_aud6
+document.getElementById("fa-all-func-aud7").innerHTML = fa_all_func_aud7
+document.getElementById("fa-all-func-aud8").innerHTML = fa_all_func_aud8
+document.getElementById("fa-all-func-aud9").innerHTML = fa_all_func_aud9
+
+document.getElementById("fa-all-func-test1").innerHTML = fa_all_func_test1
+document.getElementById("fa-all-func-test2").innerHTML = fa_all_func_test2
+document.getElementById("fa-all-func-test3").innerHTML = fa_all_func_test3
+document.getElementById("fa-all-func-test4").innerHTML = fa_all_func_test4
+document.getElementById("fa-all-func-test5").innerHTML = fa_all_func_test5
+document.getElementById("fa-all-func-test6").innerHTML = fa_all_func_test6
+document.getElementById("fa-all-func-test7").innerHTML = fa_all_func_test7
+document.getElementById("fa-all-func-test8").innerHTML = fa_all_func_test8
+document.getElementById("fa-all-func-test9").innerHTML = fa_all_func_test9
+
+document.getElementById("fa-all-func-lab1").innerHTML = fa_all_func_lab1
+document.getElementById("fa-all-func-lab2").innerHTML = fa_all_func_lab2
+document.getElementById("fa-all-func-lab3").innerHTML = fa_all_func_lab3
+document.getElementById("fa-all-func-lab4").innerHTML = fa_all_func_lab4
+document.getElementById("fa-all-func-lab5").innerHTML = fa_all_func_lab5
+document.getElementById("fa-all-func-lab6").innerHTML = fa_all_func_lab6
+document.getElementById("fa-all-func-lab7").innerHTML = fa_all_func_lab7
+document.getElementById("fa-all-func-lab8").innerHTML = fa_all_func_lab8
+document.getElementById("fa-all-func-lab9").innerHTML = fa_all_func_lab9
+
+document.getElementById("fa-all-func-sum1").innerHTML = fa_all_func_sum1
+document.getElementById("fa-all-func-sum2").innerHTML = fa_all_func_sum2
+document.getElementById("fa-all-func-sum3").innerHTML = fa_all_func_sum3
+document.getElementById("fa-all-func-sum4").innerHTML = fa_all_func_sum4
+document.getElementById("fa-all-func-sum5").innerHTML = fa_all_func_sum5
+document.getElementById("fa-all-func-sum6").innerHTML = fa_all_func_sum6
+document.getElementById("fa-all-func-sum7").innerHTML = fa_all_func_sum7
+document.getElementById("fa-all-func-sum8").innerHTML = fa_all_func_sum8
+document.getElementById("fa-all-func-sum9").innerHTML = fa_all_func_sum9
+
+document.getElementById("fa-all-func-cnc").innerHTML = fa_all_func_sum3
+document.getElementById("fa-all-func-sipv").innerHTML = fa_all_func_sum6
+document.getElementById("fa-all-func-mvmp").innerHTML = fa_all_func_sum9
+
+
+}
+
+function DFAtable4_init(){
+
+    var table_init = $('#DFA-table4').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table4");
+    var tableLen = table.rows.length;
+
+    var fa_all_est_aud1 = 0;
+    var fa_all_est_aud2 = 0;
+    var fa_all_est_aud3 = 0;
+    var fa_all_est_aud4 = 0;
+    var fa_all_est_aud5 = 0;
+    var fa_all_est_aud6 = 0;
+    var fa_all_est_aud7 = 0;
+    var fa_all_est_aud8 = 0;
+    var fa_all_est_aud9 = 0;
+
+    var fa_all_est_test1 = 0;
+    var fa_all_est_test2 = 0;
+    var fa_all_est_test3 = 0;
+    var fa_all_est_test4 = 0;
+    var fa_all_est_test5 = 0;
+    var fa_all_est_test6 = 0;
+    var fa_all_est_test7 = 0;
+    var fa_all_est_test8 = 0;
+    var fa_all_est_test9 = 0;
+
+    var fa_all_est_lab1 = 0;
+    var fa_all_est_lab2 = 0;
+    var fa_all_est_lab3 = 0;
+    var fa_all_est_lab4 = 0;
+    var fa_all_est_lab5 = 0;
+    var fa_all_est_lab6 = 0;
+    var fa_all_est_lab7 = 0;
+    var fa_all_est_lab8 = 0;
+    var fa_all_est_lab9 = 0;
+
+    var fa_all_est_sum1 = 0;
+    var fa_all_est_sum2 = 0;
+    var fa_all_est_sum3 = 0;
+    var fa_all_est_sum4 = 0;
+    var fa_all_est_sum5 = 0;
+    var fa_all_est_sum6 = 0;
+    var fa_all_est_sum7 = 0;
+    var fa_all_est_sum8 = 0;
+    var fa_all_est_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext3 = Number(table.rows[i].cells[3].innerText);
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//FA-aud
+    if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Audits") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_all_est_aud1 = fa_all_est_aud1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_all_est_aud4 = fa_all_est_aud4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_all_est_aud7 = fa_all_est_aud7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_all_est_aud2 = fa_all_est_aud2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_all_est_aud5 = fa_all_est_aud5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_all_est_aud8 = fa_all_est_aud8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-test
+    else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Test") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_all_est_test1 = fa_all_est_test1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_all_est_test4 = fa_all_est_test4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_all_est_test7 = fa_all_est_test7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_all_est_test2 = fa_all_est_test2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_all_est_test5 = fa_all_est_test5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_all_est_test8 = fa_all_est_test8 + (coltext3 * coltext8)
+        }
+
+    }
+//FA-lab
+        else if (coltext4 === "FA" && coltext3 > 0 && coltext2 === "Labeling&Packing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_all_est_lab1 = fa_all_est_lab1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_all_est_lab4 = fa_all_est_lab4 + (coltext3 * coltext8)
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_all_est_lab7 = fa_all_est_lab7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            fa_all_est_lab2 = fa_all_est_lab2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            fa_all_est_lab5 = fa_all_est_lab5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            fa_all_est_lab8 = fa_all_est_lab8 + (coltext3 * coltext8)
+        }
+
+    }
+}
+
+//FA-aud %
+
+if(fa_all_est_aud1 ===0 || fa_all_est_aud2 ===0 ){
+    fa_all_est_aud3 = 0+"%"
+}
+else {
+    fa_all_est_aud3 = Math.round(fa_all_est_aud2/fa_all_est_aud1*100)+"%"
+}
+
+if(fa_all_est_aud4 ===0 || fa_all_est_aud5 ===0 ){
+    fa_all_est_aud6 = 0+"%"
+}
+else {
+    fa_all_est_aud6 = Math.round(fa_all_est_aud5/fa_all_est_aud4*100)+"%"
+}
+
+if(fa_all_est_aud7 ===0 || fa_all_est_aud8 ===0 ){
+    fa_all_est_aud9 = 0+"%"
+}
+else {
+    fa_all_est_aud9 = Math.round(fa_all_est_aud8/fa_all_est_aud7*100)+"%"
+}
+
+//FA-test %
+
+if(fa_all_est_test1 ===0 || fa_all_est_test2 ===0 ){
+    fa_all_est_test3 = 0+"%"
+}
+else {
+    fa_all_est_test3 = Math.round(fa_all_est_test2/fa_all_est_test1*100)+"%"
+}
+
+if(fa_all_est_test4 ===0 || fa_all_est_test5 ===0 ){
+    fa_all_est_test6 = 0+"%"
+}
+else {
+    fa_all_est_test6 = Math.round(fa_all_est_test5/fa_all_est_test4*100)+"%"
+}
+
+if(fa_all_est_test7 ===0 || fa_all_est_test8 ===0 ){
+    fa_all_est_test9 = 0+"%"
+}
+else {
+    fa_all_est_test9 = Math.round(fa_all_est_test8/fa_all_est_test7*100)+"%"
+}
+
+//FA-lab %
+
+if(fa_all_est_lab1 ===0 || fa_all_est_lab2 ===0 ){
+    fa_all_est_lab3 = 0+"%"
+}
+else {
+    fa_all_est_lab3 = Math.round(fa_all_est_lab2/fa_all_est_lab1*100)+"%"
+}
+
+if(fa_all_est_lab4 ===0 || fa_all_est_lab5 ===0 ){
+    fa_all_est_lab6 = 0+"%"
+}
+else {
+    fa_all_est_lab6 = Math.round(fa_all_est_lab5/fa_all_est_lab4*100)+"%"
+}
+
+if(fa_all_est_lab7 ===0 || fa_all_est_lab8 ===0 ){
+    fa_all_est_lab9 = 0+"%"
+}
+else {
+    fa_all_est_lab9 = Math.round(fa_all_est_lab8/fa_all_est_lab7*100)+"%"
+}
+
+
+//FA-sum
+fa_all_est_sum1 = fa_all_est_aud1+fa_all_est_test1+fa_all_est_lab1
+fa_all_est_sum2 = fa_all_est_aud2+fa_all_est_test2+fa_all_est_lab2
+fa_all_est_sum4 = fa_all_est_aud4+fa_all_est_test4+fa_all_est_lab4
+fa_all_est_sum5 = fa_all_est_aud5+fa_all_est_test5+fa_all_est_lab5
+fa_all_est_sum7 = fa_all_est_aud7+fa_all_est_test7+fa_all_est_lab7
+fa_all_est_sum8 = fa_all_est_aud8+fa_all_est_test8+fa_all_est_lab8
+
+//FA-sum %
+
+if(fa_all_est_sum1 ===0 || fa_all_est_sum2 ===0 ){
+    fa_all_est_sum3 = 0+"%"
+}
+else {
+    fa_all_est_sum3 = Math.round(fa_all_est_sum2/fa_all_est_sum1*100)+"%"
+}
+
+if(fa_all_est_sum4 ===0 || fa_all_est_sum5 ===0 ){
+    fa_all_est_sum6 = 0+"%"
+}
+else {
+    fa_all_est_sum6 = Math.round(fa_all_est_sum5/fa_all_est_sum4*100)+"%"
+}
+
+if(fa_all_est_sum7 ===0 || fa_all_est_sum8 ===0 ){
+    fa_all_est_sum9 = 0+"%"
+}
+else {
+    fa_all_est_sum9 = Math.round(fa_all_est_sum8/fa_all_est_sum7*100)+"%"
+}
+
+
+document.getElementById("fa-all-est-aud1").innerHTML = fa_all_est_aud1
+document.getElementById("fa-all-est-aud2").innerHTML = fa_all_est_aud2
+document.getElementById("fa-all-est-aud3").innerHTML = fa_all_est_aud3
+document.getElementById("fa-all-est-aud4").innerHTML = fa_all_est_aud4
+document.getElementById("fa-all-est-aud5").innerHTML = fa_all_est_aud5
+document.getElementById("fa-all-est-aud6").innerHTML = fa_all_est_aud6
+document.getElementById("fa-all-est-aud7").innerHTML = fa_all_est_aud7
+document.getElementById("fa-all-est-aud8").innerHTML = fa_all_est_aud8
+document.getElementById("fa-all-est-aud9").innerHTML = fa_all_est_aud9
+
+document.getElementById("fa-all-est-test1").innerHTML = fa_all_est_test1
+document.getElementById("fa-all-est-test2").innerHTML = fa_all_est_test2
+document.getElementById("fa-all-est-test3").innerHTML = fa_all_est_test3
+document.getElementById("fa-all-est-test4").innerHTML = fa_all_est_test4
+document.getElementById("fa-all-est-test5").innerHTML = fa_all_est_test5
+document.getElementById("fa-all-est-test6").innerHTML = fa_all_est_test6
+document.getElementById("fa-all-est-test7").innerHTML = fa_all_est_test7
+document.getElementById("fa-all-est-test8").innerHTML = fa_all_est_test8
+document.getElementById("fa-all-est-test9").innerHTML = fa_all_est_test9
+
+document.getElementById("fa-all-est-lab1").innerHTML = fa_all_est_lab1
+document.getElementById("fa-all-est-lab2").innerHTML = fa_all_est_lab2
+document.getElementById("fa-all-est-lab3").innerHTML = fa_all_est_lab3
+document.getElementById("fa-all-est-lab4").innerHTML = fa_all_est_lab4
+document.getElementById("fa-all-est-lab5").innerHTML = fa_all_est_lab5
+document.getElementById("fa-all-est-lab6").innerHTML = fa_all_est_lab6
+document.getElementById("fa-all-est-lab7").innerHTML = fa_all_est_lab7
+document.getElementById("fa-all-est-lab8").innerHTML = fa_all_est_lab8
+document.getElementById("fa-all-est-lab9").innerHTML = fa_all_est_lab9
+
+
+document.getElementById("fa-all-est-sum1").innerHTML = fa_all_est_sum1
+document.getElementById("fa-all-est-sum2").innerHTML = fa_all_est_sum2
+document.getElementById("fa-all-est-sum3").innerHTML = fa_all_est_sum3
+document.getElementById("fa-all-est-sum4").innerHTML = fa_all_est_sum4
+document.getElementById("fa-all-est-sum5").innerHTML = fa_all_est_sum5
+document.getElementById("fa-all-est-sum6").innerHTML = fa_all_est_sum6
+document.getElementById("fa-all-est-sum7").innerHTML = fa_all_est_sum7
+document.getElementById("fa-all-est-sum8").innerHTML = fa_all_est_sum8
+document.getElementById("fa-all-est-sum9").innerHTML = fa_all_est_sum9
+
+document.getElementById("fa-all-est-cnc").innerHTML = fa_all_est_sum3
+document.getElementById("fa-all-est-sipv").innerHTML = fa_all_est_sum6
+document.getElementById("fa-all-est-mvmp").innerHTML = fa_all_est_sum9
+
+}
+
+function DFAtable5_init(){
+
+    var table_init = $('#DFA-table5').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table5");
+    var tableLen = table.rows.length;
+
+    var sa_line_func_bond1 = 0;
+    var sa_line_func_bond2 = 0;
+    var sa_line_func_bond3 = 0;
+    var sa_line_func_bond4 = 0;
+    var sa_line_func_bond5 = 0;
+    var sa_line_func_bond6 = 0;
+    var sa_line_func_bond7 = 0;
+    var sa_line_func_bond8 = 0;
+    var sa_line_func_bond9 = 0;
+
+    var sa_line_func_glu1 = 0;
+    var sa_line_func_glu2 = 0;
+    var sa_line_func_glu3 = 0;
+    var sa_line_func_glu4 = 0;
+    var sa_line_func_glu5 = 0;
+    var sa_line_func_glu6 = 0;
+    var sa_line_func_glu7 = 0;
+    var sa_line_func_glu8 = 0;
+    var sa_line_func_glu9 = 0;
+
+    var sa_line_func_ass1 = 0;
+    var sa_line_func_ass2 = 0;
+    var sa_line_func_ass3 = 0;
+    var sa_line_func_ass4 = 0;
+    var sa_line_func_ass5 = 0;
+    var sa_line_func_ass6 = 0;
+    var sa_line_func_ass7 = 0;
+    var sa_line_func_ass8 = 0;
+    var sa_line_func_ass9 = 0;
+
+    var sa_line_func_scr1 = 0;
+    var sa_line_func_scr2 = 0;
+    var sa_line_func_scr3 = 0;
+    var sa_line_func_scr4 = 0;
+    var sa_line_func_scr5 = 0;
+    var sa_line_func_scr6 = 0;
+    var sa_line_func_scr7 = 0;
+    var sa_line_func_scr8 = 0;
+    var sa_line_func_scr9 = 0;
+
+    var sa_line_func_cab1 = 0;
+    var sa_line_func_cab2 = 0;
+    var sa_line_func_cab3 = 0;
+    var sa_line_func_cab4 = 0;
+    var sa_line_func_cab5 = 0;
+    var sa_line_func_cab6 = 0;
+    var sa_line_func_cab7 = 0;
+    var sa_line_func_cab8 = 0;
+    var sa_line_func_cab9 = 0;
+
+    var sa_line_func_mat1 = 0;
+    var sa_line_func_mat2 = 0;
+    var sa_line_func_mat3 = 0;
+    var sa_line_func_mat4 = 0;
+    var sa_line_func_mat5 = 0;
+    var sa_line_func_mat6 = 0;
+    var sa_line_func_mat7 = 0;
+    var sa_line_func_mat8 = 0;
+    var sa_line_func_mat9 = 0;
+
+    var sa_line_func_sum1 = 0;
+    var sa_line_func_sum2 = 0;
+    var sa_line_func_sum3 = 0;
+    var sa_line_func_sum4 = 0;
+    var sa_line_func_sum5 = 0;
+    var sa_line_func_sum6 = 0;
+    var sa_line_func_sum7 = 0;
+    var sa_line_func_sum8 = 0;
+    var sa_line_func_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//SA-bond
+    if (coltext4 === "SA" && coltext2 === "Bonding") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_func_bond1 = sa_line_func_bond1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_func_bond4 = sa_line_func_bond4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_func_bond7 = sa_line_func_bond7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_func_bond2 = sa_line_func_bond2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            sa_line_func_bond5 = sa_line_func_bond5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            sa_line_func_bond8 = sa_line_func_bond8 + coltext8
+        }
+
+    }
+//SA-glu
+    else if (coltext4 === "SA" && coltext2 === "Gluing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_func_glu1 = sa_line_func_glu1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_func_glu4 = sa_line_func_glu4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_func_glu7 = sa_line_func_glu7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_func_glu2 = sa_line_func_glu2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            sa_line_func_glu5 = sa_line_func_glu5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            sa_line_func_glu8 = sa_line_func_glu8 + coltext8
+        }
+
+    }
+//SA-ass
+        else if (coltext4 === "SA" && coltext2 === "Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_func_ass1 = sa_line_func_ass1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_func_ass4 = sa_line_func_ass4 + coltext8
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_func_ass7 = sa_line_func_ass7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_func_ass2 = sa_line_func_ass2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            sa_line_func_ass5 = sa_line_func_ass5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            sa_line_func_ass8 = sa_line_func_ass8 + coltext8
+        }
+
+    }
+//SA-scr
+        else if (coltext4 === "SA" && coltext2 === "Screwing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_func_scr1 = sa_line_func_scr1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_func_scr4 = sa_line_func_scr4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_func_scr7 = sa_line_func_scr7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_func_scr2 = sa_line_func_scr2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            sa_line_func_scr5 = sa_line_func_scr5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            sa_line_func_scr8 = sa_line_func_scr8 + coltext8
+        }
+
+    }
+//SA-cab
+        else if (coltext4 === "SA" && coltext2 === "Cables Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_func_cab1 = sa_line_func_cab1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_func_cab4 = sa_line_func_cab4 + coltext8
+        }
+         if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_func_cab7 = sa_line_func_cab7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_func_cab2 = sa_line_func_cab2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            sa_line_func_cab5 = sa_line_func_cab5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            sa_line_func_cab8 = sa_line_func_cab8 + coltext8
+        }
+
+    }
+//SA-mat
+        else if (coltext4 === "SA" && coltext2 === "Material Scan & link") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_func_mat1 = sa_line_func_mat1 + coltext8
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_func_mat4 = sa_line_func_mat4 + coltext8
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_func_mat7 = sa_line_func_mat7 + coltext8
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_func_mat2 = sa_line_func_mat2 + coltext8
+        }
+        if (coltext6 === "Y") {
+            sa_line_func_mat5 = sa_line_func_mat5 + coltext8
+        }
+        if (coltext7 === "Y") {
+            sa_line_func_mat8 = sa_line_func_mat8 + coltext8
+        }
+
+    }
+}
+
+//SA-bond %
+
+if(sa_line_func_bond1 ===0 || sa_line_func_bond2 ===0 ){
+    sa_line_func_bond3 = 0+"%"
+}
+else {
+    sa_line_func_bond3 = Math.round(sa_line_func_bond2/sa_line_func_bond1*100)+"%"
+}
+
+if(sa_line_func_bond4 ===0 || sa_line_func_bond5 ===0 ){
+    sa_line_func_bond6 = 0+"%"
+}
+else {
+    sa_line_func_bond6 = Math.round(sa_line_func_bond5/sa_line_func_bond4*100)+"%"
+}
+
+if(sa_line_func_bond7 ===0 || sa_line_func_bond8 ===0 ){
+    sa_line_func_bond9 = 0+"%"
+}
+else {
+    sa_line_func_bond9 = Math.round(sa_line_func_bond8/sa_line_func_bond7*100)+"%"
+}
+
+//SA-glu %
+
+if(sa_line_func_glu1 ===0 || sa_line_func_glu2 ===0 ){
+    sa_line_func_glu3 = 0+"%"
+}
+else {
+    sa_line_func_glu3 = Math.round(sa_line_func_glu2/sa_line_func_glu1*100)+"%"
+}
+
+if(sa_line_func_glu4 ===0 || sa_line_func_glu5 ===0 ){
+    sa_line_func_glu6 = 0+"%"
+}
+else {
+    sa_line_func_glu6 = Math.round(sa_line_func_glu5/sa_line_func_glu4*100)+"%"
+}
+
+if(sa_line_func_glu7 ===0 || sa_line_func_glu8 ===0 ){
+    sa_line_func_glu9 = 0+"%"
+}
+else {
+    sa_line_func_glu9 = Math.round(sa_line_func_glu8/sa_line_func_glu7*100)+"%"
+}
+
+//SA-ass %
+
+if(sa_line_func_ass1 ===0 || sa_line_func_ass2 ===0 ){
+    sa_line_func_ass3 = 0+"%"
+}
+else {
+    sa_line_func_ass3 = Math.round(sa_line_func_ass2/sa_line_func_ass1*100)+"%"
+}
+
+if(sa_line_func_ass4 ===0 || sa_line_func_ass5 ===0 ){
+    sa_line_func_ass6 = 0+"%"
+}
+else {
+    sa_line_func_ass6 = Math.round(sa_line_func_ass5/sa_line_func_ass4*100)+"%"
+}
+
+if(sa_line_func_ass7 ===0 || sa_line_func_ass8 ===0 ){
+    sa_line_func_ass9 = 0+"%"
+}
+else {
+    sa_line_func_ass9 = Math.round(sa_line_func_ass8/sa_line_func_ass7*100)+"%"
+}
+
+//SA-scr %
+
+if(sa_line_func_scr1 ===0 || sa_line_func_scr2 ===0 ){
+    sa_line_func_scr3 = 0+"%"
+}
+else {
+    sa_line_func_scr3 = Math.round(sa_line_func_scr2/sa_line_func_scr1*100)+"%"
+}
+
+if(sa_line_func_scr4 ===0 || sa_line_func_scr5 ===0 ){
+    sa_line_func_scr6 = 0+"%"
+}
+else {
+    sa_line_func_scr6 = Math.round(sa_line_func_scr5/sa_line_func_scr4*100)+"%"
+}
+
+if(sa_line_func_scr7 ===0 || sa_line_func_scr8 ===0 ){
+    sa_line_func_scr9 = 0+"%"
+}
+else {
+    sa_line_func_scr9 = Math.round(sa_line_func_scr8/sa_line_func_scr7*100)+"%"
+}
+
+//SA-cab %
+
+if(sa_line_func_cab1 ===0 || sa_line_func_cab2 ===0 ){
+    sa_line_func_cab3 = 0+"%"
+}
+else {
+    sa_line_func_cab3 = Math.round(sa_line_func_cab2/sa_line_func_cab1*100)+"%"
+}
+
+if(sa_line_func_cab4 ===0 || sa_line_func_cab5 ===0 ){
+    sa_line_func_cab6 = 0+"%"
+}
+else {
+    sa_line_func_cab6 = Math.round(sa_line_func_cab5/sa_line_func_cab4*100)+"%"
+}
+
+if(sa_line_func_cab7 ===0 || sa_line_func_cab8 ===0 ){
+    sa_line_func_cab9 = 0+"%"
+}
+else {
+    sa_line_func_cab9 = Math.round(sa_line_func_cab8/sa_line_func_cab7*100)+"%"
+}
+
+//SA-mat %
+
+if(sa_line_func_mat1 ===0 || sa_line_func_mat2 ===0 ){
+    sa_line_func_mat3 = 0+"%"
+}
+else {
+    sa_line_func_mat3 = Math.round(sa_line_func_mat2/sa_line_func_mat1*100)+"%"
+}
+
+if(sa_line_func_mat4 ===0 || sa_line_func_mat5 ===0 ){
+    sa_line_func_mat6 = 0+"%"
+}
+else {
+    sa_line_func_mat6 = Math.round(sa_line_func_mat5/sa_line_func_mat4*100)+"%"
+}
+
+if(sa_line_func_mat7 ===0 || sa_line_func_mat8 ===0 ){
+    sa_line_func_mat9 = 0+"%"
+}
+else {
+    sa_line_func_mat9 = Math.round(sa_line_func_mat8/sa_line_func_mat7*100)+"%"
+}
+
+//SA-sum
+sa_line_func_sum1 = sa_line_func_bond1+sa_line_func_glu1+sa_line_func_ass1+sa_line_func_scr1+sa_line_func_cab1+sa_line_func_mat1
+sa_line_func_sum2 = sa_line_func_bond2+sa_line_func_glu2+sa_line_func_ass2+sa_line_func_scr2+sa_line_func_cab2+sa_line_func_mat2
+sa_line_func_sum4 = sa_line_func_bond4+sa_line_func_glu4+sa_line_func_ass4+sa_line_func_scr4+sa_line_func_cab4+sa_line_func_mat4
+sa_line_func_sum5 = sa_line_func_bond5+sa_line_func_glu5+sa_line_func_ass5+sa_line_func_scr5+sa_line_func_cab5+sa_line_func_mat5
+sa_line_func_sum7 = sa_line_func_bond7+sa_line_func_glu7+sa_line_func_ass7+sa_line_func_scr7+sa_line_func_cab7+sa_line_func_mat7
+sa_line_func_sum8 = sa_line_func_bond8+sa_line_func_glu8+sa_line_func_ass8+sa_line_func_scr8+sa_line_func_cab8+sa_line_func_mat8
+
+//SA-sum %
+
+if(sa_line_func_sum1 ===0 || sa_line_func_sum2 ===0 ){
+    sa_line_func_sum3 = 0+"%"
+}
+else {
+    sa_line_func_sum3 = Math.round(sa_line_func_sum2/sa_line_func_sum1*100)+"%"
+}
+
+if(sa_line_func_sum4 ===0 || sa_line_func_sum5 ===0 ){
+    sa_line_func_sum6 = 0+"%"
+}
+else {
+    sa_line_func_sum6 = Math.round(sa_line_func_sum5/sa_line_func_sum4*100)+"%"
+}
+
+if(sa_line_func_sum7 ===0 || sa_line_func_sum8 ===0 ){
+    sa_line_func_sum9 = 0+"%"
+}
+else {
+    sa_line_func_sum9 = Math.round(sa_line_func_sum8/sa_line_func_sum7*100)+"%"
+}
+
+
+document.getElementById("sa-line-func-bond1").innerHTML = sa_line_func_bond1
+document.getElementById("sa-line-func-bond2").innerHTML = sa_line_func_bond2
+document.getElementById("sa-line-func-bond3").innerHTML = sa_line_func_bond3
+document.getElementById("sa-line-func-bond4").innerHTML = sa_line_func_bond4
+document.getElementById("sa-line-func-bond5").innerHTML = sa_line_func_bond5
+document.getElementById("sa-line-func-bond6").innerHTML = sa_line_func_bond6
+document.getElementById("sa-line-func-bond7").innerHTML = sa_line_func_bond7
+document.getElementById("sa-line-func-bond8").innerHTML = sa_line_func_bond8
+document.getElementById("sa-line-func-bond9").innerHTML = sa_line_func_bond9
+
+document.getElementById("sa-line-func-glu1").innerHTML = sa_line_func_glu1
+document.getElementById("sa-line-func-glu2").innerHTML = sa_line_func_glu2
+document.getElementById("sa-line-func-glu3").innerHTML = sa_line_func_glu3
+document.getElementById("sa-line-func-glu4").innerHTML = sa_line_func_glu4
+document.getElementById("sa-line-func-glu5").innerHTML = sa_line_func_glu5
+document.getElementById("sa-line-func-glu6").innerHTML = sa_line_func_glu6
+document.getElementById("sa-line-func-glu7").innerHTML = sa_line_func_glu7
+document.getElementById("sa-line-func-glu8").innerHTML = sa_line_func_glu8
+document.getElementById("sa-line-func-glu9").innerHTML = sa_line_func_glu9
+
+document.getElementById("sa-line-func-ass1").innerHTML = sa_line_func_ass1
+document.getElementById("sa-line-func-ass2").innerHTML = sa_line_func_ass2
+document.getElementById("sa-line-func-ass3").innerHTML = sa_line_func_ass3
+document.getElementById("sa-line-func-ass4").innerHTML = sa_line_func_ass4
+document.getElementById("sa-line-func-ass5").innerHTML = sa_line_func_ass5
+document.getElementById("sa-line-func-ass6").innerHTML = sa_line_func_ass6
+document.getElementById("sa-line-func-ass7").innerHTML = sa_line_func_ass7
+document.getElementById("sa-line-func-ass8").innerHTML = sa_line_func_ass8
+document.getElementById("sa-line-func-ass9").innerHTML = sa_line_func_ass9
+
+document.getElementById("sa-line-func-scr1").innerHTML = sa_line_func_scr1
+document.getElementById("sa-line-func-scr2").innerHTML = sa_line_func_scr2
+document.getElementById("sa-line-func-scr3").innerHTML = sa_line_func_scr3
+document.getElementById("sa-line-func-scr4").innerHTML = sa_line_func_scr4
+document.getElementById("sa-line-func-scr5").innerHTML = sa_line_func_scr5
+document.getElementById("sa-line-func-scr6").innerHTML = sa_line_func_scr6
+document.getElementById("sa-line-func-scr7").innerHTML = sa_line_func_scr7
+document.getElementById("sa-line-func-scr8").innerHTML = sa_line_func_scr8
+document.getElementById("sa-line-func-scr9").innerHTML = sa_line_func_scr9
+
+document.getElementById("sa-line-func-cab1").innerHTML = sa_line_func_cab1
+document.getElementById("sa-line-func-cab2").innerHTML = sa_line_func_cab2
+document.getElementById("sa-line-func-cab3").innerHTML = sa_line_func_cab3
+document.getElementById("sa-line-func-cab4").innerHTML = sa_line_func_cab4
+document.getElementById("sa-line-func-cab5").innerHTML = sa_line_func_cab5
+document.getElementById("sa-line-func-cab6").innerHTML = sa_line_func_cab6
+document.getElementById("sa-line-func-cab7").innerHTML = sa_line_func_cab7
+document.getElementById("sa-line-func-cab8").innerHTML = sa_line_func_cab8
+document.getElementById("sa-line-func-cab9").innerHTML = sa_line_func_cab9
+
+document.getElementById("sa-line-func-mat1").innerHTML = sa_line_func_mat1
+document.getElementById("sa-line-func-mat2").innerHTML = sa_line_func_mat2
+document.getElementById("sa-line-func-mat3").innerHTML = sa_line_func_mat3
+document.getElementById("sa-line-func-mat4").innerHTML = sa_line_func_mat4
+document.getElementById("sa-line-func-mat5").innerHTML = sa_line_func_mat5
+document.getElementById("sa-line-func-mat6").innerHTML = sa_line_func_mat6
+document.getElementById("sa-line-func-mat7").innerHTML = sa_line_func_mat7
+document.getElementById("sa-line-func-mat8").innerHTML = sa_line_func_mat8
+document.getElementById("sa-line-func-mat9").innerHTML = sa_line_func_mat9
+
+document.getElementById("sa-line-func-sum1").innerHTML = sa_line_func_sum1
+document.getElementById("sa-line-func-sum2").innerHTML = sa_line_func_sum2
+document.getElementById("sa-line-func-sum3").innerHTML = sa_line_func_sum3
+document.getElementById("sa-line-func-sum4").innerHTML = sa_line_func_sum4
+document.getElementById("sa-line-func-sum5").innerHTML = sa_line_func_sum5
+document.getElementById("sa-line-func-sum6").innerHTML = sa_line_func_sum6
+document.getElementById("sa-line-func-sum7").innerHTML = sa_line_func_sum7
+document.getElementById("sa-line-func-sum8").innerHTML = sa_line_func_sum8
+document.getElementById("sa-line-func-sum9").innerHTML = sa_line_func_sum9
+
+document.getElementById("sa-line-func-cnc").innerHTML = sa_line_func_sum3
+document.getElementById("sa-line-func-sipv").innerHTML = sa_line_func_sum6
+document.getElementById("sa-line-func-mvmp").innerHTML = sa_line_func_sum9
+}
+
+function DFAtable6_init(){
+
+    var table_init = $('#DFA-table6').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table6");
+    var tableLen = table.rows.length;
+
+    var sa_line_est_bond1 = 0;
+    var sa_line_est_bond2 = 0;
+    var sa_line_est_bond3 = 0;
+    var sa_line_est_bond4 = 0;
+    var sa_line_est_bond5 = 0;
+    var sa_line_est_bond6 = 0;
+    var sa_line_est_bond7 = 0;
+    var sa_line_est_bond8 = 0;
+    var sa_line_est_bond9 = 0;
+
+    var sa_line_est_glu1 = 0;
+    var sa_line_est_glu2 = 0;
+    var sa_line_est_glu3 = 0;
+    var sa_line_est_glu4 = 0;
+    var sa_line_est_glu5 = 0;
+    var sa_line_est_glu6 = 0;
+    var sa_line_est_glu7 = 0;
+    var sa_line_est_glu8 = 0;
+    var sa_line_est_glu9 = 0;
+
+    var sa_line_est_ass1 = 0;
+    var sa_line_est_ass2 = 0;
+    var sa_line_est_ass3 = 0;
+    var sa_line_est_ass4 = 0;
+    var sa_line_est_ass5 = 0;
+    var sa_line_est_ass6 = 0;
+    var sa_line_est_ass7 = 0;
+    var sa_line_est_ass8 = 0;
+    var sa_line_est_ass9 = 0;
+
+    var sa_line_est_scr1 = 0;
+    var sa_line_est_scr2 = 0;
+    var sa_line_est_scr3 = 0;
+    var sa_line_est_scr4 = 0;
+    var sa_line_est_scr5 = 0;
+    var sa_line_est_scr6 = 0;
+    var sa_line_est_scr7 = 0;
+    var sa_line_est_scr8 = 0;
+    var sa_line_est_scr9 = 0;
+
+    var sa_line_est_cab1 = 0;
+    var sa_line_est_cab2 = 0;
+    var sa_line_est_cab3 = 0;
+    var sa_line_est_cab4 = 0;
+    var sa_line_est_cab5 = 0;
+    var sa_line_est_cab6 = 0;
+    var sa_line_est_cab7 = 0;
+    var sa_line_est_cab8 = 0;
+    var sa_line_est_cab9 = 0;
+
+    var sa_line_est_mat1 = 0;
+    var sa_line_est_mat2 = 0;
+    var sa_line_est_mat3 = 0;
+    var sa_line_est_mat4 = 0;
+    var sa_line_est_mat5 = 0;
+    var sa_line_est_mat6 = 0;
+    var sa_line_est_mat7 = 0;
+    var sa_line_est_mat8 = 0;
+    var sa_line_est_mat9 = 0;
+
+    var sa_line_est_sum1 = 0;
+    var sa_line_est_sum2 = 0;
+    var sa_line_est_sum3 = 0;
+    var sa_line_est_sum4 = 0;
+    var sa_line_est_sum5 = 0;
+    var sa_line_est_sum6 = 0;
+    var sa_line_est_sum7 = 0;
+    var sa_line_est_sum8 = 0;
+    var sa_line_est_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext3 = table.rows[i].cells[3].innerText;
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//SA-bond
+    if (coltext4 === "SA" && coltext3 > 0 && coltext2 === "Bonding") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_est_bond1 = sa_line_est_bond1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_est_bond4 = sa_line_est_bond4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_est_bond7 = sa_line_est_bond7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_est_bond2 = sa_line_est_bond2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            sa_line_est_bond5 = sa_line_est_bond5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            sa_line_est_bond8 = sa_line_est_bond8 + (coltext3 * coltext8)
+        }
+
+    }
+//SA-glu
+    else if (coltext4 === "SA" && coltext3 > 0 && coltext2 === "Gluing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_est_glu1 = sa_line_est_glu1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_est_glu4 = sa_line_est_glu4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_est_glu7 = sa_line_est_glu7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_est_glu2 = sa_line_est_glu2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            sa_line_est_glu5 = sa_line_est_glu5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            sa_line_est_glu8 = sa_line_est_glu8 + (coltext3 * coltext8)
+        }
+
+    }
+//SA-ass
+        else if (coltext4 === "SA" && coltext3 > 0 && coltext2 === "Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_est_ass1 = sa_line_est_ass1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_est_ass4 = sa_line_est_ass4 + (coltext3 * coltext8)
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_est_ass7 = sa_line_est_ass7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_est_ass2 = sa_line_est_ass2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            sa_line_est_ass5 = sa_line_est_ass5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            sa_line_est_ass8 = sa_line_est_ass8 + (coltext3 * coltext8)
+        }
+
+    }
+//SA-scr
+        else if (coltext4 === "SA" && coltext3 > 0 && coltext2 === "Screwing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_est_scr1 = sa_line_est_scr1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_est_scr4 = sa_line_est_scr4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_est_scr7 = sa_line_est_scr7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_est_scr2 = sa_line_est_scr2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            sa_line_est_scr5 = sa_line_est_scr5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            sa_line_est_scr8 = sa_line_est_scr8 + (coltext3 * coltext8)
+        }
+
+    }
+//SA-cab
+        else if (coltext4 === "SA" && coltext3 > 0 && coltext2 === "Cables Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_est_cab1 = sa_line_est_cab1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_est_cab4 = sa_line_est_cab4 + (coltext3 * coltext8)
+        }
+         if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_est_cab7 = sa_line_est_cab7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_est_cab2 = sa_line_est_cab2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            sa_line_est_cab5 = sa_line_est_cab5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            sa_line_est_cab8 = sa_line_est_cab8 + (coltext3 * coltext8)
+        }
+
+    }
+//SA-mat
+        else if (coltext4 === "SA" && coltext3 > 0 && coltext2 === "Material Scan & link") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            sa_line_est_mat1 = sa_line_est_mat1 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            sa_line_est_mat4 = sa_line_est_mat4 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            sa_line_est_mat7 = sa_line_est_mat7 + (coltext3 * coltext8)
+        }
+
+        if (coltext5 === "Y") {
+            sa_line_est_mat2 = sa_line_est_mat2 + (coltext3 * coltext8)
+        }
+        if (coltext6 === "Y") {
+            sa_line_est_mat5 = sa_line_est_mat5 + (coltext3 * coltext8)
+        }
+        if (coltext7 === "Y") {
+            sa_line_est_mat8 = sa_line_est_mat8 + (coltext3 * coltext8)
+        }
+
+    }
+}
+
+//SA-bond %
+
+if(sa_line_est_bond1 ===0 || sa_line_est_bond2 ===0 ){
+    sa_line_est_bond3 = 0+"%"
+}
+else {
+    sa_line_est_bond3 = Math.round(sa_line_est_bond2/sa_line_est_bond1*100)+"%"
+}
+
+if(sa_line_est_bond4 ===0 || sa_line_est_bond5 ===0 ){
+    sa_line_est_bond6 = 0+"%"
+}
+else {
+    sa_line_est_bond6 = Math.round(sa_line_est_bond5/sa_line_est_bond4*100)+"%"
+}
+
+if(sa_line_est_bond7 ===0 || sa_line_est_bond8 ===0 ){
+    sa_line_est_bond9 = 0+"%"
+}
+else {
+    sa_line_est_bond9 = Math.round(sa_line_est_bond8/sa_line_est_bond7*100)+"%"
+}
+
+//SA-glu %
+
+if(sa_line_est_glu1 ===0 || sa_line_est_glu2 ===0 ){
+    sa_line_est_glu3 = 0+"%"
+}
+else {
+    sa_line_est_glu3 = Math.round(sa_line_est_glu2/sa_line_est_glu1*100)+"%"
+}
+
+if(sa_line_est_glu4 ===0 || sa_line_est_glu5 ===0 ){
+    sa_line_est_glu6 = 0+"%"
+}
+else {
+    sa_line_est_glu6 = Math.round(sa_line_est_glu5/sa_line_est_glu4*100)+"%"
+}
+
+if(sa_line_est_glu7 ===0 || sa_line_est_glu8 ===0 ){
+    sa_line_est_glu9 = 0+"%"
+}
+else {
+    sa_line_est_glu9 = Math.round(sa_line_est_glu8/sa_line_est_glu7*100)+"%"
+}
+
+//SA-ass %
+
+if(sa_line_est_ass1 ===0 || sa_line_est_ass2 ===0 ){
+    sa_line_est_ass3 = 0+"%"
+}
+else {
+    sa_line_est_ass3 = Math.round(sa_line_est_ass2/sa_line_est_ass1*100)+"%"
+}
+
+if(sa_line_est_ass4 ===0 || sa_line_est_ass5 ===0 ){
+    sa_line_est_ass6 = 0+"%"
+}
+else {
+    sa_line_est_ass6 = Math.round(sa_line_est_ass5/sa_line_est_ass4*100)+"%"
+}
+
+if(sa_line_est_ass7 ===0 || sa_line_est_ass8 ===0 ){
+    sa_line_est_ass9 = 0+"%"
+}
+else {
+    sa_line_est_ass9 = Math.round(sa_line_est_ass8/sa_line_est_ass7*100)+"%"
+}
+
+//SA-scr %
+
+if(sa_line_est_scr1 ===0 || sa_line_est_scr2 ===0 ){
+    sa_line_est_scr3 = 0+"%"
+}
+else {
+    sa_line_est_scr3 = Math.round(sa_line_est_scr2/sa_line_est_scr1*100)+"%"
+}
+
+if(sa_line_est_scr4 ===0 || sa_line_est_scr5 ===0 ){
+    sa_line_est_scr6 = 0+"%"
+}
+else {
+    sa_line_est_scr6 = Math.round(sa_line_est_scr5/sa_line_est_scr4*100)+"%"
+}
+
+if(sa_line_est_scr7 ===0 || sa_line_est_scr8 ===0 ){
+    sa_line_est_scr9 = 0+"%"
+}
+else {
+    sa_line_est_scr9 = Math.round(sa_line_est_scr8/sa_line_est_scr7*100)+"%"
+}
+
+//SA-cab %
+
+if(sa_line_est_cab1 ===0 || sa_line_est_cab2 ===0 ){
+    sa_line_est_cab3 = 0+"%"
+}
+else {
+    sa_line_est_cab3 = Math.round(sa_line_est_cab2/sa_line_est_cab1*100)+"%"
+}
+
+if(sa_line_est_cab4 ===0 || sa_line_est_cab5 ===0 ){
+    sa_line_est_cab6 = 0+"%"
+}
+else {
+    sa_line_est_cab6 = Math.round(sa_line_est_cab5/sa_line_est_cab4*100)+"%"
+}
+
+if(sa_line_est_cab7 ===0 || sa_line_est_cab8 ===0 ){
+    sa_line_est_cab9 = 0+"%"
+}
+else {
+    sa_line_est_cab9 = Math.round(sa_line_est_cab8/sa_line_est_cab7*100)+"%"
+}
+
+//SA-mat %
+
+if(sa_line_est_mat1 ===0 || sa_line_est_mat2 ===0 ){
+    sa_line_est_mat3 = 0+"%"
+}
+else {
+    sa_line_est_mat3 = Math.round(sa_line_est_mat2/sa_line_est_mat1*100)+"%"
+}
+
+if(sa_line_est_mat4 ===0 || sa_line_est_mat5 ===0 ){
+    sa_line_est_mat6 = 0+"%"
+}
+else {
+    sa_line_est_mat6 = Math.round(sa_line_est_mat5/sa_line_est_mat4*100)+"%"
+}
+
+if(sa_line_est_mat7 ===0 || sa_line_est_mat8 ===0 ){
+    sa_line_est_mat9 = 0+"%"
+}
+else {
+    sa_line_est_mat9 = Math.round(sa_line_est_mat8/sa_line_est_mat7*100)+"%"
+}
+
+//SA-sum
+sa_line_est_sum1 = sa_line_est_bond1+sa_line_est_glu1+sa_line_est_ass1+sa_line_est_scr1+sa_line_est_cab1+sa_line_est_mat1
+sa_line_est_sum2 = sa_line_est_bond2+sa_line_est_glu2+sa_line_est_ass2+sa_line_est_scr2+sa_line_est_cab2+sa_line_est_mat2
+sa_line_est_sum4 = sa_line_est_bond4+sa_line_est_glu4+sa_line_est_ass4+sa_line_est_scr4+sa_line_est_cab4+sa_line_est_mat4
+sa_line_est_sum5 = sa_line_est_bond5+sa_line_est_glu5+sa_line_est_ass5+sa_line_est_scr5+sa_line_est_cab5+sa_line_est_mat5
+sa_line_est_sum7 = sa_line_est_bond7+sa_line_est_glu7+sa_line_est_ass7+sa_line_est_scr7+sa_line_est_cab7+sa_line_est_mat7
+sa_line_est_sum8 = sa_line_est_bond8+sa_line_est_glu8+sa_line_est_ass8+sa_line_est_scr8+sa_line_est_cab8+sa_line_est_mat8
+
+//SA-sum %
+
+if(sa_line_est_sum1 ===0 || sa_line_est_sum2 ===0 ){
+    sa_line_est_sum3 = 0+"%"
+}
+else {
+    sa_line_est_sum3 = Math.round(sa_line_est_sum2/sa_line_est_sum1*100)+"%"
+}
+
+if(sa_line_est_sum4 ===0 || sa_line_est_sum5 ===0 ){
+    sa_line_est_sum6 = 0+"%"
+}
+else {
+    sa_line_est_sum6 = Math.round(sa_line_est_sum5/sa_line_est_sum4*100)+"%"
+}
+
+if(sa_line_est_sum7 ===0 || sa_line_est_sum8 ===0 ){
+    sa_line_est_sum9 = 0+"%"
+}
+else {
+    sa_line_est_sum9 = Math.round(sa_line_est_sum8/sa_line_est_sum7*100)+"%"
+}
+
+
+document.getElementById("sa-line-est-bond1").innerHTML = sa_line_est_bond1
+document.getElementById("sa-line-est-bond2").innerHTML = sa_line_est_bond2
+document.getElementById("sa-line-est-bond3").innerHTML = sa_line_est_bond3
+document.getElementById("sa-line-est-bond4").innerHTML = sa_line_est_bond4
+document.getElementById("sa-line-est-bond5").innerHTML = sa_line_est_bond5
+document.getElementById("sa-line-est-bond6").innerHTML = sa_line_est_bond6
+document.getElementById("sa-line-est-bond7").innerHTML = sa_line_est_bond7
+document.getElementById("sa-line-est-bond8").innerHTML = sa_line_est_bond8
+document.getElementById("sa-line-est-bond9").innerHTML = sa_line_est_bond9
+
+document.getElementById("sa-line-est-glu1").innerHTML = sa_line_est_glu1
+document.getElementById("sa-line-est-glu2").innerHTML = sa_line_est_glu2
+document.getElementById("sa-line-est-glu3").innerHTML = sa_line_est_glu3
+document.getElementById("sa-line-est-glu4").innerHTML = sa_line_est_glu4
+document.getElementById("sa-line-est-glu5").innerHTML = sa_line_est_glu5
+document.getElementById("sa-line-est-glu6").innerHTML = sa_line_est_glu6
+document.getElementById("sa-line-est-glu7").innerHTML = sa_line_est_glu7
+document.getElementById("sa-line-est-glu8").innerHTML = sa_line_est_glu8
+document.getElementById("sa-line-est-glu9").innerHTML = sa_line_est_glu9
+
+document.getElementById("sa-line-est-ass1").innerHTML = sa_line_est_ass1
+document.getElementById("sa-line-est-ass2").innerHTML = sa_line_est_ass2
+document.getElementById("sa-line-est-ass3").innerHTML = sa_line_est_ass3
+document.getElementById("sa-line-est-ass4").innerHTML = sa_line_est_ass4
+document.getElementById("sa-line-est-ass5").innerHTML = sa_line_est_ass5
+document.getElementById("sa-line-est-ass6").innerHTML = sa_line_est_ass6
+document.getElementById("sa-line-est-ass7").innerHTML = sa_line_est_ass7
+document.getElementById("sa-line-est-ass8").innerHTML = sa_line_est_ass8
+document.getElementById("sa-line-est-ass9").innerHTML = sa_line_est_ass9
+
+document.getElementById("sa-line-est-scr1").innerHTML = sa_line_est_scr1
+document.getElementById("sa-line-est-scr2").innerHTML = sa_line_est_scr2
+document.getElementById("sa-line-est-scr3").innerHTML = sa_line_est_scr3
+document.getElementById("sa-line-est-scr4").innerHTML = sa_line_est_scr4
+document.getElementById("sa-line-est-scr5").innerHTML = sa_line_est_scr5
+document.getElementById("sa-line-est-scr6").innerHTML = sa_line_est_scr6
+document.getElementById("sa-line-est-scr7").innerHTML = sa_line_est_scr7
+document.getElementById("sa-line-est-scr8").innerHTML = sa_line_est_scr8
+document.getElementById("sa-line-est-scr9").innerHTML = sa_line_est_scr9
+
+document.getElementById("sa-line-est-cab1").innerHTML = sa_line_est_cab1
+document.getElementById("sa-line-est-cab2").innerHTML = sa_line_est_cab2
+document.getElementById("sa-line-est-cab3").innerHTML = sa_line_est_cab3
+document.getElementById("sa-line-est-cab4").innerHTML = sa_line_est_cab4
+document.getElementById("sa-line-est-cab5").innerHTML = sa_line_est_cab5
+document.getElementById("sa-line-est-cab6").innerHTML = sa_line_est_cab6
+document.getElementById("sa-line-est-cab7").innerHTML = sa_line_est_cab7
+document.getElementById("sa-line-est-cab8").innerHTML = sa_line_est_cab8
+document.getElementById("sa-line-est-cab9").innerHTML = sa_line_est_cab9
+
+document.getElementById("sa-line-est-mat1").innerHTML = sa_line_est_mat1
+document.getElementById("sa-line-est-mat2").innerHTML = sa_line_est_mat2
+document.getElementById("sa-line-est-mat3").innerHTML = sa_line_est_mat3
+document.getElementById("sa-line-est-mat4").innerHTML = sa_line_est_mat4
+document.getElementById("sa-line-est-mat5").innerHTML = sa_line_est_mat5
+document.getElementById("sa-line-est-mat6").innerHTML = sa_line_est_mat6
+document.getElementById("sa-line-est-mat7").innerHTML = sa_line_est_mat7
+document.getElementById("sa-line-est-mat8").innerHTML = sa_line_est_mat8
+document.getElementById("sa-line-est-mat9").innerHTML = sa_line_est_mat9
+
+document.getElementById("sa-line-est-sum1").innerHTML = sa_line_est_sum1
+document.getElementById("sa-line-est-sum2").innerHTML = sa_line_est_sum2
+document.getElementById("sa-line-est-sum3").innerHTML = sa_line_est_sum3
+document.getElementById("sa-line-est-sum4").innerHTML = sa_line_est_sum4
+document.getElementById("sa-line-est-sum5").innerHTML = sa_line_est_sum5
+document.getElementById("sa-line-est-sum6").innerHTML = sa_line_est_sum6
+document.getElementById("sa-line-est-sum7").innerHTML = sa_line_est_sum7
+document.getElementById("sa-line-est-sum8").innerHTML = sa_line_est_sum8
+document.getElementById("sa-line-est-sum9").innerHTML = sa_line_est_sum9
+
+document.getElementById("sa-line-est-cnc").innerHTML = sa_line_est_sum3
+document.getElementById("sa-line-est-sipv").innerHTML = sa_line_est_sum6
+document.getElementById("sa-line-est-mvmp").innerHTML = sa_line_est_sum9
+
+}

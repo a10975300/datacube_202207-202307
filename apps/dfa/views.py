@@ -1,3 +1,27 @@
-from django.shortcuts import render
+from dfa.models import Dfa_Review_Result
 
-# Create your views here.
+
+# dashboard data
+class DfaDashboardData:
+    def get_dfa_dashbaord_data(self):
+        from django.db.models import Max, Min, Sum, Count, Avg, Q
+
+        dfa_issues = Dfa_Review_Result.objects.all()
+        dfa_issue_qty = dfa_issues.count()
+        #dfa_fa_fun_qty = dfa_issues.filter(Q(dfa_production_line='FA') & Q(dfa_category='Bonding') | Q(dfa_category='Gluing') | Q(dfa_category='Assembly') | Q(dfa_category='Screwing') | Q(dfa_category='Cables Assembly') | Q(dfa_category='Material Scan & link')).count()
+
+        # statistics by factory related issue
+        dfa_issue = dfa_issues.values('dfa_product__PartnerName',
+                                        'dfa_product__ProductName',
+                                          'dfa_category',
+                                          'dfa_estimated_hc',
+                                          'dfa_production_line',
+                                          'dfa_cnc',
+                                          'dfa_si_pv',
+                                          'dfa_mv_mp').annotate(Count('dfa_object'))
+
+        dfa_context = {
+            "dfa_issue_qty": dfa_issue_qty,
+            'dfa_issue': dfa_issue,
+        }
+        return dfa_context

@@ -1,0 +1,479 @@
+function DFAtable2_init(){
+
+    var table_init = $('#DFA-table2').DataTable();
+    table_init.page.len(-1).draw();
+
+    var table = document.getElementById("DFA-table2");
+    var tableLen = table.rows.length;
+
+    var fa_est_bond1 = 0;
+    var fa_est_bond2 = 0;
+    var fa_est_bond3 = 0;
+    var fa_est_bond4 = 0;
+    var fa_est_bond5 = 0;
+    var fa_est_bond6 = 0;
+    var fa_est_bond7 = 0;
+    var fa_est_bond8 = 0;
+    var fa_est_bond9 = 0;
+
+    var fa_est_glu1 = 0;
+    var fa_est_glu2 = 0;
+    var fa_est_glu3 = 0;
+    var fa_est_glu4 = 0;
+    var fa_est_glu5 = 0;
+    var fa_est_glu6 = 0;
+    var fa_est_glu7 = 0;
+    var fa_est_glu8 = 0;
+    var fa_est_glu9 = 0;
+
+    var fa_est_ass1 = 0;
+    var fa_est_ass2 = 0;
+    var fa_est_ass3 = 0;
+    var fa_est_ass4 = 0;
+    var fa_est_ass5 = 0;
+    var fa_est_ass6 = 0;
+    var fa_est_ass7 = 0;
+    var fa_est_ass8 = 0;
+    var fa_est_ass9 = 0;
+
+    var fa_est_scr1 = 0;
+    var fa_est_scr2 = 0;
+    var fa_est_scr3 = 0;
+    var fa_est_scr4 = 0;
+    var fa_est_scr5 = 0;
+    var fa_est_scr6 = 0;
+    var fa_est_scr7 = 0;
+    var fa_est_scr8 = 0;
+    var fa_est_scr9 = 0;
+
+    var fa_est_cab1 = 0;
+    var fa_est_cab2 = 0;
+    var fa_est_cab3 = 0;
+    var fa_est_cab4 = 0;
+    var fa_est_cab5 = 0;
+    var fa_est_cab6 = 0;
+    var fa_est_cab7 = 0;
+    var fa_est_cab8 = 0;
+    var fa_est_cab9 = 0;
+
+    var fa_est_mat1 = 0;
+    var fa_est_mat2 = 0;
+    var fa_est_mat3 = 0;
+    var fa_est_mat4 = 0;
+    var fa_est_mat5 = 0;
+    var fa_est_mat6 = 0;
+    var fa_est_mat7 = 0;
+    var fa_est_mat8 = 0;
+    var fa_est_mat9 = 0;
+
+    var fa_est_sum1 = 0;
+    var fa_est_sum2 = 0;
+    var fa_est_sum3 = 0;
+    var fa_est_sum4 = 0;
+    var fa_est_sum5 = 0;
+    var fa_est_sum6 = 0;
+    var fa_est_sum7 = 0;
+    var fa_est_sum8 = 0;
+    var fa_est_sum9 = 0;
+
+for (var i = 1; i < tableLen; i++) {
+
+    var coltext2 = table.rows[i].cells[2].innerText;
+    var coltext3 = Number(table.rows[i].cells[3].innerText);
+    var coltext4 = table.rows[i].cells[4].innerText;
+    var coltext5 = table.rows[i].cells[5].innerText;
+    var coltext6 = table.rows[i].cells[6].innerText;
+    var coltext7 = table.rows[i].cells[7].innerText;
+    var coltext8 = Number(table.rows[i].cells[8].innerText);
+
+//FA-bond
+    if (coltext4 === "FA" && coltext2 === "Bonding") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_est_bond1 = fa_est_bond1 + (coltext3*coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_est_bond4 = fa_est_bond4 + (coltext3*coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_est_bond7 = fa_est_bond7 + (coltext3*coltext8)
+        }
+
+        if (isNaN(coltext3) === false && coltext5 === "Y") {
+            fa_est_bond2 = fa_est_bond2 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext6 === "Y") {
+            fa_est_bond5 = fa_est_bond5 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext7 === "Y") {
+            fa_est_bond8 = fa_est_bond8 + (coltext3*coltext8)
+        }
+
+    }
+//FA-glu
+    else if (coltext4 === "FA" && coltext2 === "Gluing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_est_glu1 = fa_est_glu1 + (coltext3*coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_est_glu4 = fa_est_glu4 + (coltext3*coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_est_glu7 = fa_est_glu7 + (coltext3*coltext8)
+        }
+
+        if (isNaN(coltext3) === false && coltext5 === "Y") {
+            fa_est_glu2 = fa_est_glu2 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext6 === "Y") {
+            fa_est_glu5 = fa_est_glu5 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext7 === "Y") {
+            fa_est_glu8 = fa_est_glu8 + (coltext3*coltext8)
+        }
+
+    }
+//FA-ass
+        else if (coltext4 === "FA" && coltext2 === "Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_est_ass1 = fa_est_ass1 + (coltext3*coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_est_ass4 = fa_est_ass4 + (coltext3*coltext8)
+        }
+       if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_est_ass7 = fa_est_ass7 + (coltext3*coltext8)
+        }
+
+        if (isNaN(coltext3) === false && coltext5 === "Y") {
+            fa_est_ass2 = fa_est_ass2 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext6 === "Y") {
+            fa_est_ass5 = fa_est_ass5 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext7 === "Y") {
+            fa_est_ass8 = fa_est_ass8 + (coltext3*coltext8)
+        }
+
+    }
+//FA-scr
+        else if (coltext4 === "FA" && coltext2 === "Screwing") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_est_scr1 = fa_est_scr1 + (coltext3*coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_est_scr4 = fa_est_scr4 + (coltext3*coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_est_scr7 = fa_est_scr7 + (coltext3*coltext8)
+        }
+
+        if (isNaN(coltext3) === false && coltext5 === "Y") {
+            fa_est_scr2 = fa_est_scr2 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext6 === "Y") {
+            fa_est_scr5 = fa_est_scr5 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext7 === "Y") {
+            fa_est_scr8 = fa_est_scr8 + (coltext3*coltext8)
+        }
+
+    }
+//FA-cab
+        else if (coltext4 === "FA" && coltext2 === "Cables Assembly") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_est_cab1 = fa_est_cab1 + (coltext3*coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_est_cab4 = fa_est_cab4 + (coltext3*coltext8)
+        }
+         if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_est_cab7 = fa_est_cab7 + (coltext3*coltext8)
+        }
+
+        if (isNaN(coltext3) === false && coltext5 === "Y") {
+            fa_est_cab2 = fa_est_cab2 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext6 === "Y") {
+            fa_est_cab5 = fa_est_cab5 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext7 === "Y") {
+            fa_est_cab8 = fa_est_cab8 + (coltext3*coltext8)
+        }
+
+    }
+//FA-mat
+        else if (coltext4 === "FA" && coltext2 === "Material Scan & link") {
+
+        if (coltext5 === "N" || coltext5 === "Y" || coltext5 === "N/A") {
+            fa_est_mat1 = fa_est_mat1 + (coltext3*coltext8)
+        }
+        if (coltext6 === "N" || coltext6 === "Y" || coltext6 === "N/A") {
+            fa_est_mat4 = fa_est_mat4 + (coltext3*coltext8)
+        }
+        if (coltext7 === "N" || coltext7 === "Y" || coltext7 === "N/A") {
+            fa_est_mat7 = fa_est_mat7 + (coltext3*coltext8)
+        }
+
+        if (isNaN(coltext3) === false && coltext5 === "Y") {
+            fa_est_mat2 = fa_est_mat2 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext6 === "Y") {
+            fa_est_mat5 = fa_est_mat5 + (coltext3*coltext8)
+        }
+        if (isNaN(coltext3) === false && coltext7 === "Y") {
+            fa_est_mat8 = fa_est_mat8 + (coltext3*coltext8)
+        }
+
+    }
+}
+
+//FA-bond %
+
+if(fa_est_bond1 ===0 || fa_est_bond2 ===0 ){
+    fa_est_bond3 = 0+"%"
+}
+else {
+    fa_est_bond3 = Math.round(fa_est_bond2/fa_est_bond1*100)+"%"
+}
+
+if(fa_est_bond4 ===0 || fa_est_bond5 ===0 ){
+    fa_est_bond6 = 0+"%"
+}
+else {
+    fa_est_bond6 = Math.round(fa_est_bond5/fa_est_bond4*100)+"%"
+}
+
+if(fa_est_bond7 ===0 || fa_est_bond8 ===0 ){
+    fa_est_bond9 = 0+"%"
+}
+else {
+    fa_est_bond9 = Math.round(fa_est_bond8/fa_est_bond7*100)+"%"
+}
+
+//FA-glu %
+
+if(fa_est_glu1 ===0 || fa_est_glu2 ===0 ){
+    fa_est_glu3 = 0+"%"
+}
+else {
+    fa_est_glu3 = Math.round(fa_est_glu2/fa_est_glu1*100)+"%"
+}
+
+if(fa_est_glu4 ===0 || fa_est_glu5 ===0 ){
+    fa_est_glu6 = 0+"%"
+}
+else {
+    fa_est_glu6 = Math.round(fa_est_glu5/fa_est_glu4*100)+"%"
+}
+
+if(fa_est_glu7 ===0 || fa_est_glu8 ===0 ){
+    fa_est_glu9 = 0+"%"
+}
+else {
+    fa_est_glu9 = Math.round(fa_est_glu8/fa_est_glu7*100)+"%"
+}
+
+//FA-ass %
+
+if(fa_est_ass1 ===0 || fa_est_ass2 ===0 ){
+    fa_est_ass3 = 0+"%"
+}
+else {
+    fa_est_ass3 = Math.round(fa_est_ass2/fa_est_ass1*100)+"%"
+}
+
+if(fa_est_ass4 ===0 || fa_est_ass5 ===0 ){
+    fa_est_ass6 = 0+"%"
+}
+else {
+    fa_est_ass6 = Math.round(fa_est_ass5/fa_est_ass4*100)+"%"
+}
+
+if(fa_est_ass7 ===0 || fa_est_ass8 ===0 ){
+    fa_est_ass9 = 0+"%"
+}
+else {
+    fa_est_ass9 = Math.round(fa_est_ass8/fa_est_ass7*100)+"%"
+}
+
+//FA-scr %
+
+if(fa_est_scr1 ===0 || fa_est_scr2 ===0 ){
+    fa_est_scr3 = 0+"%"
+}
+else {
+    fa_est_scr3 = Math.round(fa_est_scr2/fa_est_scr1*100)+"%"
+}
+
+if(fa_est_scr4 ===0 || fa_est_scr5 ===0 ){
+    fa_est_scr6 = 0+"%"
+}
+else {
+    fa_est_scr6 = Math.round(fa_est_scr5/fa_est_scr4*100)+"%"
+}
+
+if(fa_est_scr7 ===0 || fa_est_scr8 ===0 ){
+    fa_est_scr9 = 0+"%"
+}
+else {
+    fa_est_scr9 = Math.round(fa_est_scr8/fa_est_scr7*100)+"%"
+}
+
+//FA-cab %
+
+if(fa_est_cab1 ===0 || fa_est_cab2 ===0 ){
+    fa_est_cab3 = 0+"%"
+}
+else {
+    fa_est_cab3 = Math.round(fa_est_cab2/fa_est_cab1*100)+"%"
+}
+
+if(fa_est_cab4 ===0 || fa_est_cab5 ===0 ){
+    fa_est_cab6 = 0+"%"
+}
+else {
+    fa_est_cab6 = Math.round(fa_est_cab5/fa_est_cab4*100)+"%"
+}
+
+if(fa_est_cab7 ===0 || fa_est_cab8 ===0 ){
+    fa_est_cab9 = 0+"%"
+}
+else {
+    fa_est_cab9 = Math.round(fa_est_cab8/fa_est_cab7*100)+"%"
+}
+
+//FA-mat %
+
+if(fa_est_mat1 ===0 || fa_est_mat2 ===0 ){
+    fa_est_mat3 = 0+"%"
+}
+else {
+    fa_est_mat3 = Math.round(fa_est_mat2/fa_est_mat1*100)+"%"
+}
+
+if(fa_est_mat4 ===0 || fa_est_mat5 ===0 ){
+    fa_est_mat6 = 0+"%"
+}
+else {
+    fa_est_mat6 = Math.round(fa_est_mat5/fa_est_mat4*100)+"%"
+}
+
+if(fa_est_mat7 ===0 || fa_est_mat8 ===0 ){
+    fa_est_mat9 = 0+"%"
+}
+else {
+    fa_est_mat9 = Math.round(fa_est_mat8/fa_est_mat7*100)+"%"
+}
+
+//FA-sum
+fa_est_sum1 = fa_est_bond1+fa_est_glu1+fa_est_ass1+fa_est_scr1+fa_est_cab1+fa_est_mat1
+fa_est_sum2 = fa_est_bond2+fa_est_glu2+fa_est_ass2+fa_est_scr2+fa_est_cab2+fa_est_mat2
+fa_est_sum4 = fa_est_bond4+fa_est_glu4+fa_est_ass4+fa_est_scr4+fa_est_cab4+fa_est_mat4
+fa_est_sum5 = fa_est_bond5+fa_est_glu5+fa_est_ass5+fa_est_scr5+fa_est_cab5+fa_est_mat5
+fa_est_sum7 = fa_est_bond7+fa_est_glu7+fa_est_ass7+fa_est_scr7+fa_est_cab7+fa_est_mat7
+fa_est_sum8 = fa_est_bond8+fa_est_glu8+fa_est_ass8+fa_est_scr8+fa_est_cab8+fa_est_mat8
+
+//FA-sum %
+
+if(fa_est_sum1 ===0 || fa_est_sum2 ===0 ){
+    fa_est_sum3 = 0+"%"
+}
+else {
+    fa_est_sum3 = Math.round(fa_est_sum2/fa_est_sum1*100)+"%"
+}
+
+if(fa_est_sum4 ===0 || fa_est_sum5 ===0 ){
+    fa_est_sum6 = 0+"%"
+}
+else {
+    fa_est_sum6 = Math.round(fa_est_sum5/fa_est_sum4*100)+"%"
+}
+
+if(fa_est_sum7 ===0 || fa_est_sum8 ===0 ){
+    fa_est_sum9 = 0+"%"
+}
+else {
+    fa_est_sum9 = Math.round(fa_est_sum8/fa_est_sum7*100)+"%"
+}
+
+
+document.getElementById("fa-est-bond1").innerHTML = fa_est_bond1
+document.getElementById("fa-est-bond2").innerHTML = fa_est_bond2
+document.getElementById("fa-est-bond3").innerHTML = fa_est_bond3
+document.getElementById("fa-est-bond4").innerHTML = fa_est_bond4
+document.getElementById("fa-est-bond5").innerHTML = fa_est_bond5
+document.getElementById("fa-est-bond6").innerHTML = fa_est_bond6
+document.getElementById("fa-est-bond7").innerHTML = fa_est_bond7
+document.getElementById("fa-est-bond8").innerHTML = fa_est_bond8
+document.getElementById("fa-est-bond9").innerHTML = fa_est_bond9
+
+document.getElementById("fa-est-glu1").innerHTML = fa_est_glu1
+document.getElementById("fa-est-glu2").innerHTML = fa_est_glu2
+document.getElementById("fa-est-glu3").innerHTML = fa_est_glu3
+document.getElementById("fa-est-glu4").innerHTML = fa_est_glu4
+document.getElementById("fa-est-glu5").innerHTML = fa_est_glu5
+document.getElementById("fa-est-glu6").innerHTML = fa_est_glu6
+document.getElementById("fa-est-glu7").innerHTML = fa_est_glu7
+document.getElementById("fa-est-glu8").innerHTML = fa_est_glu8
+document.getElementById("fa-est-glu9").innerHTML = fa_est_glu9
+
+document.getElementById("fa-est-ass1").innerHTML = fa_est_ass1
+document.getElementById("fa-est-ass2").innerHTML = fa_est_ass2
+document.getElementById("fa-est-ass3").innerHTML = fa_est_ass3
+document.getElementById("fa-est-ass4").innerHTML = fa_est_ass4
+document.getElementById("fa-est-ass5").innerHTML = fa_est_ass5
+document.getElementById("fa-est-ass6").innerHTML = fa_est_ass6
+document.getElementById("fa-est-ass7").innerHTML = fa_est_ass7
+document.getElementById("fa-est-ass8").innerHTML = fa_est_ass8
+document.getElementById("fa-est-ass9").innerHTML = fa_est_ass9
+
+document.getElementById("fa-est-scr1").innerHTML = fa_est_scr1
+document.getElementById("fa-est-scr2").innerHTML = fa_est_scr2
+document.getElementById("fa-est-scr3").innerHTML = fa_est_scr3
+document.getElementById("fa-est-scr4").innerHTML = fa_est_scr4
+document.getElementById("fa-est-scr5").innerHTML = fa_est_scr5
+document.getElementById("fa-est-scr6").innerHTML = fa_est_scr6
+document.getElementById("fa-est-scr7").innerHTML = fa_est_scr7
+document.getElementById("fa-est-scr8").innerHTML = fa_est_scr8
+document.getElementById("fa-est-scr9").innerHTML = fa_est_scr9
+
+document.getElementById("fa-est-cab1").innerHTML = fa_est_cab1
+document.getElementById("fa-est-cab2").innerHTML = fa_est_cab2
+document.getElementById("fa-est-cab3").innerHTML = fa_est_cab3
+document.getElementById("fa-est-cab4").innerHTML = fa_est_cab4
+document.getElementById("fa-est-cab5").innerHTML = fa_est_cab5
+document.getElementById("fa-est-cab6").innerHTML = fa_est_cab6
+document.getElementById("fa-est-cab7").innerHTML = fa_est_cab7
+document.getElementById("fa-est-cab8").innerHTML = fa_est_cab8
+document.getElementById("fa-est-cab9").innerHTML = fa_est_cab9
+
+document.getElementById("fa-est-mat1").innerHTML = fa_est_mat1
+document.getElementById("fa-est-mat2").innerHTML = fa_est_mat2
+document.getElementById("fa-est-mat3").innerHTML = fa_est_mat3
+document.getElementById("fa-est-mat4").innerHTML = fa_est_mat4
+document.getElementById("fa-est-mat5").innerHTML = fa_est_mat5
+document.getElementById("fa-est-mat6").innerHTML = fa_est_mat6
+document.getElementById("fa-est-mat7").innerHTML = fa_est_mat7
+document.getElementById("fa-est-mat8").innerHTML = fa_est_mat8
+document.getElementById("fa-est-mat9").innerHTML = fa_est_mat9
+
+document.getElementById("fa-est-sum1").innerHTML = fa_est_sum1
+document.getElementById("fa-est-sum2").innerHTML = fa_est_sum2
+document.getElementById("fa-est-sum3").innerHTML = fa_est_sum3
+document.getElementById("fa-est-sum4").innerHTML = fa_est_sum4
+document.getElementById("fa-est-sum5").innerHTML = fa_est_sum5
+document.getElementById("fa-est-sum6").innerHTML = fa_est_sum6
+document.getElementById("fa-est-sum7").innerHTML = fa_est_sum7
+document.getElementById("fa-est-sum8").innerHTML = fa_est_sum8
+document.getElementById("fa-est-sum9").innerHTML = fa_est_sum9
+
+document.getElementById("fa-est-cnc").innerHTML = fa_est_sum3
+document.getElementById("fa-est-sipv").innerHTML = fa_est_sum6
+document.getElementById("fa-est-mvmp").innerHTML = fa_est_sum9
+
+}

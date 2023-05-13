@@ -12,17 +12,17 @@ class ProductDashboardData:
         pass
 
     def get_product_dashboard_data(self):
-        from django.db.models import Max, Min, Sum, Count, Avg
+        from django.db.models import Max, Min, Sum, Count, Avg, Q
         products = Products.objects.all()
         product_qty = products.count()
+        product_mv_qty = products.filter(Q(ProductPhase='MV-1') | Q(ProductPhase='MV-2')).count()#取得在MV的product數量
 
         # 計算三個前的product增長數量
-        today = timezone.now().date()
-        three_months_ago = today - timedelta(days=90)
-        monthly_product_qty = products.filter(create_date__range=(three_months_ago, today)).count()
+        today = timezone.now().date()#取得今天日期
+        three_months_ago = today - timedelta(days=90)#取得三個月的日期
+        monthly_product_qty = products.filter(create_date__range=(three_months_ago, today)).count()#取的三個月到今天的product數量
 
-        npi_qty, ramp_build_qty, production_qty, date_today, date_delta = self.calculate_build_date(
-            products)
+        npi_qty, ramp_build_qty, production_qty, date_today, date_delta = self.calculate_build_date(products)
 
         # 'PlatformName__status' related_name__status django反向查询
         product_table_data = products.values(
@@ -41,14 +41,14 @@ class ProductDashboardData:
 
         new_context = {
             "product_qty": product_qty,
+            "product_mv_qty": product_mv_qty,
+            "monthly_product_qty": monthly_product_qty,
             "ramp_build_qty": ramp_build_qty,
             "production_qty": production_qty,
             "npi_build_qty": npi_qty,
             "date_today": date_today,  # 给django模板response date用于日期比较
             "date_delta": date_delta,
-
-            "product_table_data": product_table_data,
-            "monthly_product_qty":monthly_product_qty,
+            "product_table_data": product_table_data
         }
         return new_context
 

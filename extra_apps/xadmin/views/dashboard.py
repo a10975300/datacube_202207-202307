@@ -29,6 +29,7 @@ import copy
 from npi.views import IssueDashboardData
 from product.views import ProductDashboardData
 from dfm.views import DfmDashboardData
+from dfa.views import DfaDashboardData
 
 
 class WidgetTypeSelect(forms.Widget):
@@ -593,9 +594,6 @@ class Dashboard(CommAdminView):
     # get dashboard data
     @filter_hook
     def getDashboardData(self):
-        # get dfm data
-        dfmdashboarddata = DfmDashboardData()
-        dfm_context = dfmdashboarddata.get_dfm_dashbaord_data()
 
         # get product data
         productdashboarddata = ProductDashboardData()
@@ -606,10 +604,19 @@ class Dashboard(CommAdminView):
         issuedashboarddata = IssueDashboardData()
         issue_context = issuedashboarddata.get_issue_dashbaord_data()
 
+        # get dfm data
+        dfmdashboarddata = DfmDashboardData()
+        dfm_context = dfmdashboarddata.get_dfm_dashbaord_data()
+
+        # get dfa data
+        dfadashboarddata = DfaDashboardData()
+        dfa_context = dfadashboarddata.get_dfa_dashbaord_data()
+
         context = super(Dashboard, self).get_context()
         context.update(product_context) # update product data
         context.update(issue_context) # update npi issue data
         context.update(dfm_context) # update dfm data
+        context.update(dfa_context)  # update dfa data
 
         return context
 
