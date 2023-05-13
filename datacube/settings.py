@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'import_export',
     'dfa.apps.DfaConfig',
     'nud.apps.NudConfig',
-    'regioncase.apps.RegioncaseConfig',
 
 ]
 

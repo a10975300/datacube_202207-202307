@@ -8,7 +8,6 @@ class DfaDashboardData:
 
         dfa_issues = Dfa_Review_Result.objects.all()
         dfa_issue_qty = dfa_issues.count()
-        #dfa_fa_fun_qty = dfa_issues.filter(Q(dfa_production_line='FA') & Q(dfa_category='Bonding') | Q(dfa_category='Gluing') | Q(dfa_category='Assembly') | Q(dfa_category='Screwing') | Q(dfa_category='Cables Assembly') | Q(dfa_category='Material Scan & link')).count()
 
         # statistics by factory related issue
         dfa_issue = dfa_issues.values('dfa_product__PartnerName',

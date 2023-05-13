@@ -2,7 +2,7 @@
 {{ wizard.management_form }}
 <ul class="steps-nav nav nav-pills">
   {% for step in wizard.steps.all %}
-  <li{% if step == wizard.steps.current %} class="active"{% endif %}>
+  <li {% if step == wizard.steps.current %} class="active"{% endif %}>
       <a
       {% if wizard.steps.step0 > forloop.counter0 %} onclick="javascript:$('#wizard_goto_step').val('{{forloop.counter0}}').click();"{% endif %}
       >

@@ -1,6 +1,5 @@
 import datetime
 import requests
-import threading
 from PIL import Image
 from io import BytesIO
 
@@ -768,7 +767,6 @@ class DfmReportParser():
 
         # call method of dfm_import_record_handle to create or update an record when the above steps finished
         dfm_stage=""
-
         if dfm_sheet.cell(32, 7).value:  # mv
             dfm_stage = "MV"
         elif dfm_sheet.cell(32, 6).value:  # pv
@@ -781,7 +779,9 @@ class DfmReportParser():
         self.dfm_import_record_handle(product_name,dfm_stage,currentuser)
         # log entries
         self.log_entries(request, product_name, dfm_stage, currentuser)
-        return [product_name,dfm_stage]
+
+        # return
+        return [product_name, dfm_stage, odm_name]
 
     # parse new template Ver:3.0a
     def new_template(self,request, workbook, currentuser):
@@ -917,7 +917,7 @@ class DfmReportParser():
         self.dfm_import_record_handle(product_name,dfm_stage,currentuser)
         # log entries
         self.log_entries(request, product_name, dfm_stage, currentuser)
-        return [product_name,dfm_stage]
+        return [product_name,dfm_stage, odm_name]
 
     # create or update product Ver:1.63、Ver:2.0、Ver:3.0a
     def new_product(self,data, currentuser):
@@ -1037,11 +1037,11 @@ class DfmReportParser():
 
     # creare or update new item Ver:2.0
     def dfm_review_item_handle(self, dfm_sheet, check_item_id, product_id, row):
-            nud = dfm_sheet.cell(row, 8).value
             cnc = dfm_sheet.cell(row, 4).value
             si = dfm_sheet.cell(row, 5).value
             pv = dfm_sheet.cell(row, 6).value
             mv = dfm_sheet.cell(row, 7).value
+            nud = dfm_sheet.cell(row, 8).value
 
             new_item = Dfm_Review_Result.objects.filter(dfm_review_item_desc_id=check_item_id,dfm_product_id=product_id)
             new_item.update_or_create(defaults={

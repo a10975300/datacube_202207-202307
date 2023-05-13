@@ -7,6 +7,14 @@ from npi.models import Issue
 from datetime import date, timedelta
 from django.utils import timezone
 
+# handle new issue submit
+class SubmitIssue(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
+
 # 处理safelaunch issue category选择(当选择category_I时，自动列出category_I下面所带的category_II)
 class IssueCategorySelectView(View):
     def get(self, request):
@@ -24,7 +32,7 @@ class IssueDashboardData:
         from django.db.models import Max, Min, Sum, Count, Avg, Q
 
         npi_issues = Issue.objects.all()
-        npi_issue_qty = npi_issues.count()
+        npi_issue_qty = 2
         npi_issue_mv_qty = npi_issues.filter(Q(buildstage='MV-1') | Q(buildstage='MV-2')).count()#取得在MV的issue數量
 
         closed_qty = npi_issues.filter(status='Close').count()

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+    }
+    #customers tr td {
+    	height:8px;
+    }
+
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+    }
+    .td-1 {
+    	text-align:center;
+    }
+    p{
+    	font-size:15px;
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers tr:hover {background-color: #ddd;}
+    #customers tr {
+        font-size:12px;
+    }
+
+    #customers th {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      background-color: #00BFFF;
+      color: Black;
+      font-size:12px;
+    }
+    </style>
+</head>
+<body>
+	<p>
+		<span style="color:red">This is a notification message from the system, Please do not replay.</span><br/>
+		user {{ user }} triggered this message <br/><br/>
+	</p>
+	<p>
+	<span><strong>Platform: </strong></span> {{ platform_name }} <br/>
+	<span><strong>Build stage: </strong></span> {{ dfm_stage }} <br/>
+	<span><strong>ODM: </strong></span> {{ odm_name }} <br/>
+	</p>
+	<span>under studying -- the following table shows the distribution of Dfm items</span>
+	<p>
+	<span>SCPE DATAHOME</span><br/>
+	<span>http://15.36.145.93/scpe/</span>
+	</p>
+</body>
+</html>
