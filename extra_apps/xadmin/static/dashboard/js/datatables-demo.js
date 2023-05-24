@@ -5959,3 +5959,51 @@ document.getElementById("sa-line-est-sipv").innerHTML = sa_line_est_sum6
 document.getElementById("sa-line-est-mvmp").innerHTML = sa_line_est_sum9
 
 }
+
+
+const { createEditor, createToolbar } = window.wangEditor
+const editorConfig = {
+    placeholder: 'Type here...',
+    onChange(editor) {
+      const html = editor.getHtml()
+      console.log('editor content', html)
+    }
+}
+const editor = createEditor({
+    selector: '#editor-container',
+    html: '<p><br></p>',
+    config: editorConfig,
+    mode: 'simple',
+})
+
+const toolbarConfig = {}
+const toolbar = createToolbar({
+    editor,
+    selector: '#toolbar-container',
+    config: toolbarConfig,
+    mode: 'simple',
+})
+
+
+const { createEditor2, createToolbar2 } = window.wangEditor
+const editorConfig2 = {
+    placeholder: 'Type here...',
+    onChange(editor) {
+      const html2 = editor.getHtml()
+      console.log('editor content', html2)
+    }
+}
+const editor2 = createEditor({
+    selector: '#editor-container2',
+    html: '<p><br></p>',
+    config: editorConfig2,
+    mode: 'simple',
+})
+
+const toolbarConfig2 = {}
+const toolbar2 = createToolbar({
+    editor,
+    selector: '#toolbar-container2',
+    config: toolbarConfig2,
+    mode: 'simple',
+})

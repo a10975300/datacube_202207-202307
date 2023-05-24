@@ -45,3 +45,5 @@ class AdminAuthenticationForm(AuthenticationForm):
             elif not self.user_cache.is_active or not self.user_cache.is_staff:
                 raise forms.ValidationError(message)
         return self.cleaned_data
+
+
