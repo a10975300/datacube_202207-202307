@@ -148,6 +148,7 @@ class Dfm_Review_Admin(object):
                                                                       import_stage_cnc="Y")
 
             else:  # report_version == Ver:3.0a
+
                 # check if the product and dfm stage is the first upload or repeat to upload(don't support repeated upload)
                 cnc = dfm_sheet.cell(32, 5).value
                 si = dfm_sheet.cell(32, 6).value
@@ -200,23 +201,26 @@ class Dfm_Review_Admin(object):
                 from utils.excel_report_parser import DfmReportParser
                 result = DfmReportParser().parse(request, workbook, currentuser,report_version)
                 # raise a message on webpage
-                messages.success(request, "{}-{}'s dfm report was imported successfully.".format(result[0],result[1]))
+                messages.success(request, "{}-{}'s dfm data was imported successfully.".format(result[0],result[1]))
 
             else: #upload field
                 from utils.excel_report_parser import DfmReportParser
                 result = DfmReportParser().parse(request, workbook, currentuser,report_version)
                 # raise a message on webpage
-                messages.success(request, "{}-{}'s dfm report was imported successfully.".format(result[0],result[1]))
-
+                messages.success(request, "{}-{}'s dfm data was imported successfully.".format(result[0],result[1]))
+                """
                 #   send an alert by email
-                contents = "{}-{} dfm report was imported successfully.".format(result[0],result[1])
-                Notification().dfm_send_by_email(
-                                            user =[str(currentuser)],
-                                            platform_name =result[0],
-                                            dfm_stage=result[1],
-                                            odm_name=result[2],
-                                            subject=contents
-                                            )
+                contents = "{}-{} dfm data was imported successfully.".format(result[0],result[1])
+                Notification().send_by_email(
+                                            [str(currentuser)],
+                                            currentuser,
+                                            contents,
+                                            result[0],                                  # platform name
+                                            result[1],                                  # dfm_stage
+                                            "Dfm report uploaded Successfully",  # email title
+                                            None,                                  # 返回data
+                                            None,)                                 # odm name
+                """
             workbook.close()
             return HttpResponseRedirect('/scpe/dfm/dfm_review_result/')
         return super(Dfm_Review_Admin, self).post(request, *args, **kwargs)

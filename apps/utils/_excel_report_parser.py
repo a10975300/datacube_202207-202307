@@ -1,17 +1,13 @@
 import datetime
 import requests
-import threading
 from PIL import Image
 from io import BytesIO
-
 from django.contrib.auth.models import User
-from npi.models import Issue, SymptomCategory_First, SymptomCategory_Second
+from npi.models import Issue, Products, SymptomCategory_First, SymptomCategory_Second
+
 from dfm.models import Dfm_General_Checklist, Dfm_Review_Result,DFM_Report_Import_Records
 from product.models import Products
-from dfa.models import Dfa_Review_Result, Dfa_Report_Import_Records
-
 from openpyxl.cell import MergedCell
-from npi.forms import IssueModelForm
 
 class SafelaunchParser():
     """
@@ -30,8 +26,6 @@ class SafelaunchParser():
 
     # parse new template V2.2e (2022/12/06)
     def new_template(self,request, workbook, currentuser):
-        global issue_list
-
         summary_sheet = workbook['0-Summary Data']
         odm_name = summary_sheet.cell(3, 2).value             # get odm name from summary sheet
         segment = summary_sheet.cell(4, 2).value              # get product segment from summary sheet
@@ -40,8 +34,6 @@ class SafelaunchParser():
 
         sheet_names = workbook.sheetnames
         data = {}  # initial a null dict for collecting issue qty by each sheet
-        issue_list = [] # initial a null list to store issues temporarily
-
         for sheet_name in sheet_names[2:11]:
             # count issue qty by each sheet (default is 0)
             issue_qty_by_sheet = 0
@@ -59,36 +51,22 @@ class SafelaunchParser():
                 self.result = {}
             # write excel contents into database by for row in range(4, rows_number):
             for row in range(5, rows_number, 4):
-                if sheet.cell(row, 3).value :  # check if have contents in excel row? if yes, execute below codings; if no, break
-                    unit_size = sheet.cell(row, 2).value
-                    if not unit_size:
-                        error = {
-                            "sheet_name": sheet_name,
-                            "row": row,
-                            "message": "The column of unit_size is blank"  # list(result.keys())[0]
-                        }
-                        return [error]
+                unit_size = sheet.cell(row, 2).value
+
+                if unit_size and sheet.cell(row, 3).value:  # check if have contents in excel row? if yes, execute below codings; if no, break
                     productIds = self.create_new_product(unit_size, build_stage, odm_name, segment, currentuser)  # 调用函数 new_product 判断数据库是否已有该产品，
                     for productId in productIds:
-                        issueCateory_1 = sheet.cell(row, 4).value  # write issue interaction
-                        if not issueCateory_1:
-                            error = {
-                                "sheet_name": sheet_name,
-                                "row": row,
-                                "message": "Issue interaction is blank"  # list(result.keys())[0]
-                            }
-                            return [error]
-                        category_1_id = self.new_category_1(issueCateory_1)
-
-                        issueCategory_2 = sheet.cell(row, 5).value  # write issue symptom
-                        if not issueCategory_2:
-                            error = {
-                                "sheet_name": sheet_name,
-                                "row": row,
-                                "message": "Issue symptom is blank"  # list(result.keys())[0]
-                            }
-                            return [error]
-                        category_2_id = self.new_category_2(issueCategory_2, category_1_id, issueCateory_1)
+                        new_issue = Issue()
+                        new_issue.platformName_id = productId
+                        new_issue.processName = sheet_name                                          # write process name
+                        new_issue.issue_desc = sheet.cell(row, 3).value                             # write issue description
+                        issueCategory_1 = (sheet.cell(row, 4).value).strip()                         # write issue interaction
+                        category_1_id = self.new_category_1(issueCategory_1)
+                        new_issue.issue_interaction_id = category_1_id
+                        issueCategory_2 = (sheet.cell(row, 5).value).strip()                         # write issue symptom
+                        category_2_id = self.new_category_2(issueCategory_2, category_1_id, issueCategory_1)
+                        new_issue.issue_symptom_id = category_2_id
+                        new_issue.impact_scope = sheet.cell(row, 6).value                  # write issue impact scope
 
                         pre_build_qty = (0 if (sheet.cell(row, 7).value) == None else (sheet.cell(row, 7).value))
                         pre_build_defcet_qty = (0 if (sheet.cell(row, 8).value) == None else (sheet.cell(row, 8).value))
@@ -99,88 +77,68 @@ class SafelaunchParser():
                         balance_qty = (0 if (sheet.cell(row + 3, 7).value) == None else (sheet.cell(row + 3, 7).value))
                         balance_defcet_qty = (0 if (sheet.cell(row + 3, 8).value) == None else (sheet.cell(row + 3, 8).value))
 
+                        new_issue.pre_build_qty = pre_build_qty                       # pre_build build qty
+                        new_issue.pre_build_defcet_qty = pre_build_defcet_qty         # pre_build defect qty
+                        new_issue.mini_build_qty = mini1_build_qty                    # mini-1 build qty
+                        new_issue.mini_build_defcet_qty = mini1_build_defcet_qty      # mini-1 defect qty
+                        new_issue.mini2_build_qty = mini2_build_qty                   # mini-2 build qty
+                        new_issue.mini2_build_defcet_qty = mini2_build_defcet_qty     # mini-2 defect qty
+                        new_issue.balance_qty = balance_qty                           # balance build qty
+                        new_issue.balance_defcet_qty = balance_defcet_qty             # balance defect qty
+
+                        new_issue.input_qty = pre_build_qty + mini1_build_qty + mini2_build_qty + balance_qty                                  # write total inputs
+                        new_issue.defect_qty = pre_build_defcet_qty + mini1_build_defcet_qty + mini2_build_defcet_qty + balance_defcet_qty     # write defects
+
+                        new_issue.fail_rate_stage = "NA"                                  # write failure rate by every build stage
+                        new_issue.sn = sheet.cell(row, 10).value                          # write fail units S/N information
+                        new_issue.sku = sheet.cell(row, 11).value                         # write fail units SKU information
+
                         # get and write pic path
                         if (sheet_name + str(11) + str(row)) in self.result:
-                            photo = "issue/images/{}/{}/{}".format(self.platform, self.buildstage, self.result.get(sheet_name + str(11) + str(row)))
+                            new_issue.photo = "issue/images/{}/{}/{}".format(self.platform, self.buildstage, self.result.get(sheet_name + str(11) + str(row)))
                         else:
-                            photo = ""
-                        # get obs
-                        obs_ = sheet.cell(row, 21).value
-                        if obs_ == '' or obs_ == 'N/A' or obs_ == 'N' or obs_ == 0:
+                            new_issue.photo = ""
+
+                        new_issue.issue_analysis = sheet.cell(row, 13).value.replace("\n", "<br/>")  # write issue analysis contents
+                        new_issue.root_cause = sheet.cell(row, 14).value.replace("\n", "<br/>")      # write root cause
+                        new_issue.root_cause_category = sheet.cell(row, 15).value                    # write root cause category
+                        new_issue.short_term = sheet.cell(row, 16).value.replace("\n", "<br/>")      # write short term solutions
+                        new_issue.short_term_category = sheet.cell(row, 17).value                    # write short term solution category
+                        new_issue.long_term = sheet.cell(row, 18).value.replace("\n", "<br/>")       # write long-term solutions
+                        new_issue.long_term_category = sheet.cell(row, 19).value                     # write long-term solution category
+                        new_issue.status = sheet.cell(row, 20).value                                 # write issue status
+
+                        obs = sheet.cell(row, 21).value
+                        if obs == '' or obs == 'N/A' or obs == 'N' or obs == 0:
                             obs = 'NA'
+                        new_issue.obs = obs                                                          # write obs number
+
+                        new_issue.duplicate = sheet.cell(row, 22).value                              # write duplicate info
+                        errorCode = sheet.cell(row, 23).value                                        # write issue error code number
+                        if errorCode == '' or errorCode == "N/A" or errorCode == 'N' or errorCode == 0:
+                            new_issue.errorCode = 'NA'
+                        new_issue.errorCode = errorCode
+
+                        new_issue.repeating = sheet.cell(row, 24).value                              # write issue repeating info
+                        new_issue.repeatingstage = sheet.cell(row, 25).value                         # write issue repeated stages
+                        new_issue.buildstage = sheet.cell(row, 26).value                             # write issue build stage
+                        new_issue.owner = sheet.cell(row, 27).value                                  # write issue owner
+                        new_issue.updatedate = sheet.cell(row, 28).value
+                        new_issue.obs_link = "http://pulsarweb.twn.hp.com/Nebula//ReportRunner/RunDetailWithObsIds?observationIds={}".format(obs)  # write obs links
+
+                        new_issue.save()
+
+                        issue_qty_by_sheet += 1  # count issue qty by sheet
+                        if sheet.cell(row, 20).value == "Gating":
+                            issue_qty_gating += 1
+                        elif sheet.cell(row, 20).value == "Tracking":
+                            issue_qty_tracking += 1
+                        elif sheet.cell(row, 20).value == "Close":
+                            issue_qty_close += 1
+                        elif sheet.cell(row, 20).value == "Fix in next phase":
+                            issue_qty_fix_in_next_stage += 1
                         else:
-                            obs = obs_
-                        # get error code
-                        error = sheet.cell(row, 23).value  # write issue error code number
-                        if error == '' or error == "N/A" or error == 'N' or error == 0:
-                            errorCode = 'NA'
-                        else:
-                            errorCode = error
-
-                        post_data = {
-                            "platformName_id":productId,
-                            "processName":sheet_name,
-                            "issue_desc":sheet.cell(row, 3).value,
-                            "issue_interaction_id":category_1_id,
-                            "issue_symptom_id":category_2_id,
-                            "impact_scope":sheet.cell(row, 6).value,
-                            "pre_build_qty":pre_build_qty,
-                            "pre_build_defcet_qty": pre_build_defcet_qty,
-                            "mini_build_qty": mini1_build_qty,
-                            "mini_build_defcet_qty": mini1_build_defcet_qty,
-                            "mini2_build_qty": mini2_build_qty,
-                            "mini2_build_defcet_qty": mini2_build_defcet_qty,
-                            "balance_qty": balance_qty,
-                            "balance_defcet_qty": balance_defcet_qty,
-                            "input_qty": pre_build_qty + mini1_build_qty + mini2_build_qty + balance_qty,
-                            "defect_qty": pre_build_defcet_qty + mini1_build_defcet_qty + mini2_build_defcet_qty + balance_defcet_qty,
-                            "fail_rate_stage": "NA",
-                            "sn":sheet.cell(row, 10).value,
-                            "sku":sheet.cell(row, 11).value,
-                            "photo":photo,
-
-                            "issue_analysis": sheet.cell(row, 13).value.replace("\n", "<br/>"),
-                            "root_cause": sheet.cell(row, 14).value.replace("\n", "<br/>"),
-                            "root_cause_category": sheet.cell(row, 15).value,
-                            "short_term": sheet.cell(row, 16).value.replace("\n", "<br/>"),
-                            "short_term_category": sheet.cell(row, 17).value,
-                            "long_term": sheet.cell(row, 18).value.replace("\n", "<br/>"),
-                            "long_term_category": sheet.cell(row, 19).value,
-                            "status": sheet.cell(row, 20).value,
-                            "obs": obs,
-                            "duplicate": sheet.cell(row, 22).value ,
-                            "errorCode": errorCode,
-                            "repeating": sheet.cell(row, 24).value,
-                            "repeatingstage": sheet.cell(row, 25).value,
-                            "buildstage": sheet.cell(row, 26).value,
-                            "owner": sheet.cell(row, 27).value,
-                            "updatedate": sheet.cell(row, 28).value,
-                            "obs_link": "http://pulsarweb.twn.hp.com/Nebula//ReportRunner/RunDetailWithObsIds?observationIds={}".format(obs),
-                        }
-
-                        #  call issue_validate to verify issue contents
-                        result = self.issue_validate(post_data, productId, category_1_id, category_2_id)
-                        if result == "pass":
-                            # count issue quantity
-                            issue_qty_by_sheet += 1
-                            if sheet.cell(row, 20).value == "Gating":
-                                issue_qty_gating += 1
-                            elif sheet.cell(row, 20).value == "Tracking":
-                                issue_qty_tracking += 1
-                            elif sheet.cell(row, 20).value == "Close":
-                                issue_qty_close += 1
-                            elif sheet.cell(row, 20).value == "Fix in next phase":
-                                issue_qty_fix_in_next_stage += 1
-                            else:
-                                issue_qty_tracking += 1
-                        else:
-                            error = {
-                                "sheet_name": sheet_name,
-                                "row": row,
-                                "message":result  #list(result.keys())[0]
-                            }
-                            return [error]
-
+                            issue_qty_tracking += 1
             data[sheet_name] = {
                 "toatl_issue_qty": issue_qty_by_sheet,
                 "gating": issue_qty_gating,
@@ -189,19 +147,11 @@ class SafelaunchParser():
                 "fix_in_next_stage": issue_qty_fix_in_next_stage
             }
 
-        # call issue_save to save issues to database
-        flag = self.issue_save(issue_list)
-        if flag == "succeed":
-            # import logs
-            self.safelaunch_import_record(product_name, build_stage, currentuser)
-            # log entries
-            self.log_entries(request, product_name, build_stage, currentuser)
-            return [product_name, build_stage, odm_name, data]
-        else:
-            error = {
-                "data saving failed."
-            }
-            return [error]
+        # import logs
+        self.safelaunch_import_record(product_name, build_stage, currentuser)
+        # log entries
+        self.log_entries(request, product_name, build_stage, currentuser)
+        return [product_name, build_stage, odm_name, data]
 
     # parse old template V2.1 (2022/10/25)
     def old_template(self, request, workbook, currentuser):
@@ -331,31 +281,6 @@ class SafelaunchParser():
         self.log_entries(request, product_name, build_stage, currentuser)
         return [product_name, build_stage, odm_name, data]
 
-    # issue validate
-    def issue_validate(self, post_data, productId, category_1_id, category_2_id):
-        form = IssueModelForm(data=post_data)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.platformName_id = productId
-            instance.issue_interaction_id = category_1_id
-            instance.issue_symptom_id = category_2_id
-
-            issue_list.append(post_data)
-            return "pass"
-        else:
-            return form.errors.as_data()
-
-    # save issues to database
-    def issue_save(self, issue_list):
-        for issue in issue_list:
-            form = IssueModelForm(data=issue)
-            instance = form.save(commit=False)
-            instance.platformName_id = issue['platformName_id']
-            instance.issue_interaction_id = issue['issue_interaction_id']
-            instance.issue_symptom_id = issue['issue_symptom_id']
-            instance.save()
-        return "succeed"
-
     # handel date formate because that the excel 读出数字日期（44557）转换函数
     def date_conversion(self, date):
         delta = datetime.timedelta(days=date)
@@ -374,7 +299,7 @@ class SafelaunchParser():
         user = User.objects.filter(username=currentuser)
         unit_size = unit_size.split(",") # convert unit_size to list by ","
         for product in unit_size:
-            obj = Products.objects.filter(ProductName=product.strip())
+            obj = Products.objects.filter(ProductName=product)
             if obj:
                 product_id.append(obj[0].id)
                 Products.objects.filter(ProductName=product).update(ProductPhase=build_stage) # update build stage only
@@ -454,13 +379,8 @@ class SafelaunchParser():
             if (image.anchor._from.col, image.anchor._from.row):
                 picture_location_dict["{}{}{}".format(sheet_name, str(image.anchor._from.col), str(image.anchor._from.row + 1))] = img_name
 
-                # 单线程 -- 调用pictureUpload方法 requests.post 从本地跨域提交图片到服务器
+                # 调用pictureUpload方法 requests.post 从本地跨域提交图片到服务器
                 self.pictureUpload(product_name, stages.get(build_stage), img_name, image._data())
-
-                # 多线程 -- 调用pictureUpload方法 requests.post 从本地跨域提交图片到服务器
-                # t = threading.Thread(target=self.pictureUpload, args=(product_name, stages.get(build_stage), img_name, image._data()))
-                # t.start()
-
         return picture_location_dict, stages.get(build_stage), product_name
 
     # 通过requests.post模拟游览器提交图片和信息
@@ -516,6 +436,7 @@ class DfmReportParser():
         else: # report_version == Ver:3.0a
             result = self.new_template(request=request, workbook=workbook, currentuser=currentuser)
             return result
+
 
     # parse old template Ver:1.63
     def oldest_template(self, request, workbook, currentuser):
@@ -1211,131 +1132,7 @@ class DfmReportParser():
 
 class DfaReportParser():
     """
-    parse Dfa tear down report
+    parse DFA report
     """
-    def parse(self, request, workbook, currentuser):
-        """ call dfa method()"""
-        result = self.dfa_template(request=request, workbook=workbook, currentuser=currentuser)
-        return result
-
-    # parse dfa template
-    def dfa_template(self,request, workbook, currentuser):
-        dfa_sheet = workbook['Dashboard Page']
-        product_name = dfa_sheet.cell(2, 13).value
-        odm_name = dfa_sheet.cell(2, 7).value
-
-        product_id = self.new_product(product_name,odm_name,currentuser)
-
-        sheet_names = workbook.sheetnames
-        for sheet_name in sheet_names[2:11]:#依序讀取excel的分頁
-            sheet = workbook[sheet_name]  # 通过sheet名称指定sheet
-            rows_number = sheet.max_row  # get total row numbers
-            empty_time = 0  # 檢查最大行數之後，有三次空白，才為真正的最大行數
-            for row in range(17, rows_number):
-                checkingItem = sheet.cell(row, 3).value #object欄位 當作檢查
-                if checkingItem:
-                    dfa_object = (sheet.cell(row, 3).value).replace("\n", "\r\n")  # 使用.replace("\n", "\r\n")处理excel单元格里有换行问题 "\r\n"是textarea换行符
-                    sheet_name=sheet_name.strip()#去除sheet name 的空白
-                    self.dfa_item_handle(dfa_object,product_id,sheet,row,sheet_name)
-                    empty_time = 0
-                else:
-                    empty_time = empty_time+1
-                    if empty_time == 3:
-                        break
-
-        # call method of dfa_import_record_handle to create or update an record when the above steps finished
-        self.dfa_import_record_handle(product_name,odm_name,currentuser)
-        # log entries
-        self.log_entries(request, product_name,odm_name, currentuser)
-        return [product_name,odm_name]
-
-    # create or update product
-    def new_product(self,product_name,odm_name,currentuser):
-        """
-        check if this product already in the database 使用productName查询数据库里是否已有该产品,
-            if yes, then return product id
-            if no, create a new one and return the product id
-        """
-        item = Products.objects.filter(ProductName=product_name,PartnerName=odm_name).update_or_create(defaults={
-            'ProductName': product_name,
-            'PartnerName': odm_name,
-            'user': currentuser,
-        })
-        return item[0].id
-
-    # creare or update new item
-    def dfa_item_handle(self,dfa_object,product_id,sheet,row,sheet_name):
-
-        #處理non_match_reason 和 odm_corrective_action 欄位
-        non_match_reason = sheet.cell(row, 14).value
-        odm_corrective_action = sheet.cell(row, 15).value
-        non_match_reason_cnc = ""
-        non_match_reason_si = ""
-        non_match_reason_si2 = ""
-        non_match_reason_pv = ""
-        odm_corrective_action_cnc = ""
-        odm_corrective_action_si = ""
-        odm_corrective_action_si2 = ""
-        odm_corrective_action_pv = ""
-
-        if non_match_reason:
-            non_match_reason = non_match_reason.replace("(CNC):", "#reason").replace("(SI):", "#reason").replace("(SI-2):", "#reason").replace("(PV):", "#reason")
-            non_match_reason = non_match_reason.split('#reason')
-            non_match_reason_cnc = non_match_reason[1]
-            non_match_reason_si = non_match_reason[2]
-            non_match_reason_si2 = non_match_reason[3]
-            non_match_reason_pv = non_match_reason[4]
-
-        if odm_corrective_action:
-            odm_corrective_action = odm_corrective_action.replace("(CNC):", "#action").replace("(SI):","#action").replace("(SI-2):", "#action").replace("(PV):", "#action")
-            odm_corrective_action = odm_corrective_action.split('#action')
-            odm_corrective_action_cnc = odm_corrective_action[1]
-            odm_corrective_action_si = odm_corrective_action[2]
-            odm_corrective_action_si2 = odm_corrective_action[3]
-            odm_corrective_action_pv = odm_corrective_action[4]
-
-        new_item = Dfa_Review_Result.objects.filter(dfa_object=dfa_object, dfa_product_id=product_id,dfa_category=sheet_name)
-        new_item.update_or_create(defaults={
-            'dfa_product_id': product_id,
-            'dfa_category': sheet_name,
-            'dfa_object': dfa_object,
-            'dfa_estimated_hc': sheet.cell(row, 4).value,
-            'dfa_production_line': sheet.cell(row, 5).value,
-            'dfa_cnc': sheet.cell(row, 6).value,
-            'dfa_si_pv': sheet.cell(row, 7).value,
-            'dfa_mv_mp': sheet.cell(row, 8).value,
-            'dfa_HP_commodities_design': sheet.cell(row, 9).value,
-            'dfa_odm_product_designs': sheet.cell(row, 10).value,
-            'dfa_odm_packing_designs_kitting_box_design': sheet.cell(row, 11).value,
-            'dfa_HP_packing_designs': sheet.cell(row, 12).value,
-            'dfa_equipment_facilites_UPH_concerns': sheet.cell(row, 13).value,
-            'dfa_non_match_reason_cnc': non_match_reason_cnc,
-            'dfa_non_match_reason_si': non_match_reason_si,
-            'dfa_non_match_reason_si2': non_match_reason_si2,
-            'dfa_non_match_reason_pv': non_match_reason_pv,
-            'dfa_odm_corrective_action_cnc': odm_corrective_action_cnc,
-            'dfa_odm_corrective_action_si': odm_corrective_action_si,
-            'dfa_odm_corrective_action_si2': odm_corrective_action_si2,
-            'dfa_odm_corrective_action_pv': odm_corrective_action_pv,
-            'dfa_pictures_from_factory': sheet.cell(row, 16).value,
-            'dfa_HP_internal_discussion': sheet.cell(row, 17).value,
-            'dfa_HP_internal_assessment': sheet.cell(row, 18).value,
-        })
-
-    # create or update an record when dfa report import sucessfully
-    def dfa_import_record_handle(self,product_name,odm_name,currentuser):
-        new_item = Dfa_Report_Import_Records.objects.create(
-            user= currentuser,
-            import_product_name=product_name,
-            import_odm= odm_name,
-        )
-        new_item.save()
-
-    # log entries dfa
-    def log_entries(self, request,product_name,odm_name,currentuser):
-        from xadmin.models import Log
-        Log.objects.create(user=currentuser,
-                           ip_addr=request.META.get('REMOTE_ADDR'),
-                           object_repr=str(object),
-                           action_flag='',
-                           message="{}-{} dfa report uploaded sucessfully".format(product_name,odm_name))
+    def __int__(self):
+        pass

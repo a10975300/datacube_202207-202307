@@ -2,7 +2,7 @@ import xadmin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from xadmin.filters import MultiSelectFieldListFilter
-from .models import DataImportRecords, SymptomCategory_First,Issue,RegionalCase,DesktopIssue
+from .models import DataImportRecords, SymptomCategory_First,Issue,DesktopIssue
 from xadmin.layout import Main, Fieldset, Side, Row
 from product.models import Products
 import warnings
@@ -29,14 +29,13 @@ class SymptomCategorySecondAdmin(object):
 
 # define safelaunch issue user interface
 class IssueAdmin(object):
-    list_display = ["colorStatus","buildstage","platformName","processName","priority","business_impact","issue_desc","impact_scope", "root_cause_category", "input_qty","defect_qty"]
+    list_display = ["colorStatus","buildstage","platformName","processName","issue_desc","impact_scope", "root_cause_category", "input_qty","defect_qty"]
     list_filter = [("platformName__ProductName", MultiSelectFieldListFilter),
                    ("platformName__PartnerName", MultiSelectFieldListFilter),
                    ("processName", MultiSelectFieldListFilter),
                    ("root_cause_category", MultiSelectFieldListFilter),
                    ("long_term_category", MultiSelectFieldListFilter),
                    ("impact_scope", MultiSelectFieldListFilter),
-                   ("priority", MultiSelectFieldListFilter),
                    ("buildstage", MultiSelectFieldListFilter),
                    ("status", MultiSelectFieldListFilter),
                    ("cratedate"),
@@ -89,8 +88,7 @@ class IssueAdmin(object):
                 # send an alert by email
                 contents = "Failed to import data!  error message: [ProductId:{} -- {} -- {}'safelaunch data already imported, repeated uploads do not supported]".format(
                     record[0].id, record[0].import_product_name, record[0].import_product_phase)
-                notice = Notification()
-                notice.npi_send_by_email(
+                Notification().send_by_email(
                                            [str(currentuser)],
                                            currentuser,
                                            contents,
@@ -108,7 +106,7 @@ class IssueAdmin(object):
 
                     #   send an alert by email
                     contents = "{}-{} safe-launch data was imported successfully.".format(result[0],result[1])
-                    Notification().npi_send_by_email(
+                    Notification().send_by_email(
                                                 [str(currentuser)],
                                                 currentuser,
                                                 contents,
@@ -131,7 +129,6 @@ class IssueAdmin(object):
                 Fieldset('',
                          Row('platformName','buildstage'),
                          Row('status','processName'),
-                         Row('priority', 'business_impact'),
                          'issue_desc',
                          Row('pre_build_qty', 'pre_build_defcet_qty'),
                          Row('mini_build_qty', 'mini_build_defcet_qty'),
@@ -172,77 +169,9 @@ class DesktopIssueAdmin(object):
 
     model_icon = 'fa fa-list-ol'
 
-# define regional issue user interface
-class RegionalCaseAdmin(object):
-    list_display = ["issue_status", "issue_desc", "platform_name", "process_name", "build_stage", "input_qty",
-                    "defect_qty", "rpe_owner", "gpe_owner",]
-    list_filter = [("platform_name__ProductName", MultiSelectFieldListFilter),
-                   ("odm_name", MultiSelectFieldListFilter),
-                   ("process_name", MultiSelectFieldListFilter),
-                   ("root_cause_category", MultiSelectFieldListFilter),
-                   ("long_term_category", MultiSelectFieldListFilter),
-                   ("impact_scope", MultiSelectFieldListFilter),
-                   ("build_stage", MultiSelectFieldListFilter),
-                   ("issue_status", MultiSelectFieldListFilter),
-                   ("crate_date"),
-                   ]
-    search_fields = ["platform_name__ProductName", "rpe_owner__username", "gpe_owner", "build_stage", "issue_status",
-                     "odm_name","process_name", "impact_scope"]
-    list_display_links = ["issue_desc"]
-    list_per_page = 20
-    date_hierarchy = 'crate_date'
-    # list_editable = ('issue_desc')
-    model_icon = 'fa fa-bug'
-
-    # 配置 编辑页面
-    def get_form_layout(self):
-        # if self.org_obj:
-        self.form_layout = (
-            Main(
-                Fieldset('',
-                         'crate_date',
-                         Row('rpe_owner', 'platform_name'),
-                         Row('odm_name', 'product_segment',),
-                         Row('process_name', 'build_stage'),
-                         'issue_desc',
-
-                         css_class='unsort no_title'
-                         ),
-                Fieldset('',
-                         'issue_analysis',
-                         'root_cause',
-                         'short_term',
-                         'long_term',
-
-                         css_class='unsort no_title'
-                         ),
-            ),
-            Side(
-                Fieldset('',
-                         'gpe_owner',
-                         Row('issue_status'),
-                         Row('impact_scope'),
-                         Row('input_qty', 'defect_qty'),
-                         'fail_rate_stage',
-                         'issue_photo',
-
-                         css_class='unsort no_title'
-                         ),
-                Fieldset('',
-                         'root_cause_category',
-                         'short_term_category',
-                         'long_term_category',
-
-                         css_class='unsort no_title'
-                         ),
-            )
-        )
-        return super(RegionalCaseAdmin, self).get_form_layout()
-
 
 # xadmin.site.register(SymptomCategory_First, SymptomCategoryFirstAdmin)
 # xadmin.site.register(SymptomCategory_Second, SymptomCategorySecondAdmin)
 xadmin.site.register(Issue, IssueAdmin)
 xadmin.site.register(DataImportRecords, SafelaunchImportRecordAdmin)
 xadmin.site.register(DesktopIssue, DesktopIssueAdmin)
-xadmin.site.register(RegionalCase, RegionalCaseAdmin)
