@@ -594,13 +594,12 @@ class Dashboard(CommAdminView):
     # get dashboard data
     @filter_hook
     def getDashboardData(self):
-
         # get product data
         productdashboarddata = ProductDashboardData()
         product_context = productdashboarddata.get_product_dashboard_data()
         product_context['title'] =self.get_title()
 
-        # get npi issue data
+       # get npi issue data
         issuedashboarddata = IssueDashboardData()
         issue_context = issuedashboarddata.get_issue_dashbaord_data()
 

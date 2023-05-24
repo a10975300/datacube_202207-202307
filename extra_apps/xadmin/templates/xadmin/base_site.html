@@ -11,7 +11,7 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav pull-right">
-        {% view_block 'top_navmenu' %}
+        <!--{% view_block 'top_navmenu' %}-->
         {% if user.is_active and user.is_staff %}
           <li class="dropdown">
             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
@@ -23,7 +23,7 @@
         {% endif %}
         <li><a href="{% url 'xadmin:logout' %}"><i class="show-sm fa fa-sign-out"></i><span class="hide-sm">{% trans 'Log out' %}</span></a></li>
       </ul>
-      {% view_block 'top_navbar' %}
+      <!--{% view_block 'top_navbar' %}-->
     </div>
   </div>
   {% endblock %}

@@ -9,7 +9,7 @@
     <li class="divider"></li>
     {% endif %}
     {% for r in refresh_times %}
-      <li{% if r.selected %} class="active"{% endif %}>
+      <li {% if r.selected %} class="active"{% endif %}>
       <a href="{{r.url}}"><i class="fa fa-time"></i> 
         {% blocktrans with r.time as t %}Every {{ t }} seconds{% endblocktrans %}</a></li>
     {% endfor %}
