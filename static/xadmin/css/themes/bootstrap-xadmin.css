@@ -1,4 +1,6 @@
-
+body {
+  zoom: 0.9;
+}
 
 /* results table */
 .table th {

@@ -176,6 +176,3 @@ class FormAdminView(CommAdminView):
     @filter_hook
     def get_redirect_url(self):
         return self.get_admin_url('index')
-
-
-
