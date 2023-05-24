@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bootstrap 3 Page with Table</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<!-- Page Header -->
+	<div class="jumbotron text-center">
+		<h1>Bootstrap 3 Page with Table</h1>
+	</div>
+
+	<!-- Navigation -->
+<!--	<nav class="navbar navbar-inverse">-->
+<!--		<div class="container-fluid">-->
+<!--			<div class="navbar-header">-->
+<!--				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
+<!--					<span class="icon-bar"></span>-->
+<!--					<span class="icon-bar"></span>-->
+<!--					<span class="icon-bar"></span>-->
+<!--				</button>-->
+<!--				<a class="navbar-brand" href="#">My Website</a>-->
+<!--			</div>-->
+<!--			<div class="collapse navbar-collapse" id="myNavbar">-->
+<!--				<ul class="nav navbar-nav">-->
+<!--					<li class="active"><a href="#">Home</a></li>-->
+<!--					<li><a href="#">About</a></li>-->
+<!--					<li><a href="#">Contact</a></li>-->
+<!--				</ul>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</nav>-->
+
+	<!-- Main Content -->
+	<div class="container">
+		<h2>Table with Filter and Search Box</h2>
+		<p>Use the input fields below to filter and search the table:</p>
+		<input class="form-control" id="myInput" type="text" placeholder="Search..">
+		<br>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>RPE Owner</th>
+					<th>GPE Owner</th>
+					<th>ODM Name</th>
+					<th>Process Name</th>
+					<th>Product Segment</th>
+					<th>Build Stage</th>
+					<th>Impact Scope</th>
+					<th>Input Qty</th>
+					<th>Defect Qty</th>
+				</tr>
+			</thead>
+			<tbody id="myTable">
+				<tr>
+					<td>John</td>
+					<td>Doe</td>
+					<td>Apple</td>
+					<td>Process A</td>
+					<td>Segment 1</td>
+					<td>Build 1</td>
+					<td>Low</td>
+					<td>100</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<td>Jane</td>
+					<td>Doe</td>
+					<td>Google</td>
+					<td>Process B</td>
+					<td>Segment 2</td>
+					<td>Build 2</td>
+					<td>High</td>
+					<td>200</td>
+					<td>20</td>
+				</tr>
+				<tr>
+					<td>Bob</td>
+                  <td>Smith</td>
+                  <td>Microsoft</td>
+                  <td>Process C</td>
+                  <td>Segment 3</td>
+                  <td>Build 3</td>
+                  <td>Medium</td>
+                  <td>150</td>
+                  <td>15</td>
+			    </tr>
+		  </tbody>
+	</table>
+</div>
+
+<!-- Page Footer -->
+<footer class="footer">
+	<div class="container">
+		<p>&copy; 2023 My Website. All rights reserved.</p>
+	</div>
+</footer>
+
+<!-- JavaScript for Filter and Search -->
+<script>
+$(document).ready(function(){
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+});
+</script>
