@@ -1,0 +1,363 @@
+{% extends base_template %}
+{% load i18n %}
+{% load xadmin_tags %}
+
+{% block extrastyle %}
+<style type="text/css">
+  .btn-toolbar{margin-top: 0;}
+  #content-block.full-content{margin-left: 0;}
+</style>
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% block nav_title %}{% if brand_icon %}<i class="{{brand_icon}}"></i> {% endif %}{{brand_name}}{% endblock %}
+
+{% block nav_toggles %}
+{% include "xadmin/includes/toggle_menu.html" %}
+{% if has_add_permission %}
+  <a href="{{add_url}}" class="navbar-toggle pull-right"><i class="fa fa-plus"></i></a>
+{% endif %}
+<button class="navbar-toggle pull-right" data-toggle="collapse" data-target=".content-navbar .navbar-collapse">
+  <i class="fa fa-filter"></i>
+</button>
+{% endblock %}
+
+{% block nav_btns %}
+  {% if has_add_permission %}
+    <!--ramp_sustain_form-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#RampSustainModal"><i class="fa fa-plus"></i> Item</button>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade bd-example-modal-lg" id="RampSustainModal" tabindex="-1" role="dialog" aria-labelledby="RampSustainModals" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="min-width:1200px;max-width:1400px;"> <!-- 改模态框大小的CSS -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel">Ramp & Sustain Form</h3>
+                </div>
+                <div class="modal-body">
+                    <!-- tab 分頁 -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs justify-content-end" role="tablist" id="RampSustainTab">
+                                        <li class="nav-item active" id="Basicinformation-li"> <a class="nav-link" data-toggle="tab" href="#Basicinformation-tab-page">Basic information</a></li>
+                                        <li class="nav-item" id="RootCauseSolution-li"><a class="nav-link" data-toggle="tab" href="#RootCauseSolution-tab-page">Root Cause & Solution</a></li>
+                                        <li class="nav-item" id="Keyinformation-li"><a class="nav-link" data-toggle="tab" href="#Keyinformation-tab-page">Key information</a></li>
+                                    </ul>
+                                    <!-- tab+form -->
+                                     <form action="submitIssue/" method="POST" id="rampsustainform" enctype="multipart/form-data">
+                                       {% csrf_token %}
+                                        <div class="tab-content tabcontent-border">
+                                            <!-- Basicinformation-tab-page -->
+                                            <div class="tab-pane active" role="tabpanel" id="Basicinformation-tab-page">
+                                                <div class="form-row">
+                                                    <div class="col-xs-4 col-md-4">
+                                                      <label for="segment">Segment<sup class="text-danger">&#8727;</sup></label>
+                                                      <select id="segment" name="segment" onchange="ChangeSelectitem(this.selectedIndex)" class="form-control" required>
+                                                        <option value="" selected="selected">Choose...</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="col-xs-4 col-md-4">
+                                                      <label for="platform">Platform<sup class="text-danger">&#8727;</sup></label>
+                                                      <input id="platform" name="platform" class="form-control" list="prod" style="width:300px" autocomplete="off" required>
+                                                      <datalist id="prod">
+                                                      </datalist>
+                                                    </div>
+                                                    <div class="col-xs-4 col-md-4">
+                                                      <label for="stage">Stage<sup class="text-danger">&#8727;</sup></label>
+                                                      <select id="stage" name="stage" class="form-control" required>
+                                                      </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-xs-4 col-md-4">
+                                                        <label for="status">Status<sup class="text-danger">&#8727;</sup></label>
+                                                        <select id="status" name="status" class="form-control" required>
+                                                          <option value="">Choose...</option>
+                                                          <option value="Gating">Gating</option>
+                                                          <option value="Tracking">Tracking</option>
+                                                          <option value="Close">Close</option>
+                                                          <option value="Fix in next phase">Fix in next phase</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-4 col-md-4">
+                                                      <label for="priority">Priority<sup class="text-danger">&#8727;</sup></label>
+                                                      <select id="priority" name="priority" class="form-control" required>
+                                                          <option value="">Choose...</option>
+                                                          <option value="1">1</option>
+                                                          <option value="2">2</option>
+                                                          <option value="3">3</option>
+                                                          <option value=".">.</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="col-xs-4 col-md-4">
+                                                      <label for="issueisfrom">Issue is from<sup class="text-danger">&#8727;</sup></label>
+                                                      <select id="issueisfrom" name="issueisfrom" class="form-control" required>
+                                                        <option value="">Choose...</option>
+                                                        <option value="1-SMT">SMT</option>
+                                                        <option value="2-Off-line Assy">Offline-Assy</option>
+                                                        <option value="3-Sub Assy Test">Offline-Test</option>
+                                                        <option value="4-Final Assy ">FA</option>
+                                                        <option value="5-Pre Test">Pre-Test</option>
+                                                        <option value="6-Run-In">Run-In</option>
+                                                        <option value="7-Image Download">Image D/L</option>
+                                                        <option value="8-OOBA ">OOBA</option>
+                                                        <option value="9-Packing ">Packing</option>
+                                                        <option value="Field">Field</option>
+                                                        <option value="Factory">Factory</option>
+                                                      </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <label for="bizimpact">Biz impact<sup class="text-danger">&#8727;</sup></label>
+                                                    <textarea id="bizimpact" name="bizimpact" rows="10" cols="80" required></textarea>
+                                                </div>
+                                                <div class="form-row">
+                                                    <label for="issuedecription">Issue decription<sup class="text-danger">&#8727;</sup></label>
+                                                    <textarea id="issuedecription" name="issuedecription" rows="10" cols="80" required></textarea>
+                                                </div>
+                                                <div class="form-row">
+                                                    <label for="issueanalysis">Issue analysis<sup class="text-danger">&#8727;</sup></label>
+                                                    <textarea id="issueanalysis" name="issueanalysis" rows="10" cols="80" required></textarea>
+                                                </div>
+                                                <div class="modal-footer" style="border-top:none;">
+                                                    <button type="button" class="btn btn-success btn-lg" onclick="btnnextback('Basicinformation-tab-page','Basicinformation-li','RootCauseSolution-tab-page','RootCauseSolution-li')">Next</button>
+                                                </div>
+                                            </div>
+                                            <!-- Basicinformation-tab-page -->
+
+                                            <!-- RootCauseSolution-tab-page -->
+                                             <div class="tab-pane" role="tabpanel" id="RootCauseSolution-tab-page" >
+                                                 <div class="form-row">
+                                                     <div class="col-xs-4 col-md-4">
+                                                         <label for="rccategory">R/C Category<sup class="text-danger">&#8727;</sup></label>
+                                                         <select id="rccategory" name="rccategory" class="form-control" required>
+                                                         </select>
+                                                     </div>
+                                                     <div class="col-xs-4 col-md-4">
+                                                        <label for="stcategory">S/T Category<sup class="text-danger">&#8727;</sup></label>
+                                                        <select id="stcategory" name="stcategory" class="form-control" required>
+                                                            <option value="">Choose...</option>
+                                                            <option value="Containment - add on">Containment-add on</option>
+                                                            <option value="Containment - rework">Containment-rework</option>
+                                                            <option value="Containment - SOP/Fixture">Containment-SOP/Fixture</option>
+                                                            <option value="Containment - sorting">Containment-sorting</option>
+                                                            <option value="Inaction">Inaction</option>
+                                                            <option value="Design">Design</option>
+                                                            <option value="Waive">Waive</option>
+                                                        </select>
+                                                    </div>
+                                                     <div class="col-xs-4 col-md-4">
+                                                        <label for="ltcategory">L/T Category<sup class="text-danger">&#8727;</sup></label>
+                                                        <select id="ltcategory" name="ltcategory" class="form-control" required>
+                                                            <option value="">Choose...</option>
+                                                            <option value="Design">Design</option>
+                                                            <option value="Supplier">Supplier</option>
+                                                            <option value="Factory - Process">Factory-Process</option>
+                                                            <option value="Factory - Fixture">Factory-Fixture</option>
+                                                        </select>
+                                                    </div>
+                                                 </div>
+                                                 <div class="form-row">
+                                                     <label for="rootcause">Root Cause<sup class="text-danger">&#8727;</sup></label>
+                                                     <textarea id="rootcause" name="rootcause" rows="10" cols="80" required></textarea>
+                                                 </div>
+                                                 <div class="form-row">
+                                                     <label for="shortterm">Short Term<sup class="text-danger">&#8727;</sup></label>
+                                                     <textarea id="shortterm" name="shortterm" rows="10" cols="80" required></textarea>
+                                                 </div>
+                                                 <div class="form-row">
+                                                     <label for="longterm">Long Term<sup class="text-danger">&#8727;</sup></label>
+                                                     <textarea id="longterm" name="longterm" rows="10" cols="80" required></textarea>
+                                                </div>
+                                                  <div class="modal-footer" style="border-top:none;">
+                                                    <button type="button" class="btn btn-default btn-lg" onclick="btnnextback('RootCauseSolution-tab-page','RootCauseSolution-li','Basicinformation-tab-page','Basicinformation-li')">Back</button>
+                                                    <button type="button" class="btn btn-success btn-lg" onclick="btnnextback('RootCauseSolution-tab-page','RootCauseSolution-li','Keyinformation-tab-page','Keyinformation-li')">Next</button>
+                                                </div>
+                                             </div>
+                                            <!-- RootCauseSolution-tab-page -->
+
+                                             <!-- Keyinformation-tab-page -->
+                                             <div class="tab-pane" role="tabpanel" id="Keyinformation-tab-page">
+                                                <div class="form-row">
+                                                    <div class="col-xs-6 col-md-6">
+                                                      <label for="impactscope">Impact scope<sup class="text-danger">&#8727;</sup></label>
+                                                      <select id="impactscope" name="impactscope" class="form-control" required>
+                                                        <option value="">Choose...</option>
+                                                        <option value="Factory">Factory</option>
+                                                        <option value="Field ">Field</option>
+                                                        <option value="Field + Factory">Field+Factory</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="col-xs-6 col-md-6">
+                                                      <label for="totalinput">Total input<sup class="text-danger">&#8727;</sup></label>
+                                                        <input type="number" id="totalinput" name="totalinput" class="form-control" min="0" style="width:300px" required>
+                                                    </div>
+                                                  </div>
+                                                <div class="form-row">
+                                                    <div class="col-xs-6 col-md-6">
+                                                        <label for="defect">Defect<sup class="text-danger">&#8727;</sup></label>
+                                                        <input type="number" id="defect" name="defect" class="form-control" min="0" style="width:300px" required>
+                                                    </div>
+                                                     <div class="col-xs-6 col-md-6">
+                                                         <label for="choosefile">Choose file(Support for multiple files)</label>
+                                                         <input type="file" class="form-control-file" id="choosefile" name="choosefile[]" multiple="multiple" draggable="true">
+                                                     </div>
+                                                </div>
+                                                <div class="modal-footer" style="border-top:none;">
+                                                    <button type="button" class="btn btn-default btn-lg" onclick="btnnextback('Keyinformation-tab-page','Keyinformation-li','RootCauseSolution-tab-page','RootCauseSolution-li')">Back</button>
+                                                    <button type="button" onclick="formsumbitcheck()" class="btn btn-primary btn-lg">Sumbit</button>
+                                                </div>
+                                            </div>
+                                            <!-- Keyinformation-tab-page -->
+                                        </div>
+                                     </form>
+                                    <!-- tab+form -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  tab 分頁 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for group in request.user.groups.all %}
+      {% if group.name == 'Admin' %}
+        <a href="{{add_url}}" class="btn btn-primary"><i class="fa fa-plus"></i>{% blocktrans with cl.opts.verbose_name as name %} {{ name }} {% endblocktrans %}</a>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endblock nav_btns %}
+
+{% block content %}
+  <div class="content-toolbar btn-toolbar pull-right clearfix">
+    {% view_block 'top_toolbar' %}
+    {% block toolbar_column %}
+    <div class="btn-group">
+      <a class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" href="#">
+        <i class="fa fa-list-alt"></i> {% trans "Columns" %} <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu model_fields pull-right" role="menu" aria-labelledby="dLabel">
+        <li><a href="{{clean_select_field_url}}"><i class="fa fa-refresh"></i> {% trans "Restore Selected" %}</a></li>
+        <li class="divider"></li>
+        {% for f, selected, flink in model_fields %}
+        <li><a href="{{flink}}">
+          {% if selected %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-blank"></i>{% endif %}
+          {{f.verbose_name}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endblock toolbar_column %}
+    {% block toolbar_layouts %}
+    <div class="btn-group layout-btns" data-toggle="buttons">
+      <label class="btn btn-default btn-sm layout-normal ">
+        <input type="radio"> <i class="fa fa-th-large"></i>
+      </label>
+      <label class="btn btn-default btn-sm layout-condensed active">
+        <input type="radio"> <i class="fa fa-th"></i>
+      </label>
+      {% view_block 'top_layout_btns' %}
+    </div>
+    {% endblock toolbar_layouts %}
+    {% block toolbar_fullscreen %}
+    <div class="btn-group layout-btns" data-toggle="buttons-checkbox">
+      <button type="button" class="btn btn-default btn-sm layout-full"><i class="fa fa-expand"></i></button>
+      {% view_block 'top_check_btns' %}
+    </div>
+    {% endblock toolbar_fullscreen %}
+    {% view_block 'top_btns' %}
+  </div>
+
+  <ul class="pagination pagination-sm pagination-left pagination-inline">
+    {% view_block 'pagination' 'small' %}
+  </ul>
+
+  <form id="changelist-form" action="" method="post"> {% csrf_token %}
+<!--    <form id="changelist-form" action="" method="post" {% view_block 'result_list_form' %}> {% csrf_token %}-->
+  {% view_block 'results_top' %}
+  <div class="results table-responsive">
+  {% if results %}
+  {% block results_grid %}
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    {% block results_grid_head %}
+    <thead>
+      <tr>{% for o in result_headers.cells %}
+        <th {{o.tagattrs}}>
+          {% if o.btns %}
+            <div class="pull-right">
+              {% for b in o.btns %}
+                {{b|safe}}
+              {% endfor %}
+            </div>
+          {% endif %}
+          {% if o.menus %}
+            <div class="dropdown pull-left">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ o.label }}
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                {% for m in o.menus %}
+                  {{m|safe}}
+                {% endfor %}
+              </ul>
+            </div>
+          {% else %}
+            {{ o.label }}
+          {% endif %}
+        </th>{% endfor %}
+      </tr>
+      {% view_block 'result_head' %}
+    </thead>
+    {% endblock results_grid_head %}
+    {% block results_grid_body %}
+    <tbody>
+    {% for row in results %}
+      <tr class="grid-item{% if row.css_class %} {{row.css_class}}{%endif%}" {{ row.tagattrs }}>{% for o in row.cells %}
+        <td {{o.tagattrs}}>
+          {% if o.btns %}
+            <div class="btn-group pull-right">
+              {% for b in o.btns %}
+                {{b|safe}}
+              {% endfor %}
+            </div>
+          {% endif %}
+          {% if o.menus %}
+            <div class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ o.label }}
+              </a>
+              <ul class="dropdown-menu">
+                {% for m in o.menus %}
+                  {{m|safe}}
+                {% endfor %}
+              </ul>
+            </div>
+          {% else %}
+            {{ o.label }}
+          {% endif %}
+        </td>
+      {% endfor %}</tr>
+      {% view_block 'result_row' row %}
+    {% endfor %}
+    </tbody>
+    {% endblock results_grid_body %}
+  </table>
+  {% endblock results_grid %}
+  {% else %}
+    <p class="well">{% trans "Empty list" %}</p>
+  {% endif %}
+  </div>
+  {% view_block 'results_bottom' %}
+  </form>
+
+  <ul class="pagination">
+    {% view_block 'pagination' %}
+  </ul>
+<script src="{% static 'xadmin/js/product_sync_pulsar.js'%}"></script>
+<script src="{% static 'xadmin/vendor/ckeditor/ckeditor.js'%}"></script><!--ckeditor 的JS-->
+<script src="{% static 'xadmin/js/ramp_sustain_form.js'%}"></script><!--ramp_sustain_form的JS-->
+<script src="{% static 'xadmin/js/model_list_get_platform_name.js'%}"></script>
+{% endblock %}

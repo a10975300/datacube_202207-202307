@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard</title>
+
+    <!-- fonts 的CSS -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Css-->
+    <link href="css/Dashboard.min.css" rel="stylesheet">
+
+    <!-- dataTables 和 searchPanes 的CSS  -->
+    <link  rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" >
+    <link  rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.0.2/css/searchPanes.dataTables.min.css" >
+    <link  rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css" >
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper" >
+
+        <!-- Sidebar左側留白 刪掉就沒有左側 -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>
+        <!-- Sidebar左側留白-->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content" class="bg-white">
+
+                <!-- Page Content -->
+                <div class="container-fluid" >
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-3 mt-3 ">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>
+                    <!-- Page Heading -->
+
+                    <!-- 4card -->
+                    <div class="row">
+                        <!-- product -->
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="card border-left-primary shadow h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2 justify-content-center">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">product</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center">9</div>
+                                            <hr>
+                                              <div class="row">
+                                                    <div class="col-sm-4 text-center">
+                                                      9 Prod.
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                      1 Ramp
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                      8 Dev.
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- product -->
+
+                        <!-- NPI Issue -->
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="card border-left-success shadow h-100 ">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">NPI Issue</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center">156</div>
+                                             <hr>
+
+                                              <div class="row">
+                                                    <div class="col-sm-6 text-center">
+                                                      92.95% Fixed
+                                                    </div>
+                                                    <div class="col-sm-6 text-center">
+                                                      7.05% OOC
+                                                    </div>
+                                              </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- NPI Issue -->
+
+                        <!-- DEM -->
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="card border-left-info shadow h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">DFM</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center">Under Construction</div>
+                                             <hr>
+                                              <div class="row">
+                                                    <div class="col-sm-6 text-center">
+                                                      test
+                                                    </div>
+                                                    <div class="col-sm-6 text-center">
+                                                      test
+                                                    </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- DEM -->
+
+                        <!-- Sustaining -->
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="card border-left-warning shadow h-100">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Sustaining</div>
+                                            <div class="h5 mb-0 font-weight-bold text-center">Under Construction</div>
+                                             <hr>
+
+                                              <div class="row">
+                                                    <div class="col-sm-6 text-center">
+                                                     test
+                                                    </div>
+                                                    <div class="col-sm-6 text-center">
+                                                      test
+                                                    </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sustaining -->
+                    </div>
+                     <!-- 4card-->
+
+                    <!-- tab 分頁 -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card mb-3" style="border:none;">
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+                                        <li class="nav-item"> <a class="nav-link active" id="Product-tab" data-toggle="tab" href="#Product-tab-page" role="tab" aria-controls="Product-tab-page" aria-expanded="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Product</span></a>                                            </li>
+                                        <li class="nav-item"> <a class="nav-link" id="DFM-tab" data-toggle="tab" href="#DFM-tab-page" role="tab" aria-controls="DFM-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">DFM</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="NPI-tab" data-toggle="tab" href="#NPI-tab-page" role="tab" aria-controls="NPI-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">NPI Issue</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="SystemCosmetic-tab" data-toggle="tab" href="#SystemCosmetic-tab-page" role="tab" aria-controls="SystemCosmetic-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">System Cosmetic</span></a></li>
+                                        <li class="nav-item"> <a class="nav-link" id="Sustaining-tab" data-toggle="tab" href="#Sustaining-tab-page" role="tab" aria-controls="Sustaining-tab-page"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Sustaining</span></a></li>
+                                    </ul>
+                                    <!-- tab 內頁 -->
+                                    <div class="tab-content tabcontent-border p-10" id="myTabContent">
+
+                                        <!-- product-tab-page -->
+                                        <div role="tabpanel" class="tab-pane fade show active" id="Product-tab-page" aria-labelledby="Product-tab">
+
+                                            <div class="row">
+                                                <div class="col-xl-4 col-lg-4 mt-4">
+                                                    <div class="card shadow mb-3 h-100">
+                                                        <div class="card-body">
+                                                            <div class="chart-pie pt-2">
+                                                                <canvas id="product-pie1"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-8 col-lg-8 mt-4">
+                                                    <div class="card shadow mb-3 h-100">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table id="product-table1" class="display compact" style="width:100%;white-space:nowrap;">
+                                                                    <thead >
+                                                                        <tr>
+                                                                            <th>Risk Ass.</th>
+                                                                            <th>Stage</th>
+                                                                            <th>Product</th>
+                                                                            <th>RTP Date</th>
+                                                                            <th>Factory</th>
+                                                                            <th>PE Owner</th>
+                                                                            <th>DFM</th>
+                                                                            <th>NPI Issues</th>
+                                                                            <th>Sustaining</th>
+                                                                            <th>Create Day</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                         <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                       <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>4</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MP</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>5</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>MV</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>6</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>SI</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>7</td>
+                                                                            <td>test</td>
+                                                                            <td>2021-01-01</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>TBD</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>8</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-02-01</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>test</td>
+                                                                            <td>SI</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>test</td>
+                                                                            <td>9</td>
+                                                                            <td>test</td>
+                                                                            <td>2022-01-01</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- product-tab-page -->
+
+                                        <!-- DFM-tab-page -->
+                                        <div class="tab-pane fade" id="DFM-tab-page" role="tabpanel" aria-labelledby="DFM-tab">
+                                            <div class="row ">
+                                                <div class="col-xl-12 col-lg-12 mt-4">
+                                                    <div class="card shadow mb-2 h-100">
+                                                        <!-- Card Header-->
+                                                        <a href="#DFM-collapse1" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="DFM-collapse1">
+                                                        <h6 class="m-0 font-weight-bold text-primary">How many DFM item</h6>
+                                                        </a>
+                                                        <!--Collapse Card Content -->
+                                                        <div class="collapse" id="DFM-collapse1">
+                                                            <div class="card-body">
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- DFM-tab-page -->
+
+                                        <!-- NPI-tab-page -->
+                                         <div class="tab-pane fade" id="NPI-tab-page" role="tabpanel" aria-labelledby="NPI-tab">
+
+                                             <!-- issue1 -->
+                                             <div class="row ">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#NPI-collapse1" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse1">
+                                                             <h6 class="m-0 font-weight-bold text-primary">How many Design issue being fixed by Design Change vs fixed by Factory vs fixed by Supplier</h6>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse show" id="NPI-collapse1">
+                                                             <div class="card-body">
+                                                                <!-- row1 -->
+                                                                 <div class="row">
+                                                                    <div class="col-xl-5 col-lg-5 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-pie1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-7 col-lg-7 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="NPI-table1" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Root cause</th>
+                                                                                                <th>Long-term Category</th>
+                                                                                                <th>issue  QTY</th>
+                                                                                                <th>Create Day</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>Design-BIOS</td>
+                                                                                                <td>Supplier</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>Factory-Process</td>
+                                                                                                <td>23</td>
+                                                                                                <td>2020-08-14</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>Factory-Fixture</td>
+                                                                                                <td>34</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-BIOS</td>
+                                                                                                <td>Factory-Fixture</td>
+                                                                                                <td>34</td>
+                                                                                                <td>2020-09-16</td>
+                                                                                            </tr>
+                                                                                              <tr>
+                                                                                                <td>Design-ME</td>
+                                                                                                <td>Factory-Fixture</td>
+                                                                                                <td>24</td>
+                                                                                                <td>2020-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-ME</td>
+                                                                                                <td>Factory-Process</td>
+                                                                                                <td>12</td>
+                                                                                                <td>2022-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-BIOS</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>24</td>
+                                                                                                <td>2019-01-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>35</td>
+                                                                                                <td>2013-11-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-ME</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>   
+                                                                                            <tr>
+                                                                                                <td>Design-EE</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>35</td>
+                                                                                                <td>2013-11-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Design-ME</td>
+                                                                                                <td>Design</td>
+                                                                                                <td>30</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>   
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                 </div>
+                                                                <!-- row1 -->
+
+                                                               <!-- row2 -->
+                                                                 <div class="row">
+                                                                   <div class="col-xl-12 col-lg-12 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-bar">
+                                                                                    <canvas id="NPI-stackbar1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                                <!-- row2 -->
+
+                                                                 <!-- filter_button -->
+                                                                <div class="row ml-1">
+                                                                    <button id="NPI-filter-button1" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="fas fa-arrow-right"></i>
+                                                                        </span>
+                                                                        <span class="text">Filters</span>
+                                                                    </button>
+                                                                </div>
+                                                                 <!-- filter button -->
+
+                                                                <!-- filter -->
+                                                                <div class="row mt-2" style="display:none" id="NPI-filter1">
+                                                                    <div class="col-xl-12 col-lg-12">
+                                                                        <div class="card shadow">
+                                                                            <div class="card-body">
+
+                                                                                <form action="" method="post">
+                                                                                    <span>date range：</span>
+                                                                                    <input type="date" name="NPI_datemin1" value="2011-09-21">
+                                                                                    <span>~</span>
+                                                                                    <input type="date" name="NPI_datemax1" value="2011-09-29">
+                                                                                    <!-- date_sumbit_button -->
+                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
+                                                                                        <span class="text">Sumbit</span>
+                                                                                    </button>
+                                                                                    <!-- date_sumbit_button -->
+                                                                                </form>
+
+
+                                                                                <div id="NPI-filter-panel1"></div>
+                                                                                <button id="NPI-redraw1" class="btn btn-primary btn-icon-split btn-sm">
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Redraw Charts</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- filter -->
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- issue1 -->
+
+                                             <!-- issue2 -->
+                                             <div class="row">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#NPI-collapse2" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse2">
+                                                             <h6 class="m-0 font-weight-bold text-primary">How many issue being fixed from SI to PV</h6>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse" id="NPI-collapse2">
+                                                             <div class="card-body">
+
+
+
+                                                                 <!-- row1 -->
+                                                                <div class="row ">
+                                                                    <div class="col-xl-5 col-lg-5 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-bar">
+                                                                                    <canvas id="NPI-Bar1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-7 col-lg-7 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="NPI-table2" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Stage</th>
+                                                                                                <th>issue Stage</th>
+                                                                                                <th>issue  QTY</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>Fix in next phase</td>
+                                                                                                <td>45</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>Close</td>
+                                                                                                <td>3</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>Tracking</td>
+                                                                                                <td>53</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>PV</td>
+                                                                                                <td>Tracking</td>
+                                                                                                <td>20</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>PV</td>
+                                                                                                <td>Close</td>
+                                                                                                <td>4</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>Close</td>
+                                                                                                <td>3</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-2</td>
+                                                                                                <td>Gating</td>
+                                                                                                <td>4</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-2</td>
+                                                                                                <td>Tracking</td>
+                                                                                                <td>12</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>pv</td>
+                                                                                                <td>Gating</td>
+                                                                                                <td>33</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-2</td>
+                                                                                                <td>Gating</td>
+                                                                                                <td>23</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                 <!-- row1 -->
+
+                                                                 <!-- row2 -->
+                                                                <div class="row">
+                                                                   <div class="col-xl-5 col-lg-5 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-pie2"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                   <div class="col-xl-7 col-lg-7 mb-3">
+                                                                       <div class="card shadow mb-3 h-100">
+                                                                           <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="no" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Stage</th>
+                                                                                                <th>issue  QTY</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>SI-1</td>
+                                                                                                <td>45</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>SI-2</td>
+
+                                                                                                <td>20</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>PV</td>
+
+                                                                                                <td>4</td>
+                                                                                            </tr>
+
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                   </div>
+                                                                </div>
+                                                                 <!-- row2-->
+
+                                                               <!-- filter_button -->
+                                                                <div class="row ml-1">
+                                                                    <button id="NPI-filter-button2" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="fas fa-arrow-right"></i>
+                                                                        </span>
+                                                                        <span class="text">Filters</span>
+                                                                    </button>
+                                                                </div>
+                                                                 <!-- filter button -->
+
+                                                                <!-- filter -->
+                                                                <div class="row mt-2" style="display:none" id="NPI-filter2">
+                                                                    <div class="col-xl-12 col-lg-12">
+                                                                        <div class="card shadow">
+                                                                            <div class="card-body">
+
+                                                                                <form action="" method="post">
+                                                                                    <span>date range：</span>
+                                                                                    <input type="date" name="NPI_datemin2" value="2011-09-21">
+                                                                                    <span>~</span>
+                                                                                    <input type="date" name="NPI_datemax2" value="2011-09-29">
+                                                                                    <!-- date_sumbit_button -->
+                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
+                                                                                        <span class="text">Sumbit</span>
+                                                                                    </button>
+                                                                                    <!-- date_sumbit_button -->
+                                                                                </form>
+
+
+
+                                                                                <div id="NPI-filter-panel2"></div>
+                                                                                <button id="NPI-redraw2" class="btn btn-primary btn-icon-split btn-sm">
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Redraw Charts</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- filter -->
+
+                                                             </div>
+                                                         </div>
+
+                                                     </div>
+                                                 </div>
+
+
+                                             </div>
+                                             <!-- issue2 -->
+
+                                             <!-- issue3 -->
+                                             <div class="row ">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#NPI-collapse3" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse3">
+                                                             <h6 class="m-0 font-weight-bold text-primary">How many single failure item</h6>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse" id="NPI-collapse3">
+                                                             <div class="card-body">
+                                                                  <!-- row1 -->
+                                                                 <div class="row">
+                                                                    <div class="col-xl-5 col-lg-5 mb-3">
+                                                                        <div class="card shadow mb-3  h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-pie3"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-7 col-lg-7 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="NPI-table3" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>ODM</th>
+                                                                                                <th>Build stage</th>
+                                                                                                <th>Product name</th>
+                                                                                                <th>Series</th>
+                                                                                                <th>Failure Category</th>
+                                                                                                <th>issue QTY</th>
+                                                                                                <th>Create day</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>compal</td>
+                                                                                                <td>PV</td>
+                                                                                                <td>name1</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>single</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>PV</td>
+                                                                                                <td>name2</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>single</td>
+                                                                                                <td>10</td>
+                                                                                                <td>2019-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>Si</td>
+                                                                                                <td>name3</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>Duplicate</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>compal</td>
+                                                                                                <td>PV</td>
+                                                                                                <td>name6</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>Duplicate</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>compal</td>
+                                                                                                <td>MV</td>
+                                                                                                <td>name5</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>single</td>
+                                                                                                <td>10</td>
+                                                                                                <td>2013-09-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>compal</td>
+                                                                                                <td>PV</td>
+                                                                                                <td>name4</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>Duplicate</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>PV</td>
+                                                                                                <td>name1</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>single</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2020-08-16</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>SI</td>
+                                                                                                <td>name1</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>single</td>
+                                                                                                <td>4</td>
+                                                                                                <td>2010-08-16</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                                <!-- row1 -->
+
+                                                              <!-- filter_button -->
+                                                                <div class="row ml-1">
+                                                                    <button id="NPI-filter-button3" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="fas fa-arrow-right"></i>
+                                                                        </span>
+                                                                        <span class="text">Filters</span>
+                                                                    </button>
+                                                                </div>
+                                                                 <!-- filter button -->
+
+                                                                <!-- filter -->
+                                                                <div class="row mt-2" style="display:none" id="NPI-filter3">
+                                                                    <div class="col-xl-12 col-lg-12">
+                                                                        <div class="card shadow">
+                                                                            <div class="card-body">
+
+                                                                                <form action="" method="post">
+                                                                                    <span>date range：</span>
+                                                                                    <input type="date" name="NPI_datemin3" value="2011-09-21">
+                                                                                    <span>~</span>
+                                                                                    <input type="date" name="NPI_datemax3" value="2011-09-29">
+                                                                                    <!-- date_sumbit_button -->
+                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
+                                                                                        <span class="text">Sumbit</span>
+                                                                                    </button>
+                                                                                    <!-- date_sumbit_button -->
+                                                                                </form>
+
+
+
+                                                                                <div id="NPI-filter-panel3"></div>
+                                                                                <button id="NPI-redraw3" class="btn btn-primary btn-icon-split btn-sm">
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Redraw Charts</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- filter -->
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- issue3 -->
+
+                                             <!-- issue4 -->
+                                             <div class="row ">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#NPI-collapse4" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse4">
+                                                             <h6 class="m-0 font-weight-bold text-primary">How many platform vs issue per ODM</h6>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse" id="NPI-collapse4">
+                                                             <div class="card-body">
+
+                                                                 <!-- row1 -->
+                                                                <div class="row">
+                                                                    <div class="col-xl-5 col-lg-5 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-pie4"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-xl-7 col-lg-7 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="NPI-table4" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>ODM</th>
+                                                                                                <th>Product name</th>
+                                                                                                <th>Series</th>
+                                                                                                <th>Issue QTY</th>
+                                                                                                <th>Create Day</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>X360 G9</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>11</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>Powderkeg</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>31</td>
+                                                                                                <td>2021-08-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Rota</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>12</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wddf</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>32</td>
+                                                                                                <td>2019-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wsff</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>22</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Maldives</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>53</td>
+                                                                                                <td>2022-06-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>eddd</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>5</td>
+                                                                                                <td>2020-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>edcvv</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>23</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>efvvv</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>13</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- row1-->
+
+                                                                 <!-- row2-->
+                                                               <div class="row">
+                                                                   <div class="col-xl-12 col-lg-12 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-stacklinebar1"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                                <!-- row2-->
+
+                                                              <!-- filter_button -->
+                                                                <div class="row ml-1">
+                                                                    <button id="NPI-filter-button4" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="fas fa-arrow-right"></i>
+                                                                        </span>
+                                                                        <span class="text">Filters</span>
+                                                                    </button>
+                                                                </div>
+                                                                 <!-- filter button -->
+
+                                                                <!-- filter -->
+                                                                <div class="row mt-2" style="display:none" id="NPI-filter4">
+                                                                    <div class="col-xl-12 col-lg-12">
+                                                                        <div class="card shadow">
+                                                                            <div class="card-body">
+
+                                                                                <form action="" method="post">
+                                                                                    <span>date range：</span>
+                                                                                    <input type="date" name="NPI_datemin4" value="2011-09-21">
+                                                                                    <span>~</span>
+                                                                                    <input type="date" name="NPI_datemax4" value="2011-09-29">
+                                                                                    <!-- date_sumbit_button -->
+                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
+                                                                                        <span class="text">Sumbit</span>
+                                                                                    </button>
+                                                                                    <!-- date_sumbit_button -->
+                                                                                </form>
+
+
+                                                                                <div id="NPI-filter-panel4"></div>
+                                                                                <button id="NPI-redraw4" class="btn btn-primary btn-icon-split btn-sm">
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Redraw Charts</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- filter -->
+
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- issue4 -->
+
+                                             <!-- issue5 -->
+                                             <div class="row ">
+                                                 <div class="col-xl-12 col-lg-12 mt-4">
+                                                     <div class="card shadow mb-2 h-100">
+                                                         <!-- Card Header-->
+                                                         <a href="#NPI-collapse5" class="card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="NPI-collapse5">
+                                                             <h6 class="m-0 font-weight-bold text-primary">How many platform vs repeating issue per ODM</h6>
+                                                         </a>
+                                                            <!--Collapse Card Content -->
+                                                         <div class="collapse" id="NPI-collapse5">
+                                                             <div class="card-body">
+
+                                                                <!-- row1 -->
+                                                                <div class="row ">
+                                                                    <div class="col-xl-5 col-lg-5 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-pie5"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                     <div class="col-xl-7 col-lg-7 mb-3 ">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table id="NPI-table5" class="display compact" style="width:100%; white-space:nowrap;">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>ODM</th>
+                                                                                                <th>Product name</th>
+                                                                                                <th>Series</th>
+                                                                                                <th>Issue QTY</th>
+                                                                                                <th>Rep Issue Qty</th>
+                                                                                                <th>Create Day</th>
+                                                                                                </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>X360 G9</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>11</td>
+                                                                                                <td>1</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>Powderkeg</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>31</td>
+                                                                                                <td>11</td>
+                                                                                                <td>2021-08-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Rota</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>12</td>
+                                                                                                <td>13</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wddf</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>32</td>
+                                                                                                <td>14</td>
+                                                                                                <td>2019-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Inventec</td>
+                                                                                                <td>wsff</td>
+                                                                                                <td>8000</td>
+                                                                                                <td>22</td>
+                                                                                                <td>2</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Compal</td>
+                                                                                                <td>Maldives</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>53</td>
+                                                                                                <td>11</td>
+                                                                                                <td>2022-06-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>eddd</td>
+                                                                                                <td>9000</td>
+                                                                                                <td>5</td>
+                                                                                                <td>6</td>
+                                                                                                <td>2020-07-11</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Quanta</td>
+                                                                                                <td>edcvv</td>
+                                                                                                <td>7000</td>
+                                                                                                <td>23</td>
+                                                                                                <td>7</td>
+                                                                                                <td>2022-07-11</td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <!-- row1 -->
+
+                                                                   <!-- row2 -->
+                                                               <div class="row">
+                                                                   <div class="col-xl-12 col-lg-12 mb-3">
+                                                                        <div class="card shadow mb-3 h-100">
+                                                                            <div class="card-body">
+                                                                                <div class="chart-pie pt-2">
+                                                                                    <canvas id="NPI-stacklinebar2"></canvas>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                                <!-- row2 -->
+
+                                                                 <!-- filter_button -->
+                                                               <div class="row ml-1">
+                                                                    <button id="NPI-filter-button5" class="btn btn-secondary btn-icon-split btn-sm">
+                                                                        <span class="icon text-white-50">
+                                                                            <i class="fas fa-arrow-right"></i>
+                                                                        </span>
+                                                                        <span class="text">Filters</span>
+                                                                    </button>
+                                                                </div>
+                                                                 <!-- filter button -->
+
+                                                                <!-- filter -->
+                                                                <div class="row mt-2" style="display:none" id="NPI-filter5">
+                                                                    <div class="col-xl-12 col-lg-12">
+                                                                        <div class="card shadow">
+                                                                            <div class="card-body">
+
+                                                                                <form action="" method="post">
+                                                                                    <span>date range：</span>
+                                                                                    <input type="date" name="NPI_datemin5" value="2011-09-21">
+                                                                                    <span>~</span>
+                                                                                    <input type="date" name="NPI_datemax5" value="2011-09-29">
+                                                                                    <!-- date_sumbit_button -->
+                                                                                    <button class="btn btn-secondary btn-icon-split btn-sm ml-2" type="sumbit">
+                                                                                        <span class="text">Sumbit</span>
+                                                                                    </button>
+                                                                                    <!-- date_sumbit_button -->
+                                                                                </form>
+
+
+                                                                                <div id="NPI-filter-panel5"></div>
+                                                                                <button id="NPI-redraw5" class="btn btn-primary btn-icon-split btn-sm">
+                                                                                    <span class="icon text-white-50">
+                                                                                        <i class="fas fa-arrow-right"></i>
+                                                                                    </span>
+                                                                                    <span class="text">Redraw Charts</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- filter -->
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- issue5 -->
+
+                                        </div>
+                                        <!-- NPI-tab-page -->
+
+                                        <!-- SystemCosmetic-tab-page -->
+                                         <div class="tab-pane fade " id="SystemCosmetic-tab-page" role="tabpanel" aria-labelledby="SystemCosmetic-tab">
+                                            <img src="construction.jpg" style="width:50%;">
+                                         </div>
+                                        <!-- SystemCosmetic-tab-page -->
+
+                                         <!-- Sustaining-tab-page -->
+                                         <div class="tab-pane fade" id="Sustaining-tab-page" role="tabpanel" aria-labelledby="Sustaining-tab">
+                                             <img src="construction.jpg" style="width:50%;">
+                                        </div>
+                                        <!-- Sustaining-tab-page -->
+                                    </div>
+                                    <!-- tab 內頁 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  tab 分頁 -->
+
+                </div>
+                <!-- Page Content -->
+
+            </div>
+            <!-- Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>© Product Engineering 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer -->
+
+        </div>
+        <!-- Content Wrapper -->
+
+    </div>
+    <!-- Page Wrapper -->
+
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Scroll to Top Button-->
+
+
+    <!-- js-->
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="js/Dashboard.min.js"></script>
+<!-- datatable 和 searchpanes 共同的-->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<!-- datatable -->
+<script src="js/datatables-demo.js"></script>
+<!-- searchpanes -->
+<script src="https://cdn.datatables.net/searchpanes/2.0.2/js/dataTables.searchPanes.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script>
+<!-- chartjs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<!--<script src="https://cdnjs.com/libraries/Chart.js"></script>-->
+
+<!-- chartjs 顏色套件 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script>
+<!-- chartjs 顯示表分比套件 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script> 
+
+<!-- chartjs -->
+<script src="js/chart-pie-demo.js"></script>
+
+
+</body>
+
+</html>
