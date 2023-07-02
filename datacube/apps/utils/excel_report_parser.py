@@ -1000,8 +1000,8 @@ class DTReportParser():
 
     # 通过requests.post模拟游览器提交图片和信息
     def pictureUpload(self, product_name, stage_name, img_name, image):
-        # url = 'http://127.0.0.1:8000/pictures_upload/'  # this url for localhost test only
-        url = 'http://15.36.145.93/pictures_upload/'    # this url for server
+        url = 'http://127.0.0.1:8000/pictures_upload/'  # this url for localhost test only
+        #url = 'http://15.36.145.93/pictures_upload/'    # this url for server
         myData = {
             "product_name": product_name,
             "stage_name": stage_name,
